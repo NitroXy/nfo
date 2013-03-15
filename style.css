@@ -1,0 +1,119 @@
+/* Default settings for all browsers ... */
+ul, ol { list-style:none; }
+img { border: none; }
+h1,h2,h3,h4,h5,h6,p,span,a,li {
+	font-family: Century Gothic;
+	color: white;
+}
+
+/* General settings */
+body {
+	background: url(images/background.jpg) repeat;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+#wrapper {
+	width: 700px;
+	margin: 0 auto;
+	margin-top: 10px;
+	padding: 0;
+	padding-bottom: 30px;
+
+	min-height: 100%;
+	position: relative;
+}
+
+/* Header */
+#header #logo {
+	font-family: Rockwell;
+	font-size: 45px;
+}
+
+#header ul {
+	padding: 0;
+	margin: 0;
+}
+#header li {
+	display: inline;
+	border-right: 1px solid #fff;
+}
+#header li:last-child {
+	border-right: none;
+}
+#header li a {
+	font-family: Century Gothic;
+	padding: 10px;
+	color: #b8b8b8;
+	text-decoration: none;
+
+}
+#header li:hover a {
+	color: #fa7600;
+}
+#header li a.selected {
+	color: #fa7600;
+	border-bottom: 1px solid #fa7600;
+}
+
+#header #submenu ul {
+	margin-top: 10px;
+}
+#header #submenu li a {
+	padding: 5px;
+	font-size: 12px;
+}
+
+#content {
+	padding-bottom: 100px;
+}
+#content p {
+	margin-left: 10px;
+	margin-right: 10px;
+}
+#content h1,h2,h3,h4,h5,h6 {
+	font-family: Century Gothic;
+	color: #fa7600;
+}
+
+#footer {
+	height: 100px;
+	width: 100%;
+
+	position: absolute;
+	bottom: 0;
+	left: 0;
+}
+#footer p {
+	float: right;
+	font-family: Century Gothic;
+	font-size: 12px;
+}
+
+/* Error, info and success display */
+.error {
+	padding: 7px 10px;
+	margin: 5px 0px;
+	border: 1px solid #000;
+	color: #ea0016;
+	display: block;
+}
+.info {
+	padding: 7px 10px;
+	margin: 5px 0px;
+	border: 1px solid #000;
+}
+.success {
+	padding: 7px 10px;
+	margin: 5px 0px;
+	border: 1px solid #000;
+	color: green;
+}
+
+.name {
+	font-family: Century Gothic;
+}
+.mail {
+	color: #fa7600;
+}
