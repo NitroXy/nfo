@@ -2,7 +2,7 @@
 
 class Config {
 	private static $db_host = "localhost";
-	private static $db_name = "cpluss";
+	private static $db_name = "nfo";
 	private static $db_user = "nx";
 	private static $db_password = "";
 
@@ -19,7 +19,7 @@ require_once("model/BasicObject.php");
 require_once("model/ValidatingBasicObject.php");
 BasicObject::$output_htmlspecialchars = true;
 
-//$db = Config::fix_database();
+$db = Config::fix_database();
 $dir = dirname(__FILE__);
 
 ?>
