@@ -12,7 +12,10 @@ class ESportController extends Controller {
 	public function BuildSubMenu() {
 		//TODO: Add some code that fixes this through database?!
 		$submenu = new Menu();
-		$submenu->AddItem("/esport/test", "Test länk", "esport/test");
+		$submenu->AddItem("/esport/LoL", "League of Legends");
+		$submenu->AddItem("/esport/mc", "Minecraft");
+		$submenu->Additem("/esport/sc2", "Starcraft II");
+		$submenu->AddItem("/esport/tibia", "Tibia");
 		return $submenu;
 	}
 }
