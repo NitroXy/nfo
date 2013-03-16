@@ -1,16 +1,15 @@
 <?php
 
 class MenuItem {
-	private $href, $name, $ident;
+	private $href, $name;
 
-	public function __construct($href, $name, $ident) {
+	public function __construct($href, $name) {
 		$this->href = $href;
 		$this->name = $name;
-		$this->ident = $ident;
 	}
 
 	public function render($sel) {
-		if($sel == $this->ident) {
+		if($sel == $this->href) {
 			$class = "selected";
 		} else {
 			$class = "";
@@ -22,8 +21,8 @@ class MenuItem {
 class Menu {
 	private $items = array();
 
-	public function AddItem($href, $name, $ident) {
-		array_push($this->items, new MenuItem($href, $name, $ident));
+	public function AddItem($href, $name) {
+		array_push($this->items, new MenuItem($href, $name));
 	}
 
 	public function render($sel) {

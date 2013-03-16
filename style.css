@@ -59,10 +59,11 @@ body {
 
 #header #submenu ul {
 	margin-top: 10px;
+	margin-left: 20px;
 }
 #header #submenu li a {
 	padding: 5px;
-	font-size: 12px;
+	font-size: 14px;
 }
 
 #content {
@@ -75,6 +76,21 @@ body {
 #content h1,h2,h3,h4,h5,h6 {
 	font-family: Century Gothic;
 	color: #fa7600;
+}
+
+#newsfeed {
+	margin-left: 10px;
+}
+#newsfeed .newsitem {
+	border-bottom: 1px solid #fff;
+	padding-bottom: 20px;
+}
+#newsfeed .newsitem h3 {
+	text-decoration: underline;
+}
+#newsfeed .newsitem span {
+	margin-top: -10px;
+	margin-left: 10px;
 }
 
 #footer {
