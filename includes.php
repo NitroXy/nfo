@@ -11,5 +11,6 @@ require("helpers/flash.php");
 require("model/Controller.php");
 require("model/Path.php");
 require("model/Menu.php");
+require("model/Newsfeed.php");
 
 ?>

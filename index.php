@@ -25,15 +25,14 @@
 
 	//Build menu
 	$menu = new Menu();
-	$menu->AddItem("/main", "Startsida", "main");
-	$menu->AddItem("/esport", "E-Sport", "esport");
+	$menu->AddItem("/main", "Startsida");
+	$menu->AddItem("/esport", "E-Sport");
 
 	$submenu = $controller->BuildSubMenu();
-
 ?>
 <html>
 	<head>
-		<title> cpluss </title>
+		<title> NitroXy 16 - Info </title>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
 		<link rel="stylesheet" type="text/css" href="/style.css"/>
 	</head>
@@ -41,9 +40,9 @@
 		<div id="wrapper">
 			<div id="header">
 				<h1> NitroXy 16 - Info </h1>
-				<?=$menu->render($path->controller());?>
+				<?=$menu->render($path->raw_path());?>
 				<div id="submenu">
-					<?=$submenu->render($path->controller());?>
+					<?=$submenu->render($path->raw_path());?>
 				</div>
 			</div>
 			<div id="content">
@@ -64,6 +63,7 @@
 							}
 						}
 
+
 						//Show content
 						echo $content;
 					} catch(HTTPRedirect $e){
@@ -83,7 +83,7 @@
 			</div>
 			<div id="footer">
 				<hr>
-				<p> Copyright &copy; NitroXy </p> 
+				<p> Sidan är gjord utav cpluss - Copyright &copy; NitroXy </p> 
 			</div>
 		</div>
 	</body>
