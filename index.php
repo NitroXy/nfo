@@ -32,18 +32,20 @@
 ?>
 <html>
 	<head>
-		<title> NitroXy 16 - Info </title>
+		<title> NitroXy <?=$event?> - Info </title>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
 		<link rel="stylesheet" type="text/css" href="/style.css"/>
 	</head>
 	<body>
 		<div id="wrapper">
 			<div id="header">
-				<h1> NitroXy 16 - Info </h1>
+				<h1> NitroXy <?=$event?> - Info </h1>
 				<?=$menu->render($path->raw_path());?>
 				<div id="submenu">
 					<?=$submenu->render($path->raw_path());?>
 				</div>
+
+				<!-- Add login buttonzzzz -->
 			</div>
 			<div id="content">
 				<?php
