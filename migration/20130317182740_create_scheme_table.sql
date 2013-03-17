@@ -1,0 +1,6 @@
+CREATE TABLE `scheme_items` (
+		`id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+		`timestamp` DATETIME NOT NULL,
+		`text` TEXT NOT NULL,
+		`href` TEXT NOT NULL
+);

@@ -25,7 +25,7 @@
 
 	//Build menu
 	$menu = new Menu();
-	$menu->AddItem("/main", "Startsida");
+	$menu->AddItem("/main", "Schema");
 	$menu->AddItem("/esport", "E-Sport");
 
 	$submenu = $controller->BuildSubMenu();
