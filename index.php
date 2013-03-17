@@ -21,11 +21,20 @@
 		unset($_SESSION['flash']);
 	}
 	
-	$controller = Controller::factory($path);
+	try {
+		$controller = Controller::factory($path);
+	} catch (HTTPError $e){ 
+		echo "<h2> {$e->title()} </h2> <p> {$e->message()} </p>";
+		die();
+	} catch(Exception $e){
+		echo "<h2> Error </h2> <p> {$e->getMessage()} </p>";
+		die();
+	}
 
 	//Build menu
 	$menu = new Menu();
 	$menu->AddItem("/main", "Schema");
+	$menu->AddItem("/info", "Allmän information");
 	$menu->AddItem("/esport", "E-Sport");
 
 	$submenu = $controller->BuildSubMenu();
