@@ -5,6 +5,12 @@ h1,h2,h3,h4,h5,h6,p,span,a,li {
 	font-family: Century Gothic;
 	color: white;
 }
+a {
+	text-decoration: none;
+}
+a:hover {
+	color: #fa7600;
+}
 
 /* General settings */
 body {
@@ -48,9 +54,6 @@ body {
 	color: #b8b8b8;
 	text-decoration: none;
 
-}
-#header li:hover a {
-	color: #fa7600;
 }
 #header li a.selected {
 	color: #fa7600;
@@ -96,12 +99,6 @@ body {
 .scheme_item .datetime {
 	color: green; 
 	padding: 15px;
-}
-.scheme_item a {
-	text-decoration: none;
-}
-.scheme_item a:hover {
-	color: #fa7600;
 }
 
 #footer {
