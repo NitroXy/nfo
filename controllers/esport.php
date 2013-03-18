@@ -1,20 +1,8 @@
 <?php
 
-class ESportController extends Controller {
-	public function route($path) {
-		if(empty($path)) {
-			return $this->index();
-		}
-
-		/* Fetch from database */
-		$item = DatabaseSite::from_name('esport', $path[0]);
-		if(!isset($item))
-			throw new HTTPError404();
-		return $item->render();
-	}
-
-	public function index() {
-		return $this->render('index');
+class ESportController extends DynamicController {
+	protected static function menu_name() {
+		return 'esport';
 	}
 
 	public function BuildSubMenu() {

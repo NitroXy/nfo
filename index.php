@@ -36,6 +36,9 @@
 	$menu->AddItem("/main", "Schema");
 	$menu->AddItem("/info", "Allmän information");
 	$menu->AddItem("/esport", "E-Sport");
+	$menu->AddItem("/kreativ", "Kreativ");
+	$menu->AddItem("/kiosk", "Kiosk");
+	$menu->AddItem("/activity", "Activity");
 
 	$submenu = $controller->BuildSubMenu();
 ?>
