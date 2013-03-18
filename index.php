@@ -40,6 +40,9 @@
 	$menu->AddItem("/kiosk", "Kiosk");
 	$menu->AddItem("/activity", "Activity");
 
+	//Add admin check right here !
+	$menu->AddItem("/admin", "Admin");
+
 	$submenu = $controller->BuildSubMenu();
 ?>
 <html>
