@@ -1,0 +1,6 @@
+CREATE TABLE `databasesite` (
+	`id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	`name` TEXT NOT NULL,
+	`href` TEXT NOT NULL,
+	`text` TEXT NOT NULL
+);
