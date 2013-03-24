@@ -1,3 +1,6 @@
 [submodule "libs/php-markdown"]
 	path = libs/php-markdown
 	url = https://github.com/NitroXy/php-markdown.git
+[submodule "libs/nxauth"]
+	path = libs/nxauth
+	url = https://github.com/NitroXy/nxauth
