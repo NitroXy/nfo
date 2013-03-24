@@ -12,7 +12,7 @@ class MainController extends Controller {
 		$content = ob_get_contents();
 		ob_end_clean();
 
-		return $this->render('frontpage', array('scheme' => $content, 'newsfeed' => Newsfeed::Render()));
+		return $this->render('frontpage', array('scheme' => $content, 'newsfeed' => '' /*Newsfeed::Render()*/));
 	}
 }
 ?>

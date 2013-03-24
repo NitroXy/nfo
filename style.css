@@ -115,6 +115,14 @@ body {
 	font-size: 12px;
 }
 
+/* Special selection menu UL */
+ul.select_menu {
+	list-style-type: square;
+}
+ul.select_menu li a:hover {
+	text-decoration: underline;
+}
+
 /* Error, info and success display */
 .error {
 	padding: 7px 10px;

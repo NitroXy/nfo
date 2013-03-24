@@ -5,6 +5,16 @@ class DatabaseSite extends BasicObject {
 		return "databasesite";
 	}
 
+	public static function from_only_name($name) {
+		$sel = static::selection(array('name' => $name));
+
+		if(empty($sel)) {
+			return null;
+		}
+
+		return $sel[0];
+	}
+
 	public static function from_name($name, $href) {
 		$sel = static::selection(array('name' => $name, 'href' => $href));
 

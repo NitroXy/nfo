@@ -31,7 +31,10 @@
 		die();
 	}
 
-	//Build menu
+	/*
+		Build the menu, right now this is done manually,
+		but that will _eventually_ change
+	*/
 	$menu = new Menu();
 	$menu->AddItem("/main", "Schema");
 	$menu->AddItem("/info", "Allmän information");
