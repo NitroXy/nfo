@@ -2,18 +2,63 @@
 
 class AdminController extends Controller {
 	public function pre_route($path) {
-		//ensure_login & ensure_admin
+		if(!is_loggedin() || !is_admin()) {
+			throw new HTTPError404();
+		}
 	}
 	public function route($path) {
+		/* Ugglyhack deluxe ! */
 		if(!is_post()) {
 			if(empty($path)) {
 				return $this->index(); 
 			}
 
 			$site = $path[0];
+
+			if($site == "scheme") {
+				return $this->scheme($path[1]);
+			}
+
 			return $this->generate_simple_site($site);
 		}
-		return $this->update($path[1], $path[2]);
+		if($path[0] == "scheme") {
+			return $this->scheme($path[1]);
+		} else {
+			return $this->update($path[1], $path[2]);
+		}
+	}
+
+	public function scheme($id=null) {
+		//Update or add item 
+		if(is_post()) {
+			if(isset($id)) {
+				$item = SchemeItem::from_id($id);
+				if(!isset($item)) {
+					flash('error', 'Hittade ingen schemaelement med id='.$id);
+					throw new HTTPRedirect("/admin/scheme");
+				}
+			}
+			else {
+				$item = new SchemeItem;
+			}
+
+			$item->timestamp = postdata('timestamp');
+			$item->text = postdata('name');
+			$item->href = postdata('href');
+			$item->commit();
+
+			flash('success', 'Ändringarna har blivit sparade');
+			throw new HTTPRedirect("/admin/scheme");
+		}
+
+		if(!isset($id)) {
+			$scheme_items = SchemeItem::all();
+			return $this->render('scheme', array('items' => $scheme_items));
+		}
+
+		$item = SchemeItem::from_id($id);
+		//Show individual item
+		return $this->render('edit', array('id' => $id, 'item' => $item));
 	}
 
 	public function generate_simple_site($name) {
