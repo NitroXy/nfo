@@ -69,6 +69,12 @@ body {
 	font-size: 14px;
 }
 
+#header #login_menu {
+	float: right;
+	position: relative;
+	margin-top: -110px;
+}
+
 #content {
 	padding-bottom: 100px;
 }
