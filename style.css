@@ -70,9 +70,9 @@ body {
 }
 
 #header #login_menu {
-	float: right;
-	position: relative;
-	margin-top: -110px;
+	position: absolute;
+	left: 350px;
+	top: 0px;
 }
 
 #content {
