@@ -26,6 +26,8 @@ class AdminController extends Controller {
 		}
 		if($path[0] == "scheme") {
 			return $this->scheme($path[1]);
+		} else if($path[0] == "add") {
+			return $this->add();
 		} else {
 			return $this->update($path[1], $path[2]);
 		}
@@ -40,18 +42,15 @@ class AdminController extends Controller {
 					flash('error', 'Hittade ingen schemaelement med id='.$id);
 					throw new HTTPRedirect("/admin/scheme");
 				}
-			}
-			else {
-				$item = new SchemeItem;
-			}
 
-			$item->timestamp = postdata('timestamp');
-			$item->text = postdata('name');
-			$item->href = postdata('href');
-			$item->commit();
+				$item->timestamp = postdata('timestamp');
+				$item->text = postdata('name');
+				$item->href = postdata('href');
+				$item->commit();
 
-			flash('success', 'Ändringarna har blivit sparade');
-			throw new HTTPRedirect("/admin/scheme");
+				flash('success', 'Ändringarna har blivit sparade');
+				throw new HTTPRedirect("/admin/scheme");
+			}
 		}
 
 		if(!isset($id)) {
@@ -65,7 +64,18 @@ class AdminController extends Controller {
 	}
 
 	public function add() {
-		return $this->render('edit');
+		if(is_post()) {
+			$item = new SchemeItem;
+
+			$item->timestamp = postdata('timestamp');
+			$item->text = postdata('name');
+			$item->href = postdata('href');
+			$item->commit();
+
+			flash('success', 'Ändringarna har blivit sparade');
+			throw new HTTPRedirect("/admin/scheme");
+		}
+		return $this->render('add');
 	}
 
 	public function generate_simple_site($name) {

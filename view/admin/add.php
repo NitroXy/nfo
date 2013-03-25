@@ -7,11 +7,11 @@
 <p>för att länkarna skall vara bra <u>bör</u> du inte inkludera hela URLen </p>
 
 <hr>
-<form method="post" action="/admin/scheme/<?=$id?>">
+<form method="post" action="/admin/add">
 	<table><p>
-		<tr><td><span>Tid :</span></td><td> <input type="text" name="timestamp" value="<?=$item->timestamp?>"/></td></tr>
-		<tr><td><span>Namn:</span></td><td> <input type="text" name="name" value="<?=$item->text?>"/></td></tr>
-		<tr><td><span>Länk: </span></td><td><input type="text" name="href" value="<?=$item->href?>"/></td></tr>
+		<tr><td><span>Tid :</span></td><td> <input type="text" name="timestamp"/></td></tr>
+		<tr><td><span>Namn:</span></td><td> <input type="text" name="name"/></td></tr>
+		<tr><td><span>Länk: </span></td><td> <input type="text" name="href"/></td></tr>
 	</p></table>
 	<input type="submit" value="Spara"/>
 </form>
