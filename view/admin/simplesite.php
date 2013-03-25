@@ -1,3 +1,6 @@
+<h3> Riktlinjer </h3>
+<p> Du redigerar med helt enkel och väldigt vanlig HTML. Du kan också skriva in javascript (rekommenderas ej). </p>
+<hr>
 <?
 $item_length = count($names);
 for($i = 0; $i < $item_length; $i++) {
