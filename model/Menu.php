@@ -9,7 +9,7 @@ class MenuItem {
 	}
 
 	public function render($sel) {
-		if($sel == $this->href) {
+		if($sel == $this->href or ($sel == "main" and $this->href == "/main")) {
 			$class = "selected";
 		} else {
 			$class = "";
