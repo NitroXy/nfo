@@ -69,12 +69,6 @@ body {
 	font-size: 14px;
 }
 
-#header #login_menu {
-	position: absolute;
-	left: 350px;
-	top: 0px;
-}
-
 #content {
 	padding-bottom: 100px;
 }
@@ -119,6 +113,9 @@ body {
 	float: right;
 	font-family: Century Gothic;
 	font-size: 12px;
+}
+#footer #login_menu {
+	float: left;
 }
 
 /* Special selection menu UL */

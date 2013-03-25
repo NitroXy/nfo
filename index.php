@@ -68,13 +68,6 @@
 					<?=$submenu->render($path->raw_path());?>
 				</div>
 
-				<div id="login_menu">
-					<? if(is_loggedin()) { ?>
-						<p> Inloggad som <?=$u->username?>, <a href="/user/logout"> logga ut </a> </p>
-					<? } else { ?>
-						<p> <a href="/user/login"> Logga In </a> </p>
-					<? } ?>
-				</div>
 			</div>
 			<div id="content">
 				<?php
@@ -115,6 +108,14 @@
 			<div id="footer">
 				<hr>
 				<p> Sidan är gjord utav cpluss - Copyright &copy; NitroXy </p> 
+
+				<div id="login_menu">
+					<? if(is_loggedin()) { ?>
+						<p> Inloggad som <?=$u->username?>, <a href="/user/logout"> logga ut </a> </p>
+					<? } else { ?>
+						<p> <a href="/user/login"> Logga In </a> </p>
+					<? } ?>
+				</div>
 			</div>
 		</div>
 	</body>
