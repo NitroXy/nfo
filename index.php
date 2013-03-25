@@ -44,7 +44,12 @@
 	$menu->AddItem("/activity", "Activity");
 
 	//Add admin check right here !
-	$menu->AddItem("/admin", "Admin");
+	if(is_admin()) {
+		$menu->AddItem("/admin", "Admin");
+	}
+	if(is_loggedin()) {
+		$u = NXAuth::user();
+	}
 
 	$submenu = $controller->BuildSubMenu();
 ?>
@@ -63,7 +68,13 @@
 					<?=$submenu->render($path->raw_path());?>
 				</div>
 
-				<!-- Add login buttonzzzz -->
+				<div id="login_menu">
+					<? if(is_loggedin()) { ?>
+						<p> Inloggad som <?=$u->username?>, <a href="/user/logout"> logga ut </a> </p>
+					<? } else { ?>
+						<p> <a href="/user/login"> Logga In </a> </p>
+					<? } ?>
+				</div>
 			</div>
 			<div id="content">
 				<?php
