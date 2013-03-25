@@ -1,22 +1,14 @@
 <?php
 
 function is_loggedin() {
-	global $u;
-	return ($u != NULL);
+	return NXAuth::is_authenticated();
 }
 
-function ensure_login() {
-	global $u;
-	if(!is_loggedin()){
-		throw new HTTPError403();
-	}
-}
-
-function ensure_admin() {
-	global $u;
-	if(!$u && !$u->admin){
-		throw new HTTPError403();
-	}
+function is_admin() {
+	if(!is_loggedin())
+		return false;
+	
+	return true;
 }
 
 /* no idea why I put it here ... */

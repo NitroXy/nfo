@@ -3,6 +3,9 @@
 // Basic functionality
 require("config.php");
 
+//NXAuth
+require("nxauth.php");
+
 // Helpers
 require("helpers/authenticate.php");
 require("helpers/flash.php");
