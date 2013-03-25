@@ -8,6 +8,8 @@ function is_admin() {
 	if(!is_loggedin())
 		return false;
 	
+	//Add admin check here
+
 	return true;
 }
 
