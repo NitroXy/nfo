@@ -1,5 +1,10 @@
 <h3> Riktlinjer </h3>
 <p> Du redigerar med helt enkel och väldigt vanlig HTML. Du kan också skriva in javascript (rekommenderas ej). </p>
+<p> Det finns vissa standarder att följa för att hålla sidan snygg och ren: </p>
+<ul>
+	<li> Använd helst h3 till rubriker, och absolut inte h1; eftersom att det blir alldeles för stort i sådant fall. </li>
+	<li> Stava rätt ... även om inte jag gör det </li>
+</ul>
 <hr>
 <?
 $item_length = count($names);
