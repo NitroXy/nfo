@@ -7,5 +7,6 @@ foreach($items as $item) { ?>
 			<a href="/admin/scheme/<?=$item->id?>"> <?=$item->text?> </a>
 		</div>
 	</p>
-<? }
-?>
+<? } ?>
+<a href="/admin/add"> Lägg till </a>
+

@@ -13,7 +13,7 @@
 	if(!isset($item)) { ?>
 		<tr><td><span>Tid :</span></td><td> <input type="text" name="timestamp"/></td></tr>
 		<tr><td><span>Namn:</span></td><td> <input type="text" name="name"/></td></tr>
-		<tr><td><span>Länk: </span><input type="text" name="href"/></td></tr>
+		<tr><td><span>Länk: </span></td><td> <input type="text" name="href"/></td></tr>
 	<?} else { ?>
 		<tr><td><span>Tid :</span></td><td> <input type="text" name="timestamp" value="<?=$item->timestamp?>"/></td></tr>
 		<tr><td><span>Namn:</span></td><td> <input type="text" name="name" value="<?=$item->text?>"/></td></tr>

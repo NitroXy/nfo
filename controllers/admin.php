@@ -18,6 +18,9 @@ class AdminController extends Controller {
 			if($site == "scheme") {
 				return $this->scheme($path[1]);
 			}
+			if($site == "add") {
+				return $this->add();
+			}
 
 			return $this->generate_simple_site($site);
 		}
@@ -59,6 +62,10 @@ class AdminController extends Controller {
 		$item = SchemeItem::from_id($id);
 		//Show individual item
 		return $this->render('edit', array('id' => $id, 'item' => $item));
+	}
+
+	public function add() {
+		return $this->render('edit');
 	}
 
 	public function generate_simple_site($name) {
