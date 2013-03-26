@@ -5,10 +5,15 @@ function is_loggedin() {
 }
 
 function is_admin() {
-	if(!is_loggedin())
+	if(!is_loggedin()) {
 		return false;
+	}
 	
 	//Add admin check here
+	global $event;
+	if(count(NXAPI::crew_groups(array('event' => 'nx'.$event))) <= 0) {
+		return false;
+	}
 
 	return true;
 }
@@ -26,8 +31,9 @@ function is_post() {
 }
 
 function ensure_post() {
-	if(!is_post())
+	if(!is_post()) {
 		throw new HTTPError403();
+	}
 }
 
 ?>
