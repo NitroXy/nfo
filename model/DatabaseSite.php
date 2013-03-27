@@ -1,4 +1,7 @@
 <?php
+require_once "libs/php-markdown/Michelf/Markdown.php";
+require_once "libs/php-markdown/Michelf/MarkdownExtra.php";
+use \Michelf\MarkdownExtra;
 
 class DatabaseSite extends BasicObject {
 	protected static function table_name() {
@@ -26,7 +29,12 @@ class DatabaseSite extends BasicObject {
 	}
 
 	public function render() {
-		return html_entity_decode($this->text);
+		$markdown = new MarkdownExtra();
+
+		$markdown->no_markup = true;
+		$markdown->nl2br = true;
+
+		return html_entity_decode($markdown->transform($this->text), ENT_QUOTES, "UTF-8");
 	}
 }
 
