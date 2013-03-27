@@ -5,6 +5,12 @@
 	<li> Använd helst h3 till rubriker, och absolut inte h1; eftersom att det blir alldeles för stort i sådant fall. </li>
 	<li> Stava rätt ... även om inte jag gör det </li>
 </ul>
+
+<p> Länkar som referrerar till en annan del på <u>denna</u> sidan <b>bör</b> skrivas på liknande sätt: </p>
+<div class="info">
+	/esport
+</div>
+<p> För att inte länkarna skall förstöras vid förflyttning utav sidan. </p>
 <hr>
 <?
 $item_length = count($names);
