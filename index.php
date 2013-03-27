@@ -107,7 +107,7 @@
 			</div>
 			<div id="footer">
 				<hr>
-				<p> Sidan är gjord utav cpluss - Copyright &copy; NitroXy </p> 
+				<p> Sidan är gjord utav cpluss för NitroXy </p>
 
 				<div id="login_menu">
 					<? if(is_loggedin()) { ?>
