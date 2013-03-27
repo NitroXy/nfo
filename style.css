@@ -1,5 +1,8 @@
 /* Default settings for all browsers ... */
-img { border: none; }
+img { 
+	border: none; 
+	max-width: 600px;
+}
 h1,h2,h3,h4,h5,h6,p,span,a,li {
 	font-family: Century Gothic;
 	color: white;
