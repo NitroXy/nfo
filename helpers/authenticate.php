@@ -11,7 +11,9 @@ function is_admin() {
 	
 	//Add admin check here
 	global $event;
-	if(count(NXAPI::crew_groups(array('event' => 'nx'.$event))) <= 0) {
+	$u = NXAuth::user();
+	print_r(NXAPI::is_crew(array('user' => $u->user_id)));
+	if(!NXAPI::is_crew(array('user' => $u->user_id))) {
 		return false;
 	}
 
