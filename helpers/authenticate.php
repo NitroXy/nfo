@@ -12,7 +12,6 @@ function is_admin() {
 	//Add admin check here
 	global $event;
 	$u = NXAuth::user();
-	print_r(NXAPI::is_crew(array('user' => $u->user_id)));
 	if(!NXAPI::is_crew(array('user' => $u->user_id))) {
 		return false;
 	}
