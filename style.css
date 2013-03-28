@@ -104,6 +104,7 @@ body {
 }
 
 #footer {
+	clear: both;
 	height: 100px;
 	width: 100%;
 
