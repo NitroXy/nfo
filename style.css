@@ -59,7 +59,6 @@ body {
 }
 #header li a.selected {
 	color: #fa7600;
-	border-bottom: 1px solid #fa7600;
 }
 
 #header #submenu ul {
