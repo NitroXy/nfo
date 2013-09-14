@@ -4,7 +4,7 @@ class Config {
 	private static $db_host = "localhost";
 	private static $db_name = "nfo";
 	private static $db_user = "nx";
-	private static $db_password = "";
+	private static $db_password = "nx";
 
 	public static function fix_database($username=null) {
 		if(is_null($username)) {
@@ -20,7 +20,7 @@ require_once("model/ValidatingBasicObject.php");
 BasicObject::$output_htmlspecialchars = true;
 
 $db = Config::fix_database();
-$event = 16;
+$event = 17;
 $dir = dirname(__FILE__);
 
 ?>
