@@ -88,9 +88,11 @@
 	</head>
 	<body>
             <div id="header">
-            <h1> NitroXy <?=$event?> - Info </h1>
+            <div class="page-header">
+                <h1> NitroXy <?=$event?> - Info </h1>
             <div id="navigation_menu">
                 <?=$menu->render($path->raw_path());?>
+            </div>
             </div>
 
             </div>
@@ -132,7 +134,7 @@
             </div>
             <div id="footer">
             <hr>
-            <p class="madeby"> Sidan är gjord utav cpluss för NitroXy </p>
+            <p class="madeby"> Sidan är gjord utav <a href="http://cpluss.se">cpluss</a> för NitroXy </p>
 
             <div id="login_menu">
                     <? if(is_loggedin()) { ?>

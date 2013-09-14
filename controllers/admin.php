@@ -39,7 +39,7 @@ class AdminController extends Controller {
 			if(isset($id)) {
 				$item = SchemeItem::from_id($id);
 				if(!isset($item)) {
-					flash('error', 'Hittade ingen schemaelement med id='.$id);
+					flash('alert alert-danger', 'Hittade ingen schemaelement med id='.$id);
 					throw new HTTPRedirect("/admin/scheme");
 				}
 
@@ -48,7 +48,7 @@ class AdminController extends Controller {
 				$item->href = postdata('href');
 				$item->commit();
 
-				flash('success', 'Ändringarna har blivit sparade');
+				flash('alert alert-success', 'Ändringarna har blivit sparade');
 				throw new HTTPRedirect("/admin/scheme");
 			}
 		}
@@ -72,7 +72,7 @@ class AdminController extends Controller {
 			$item->href = postdata('href');
 			$item->commit();
 
-			flash('success', 'Ändringarna har blivit sparade');
+			flash('alert alert-success', 'Ändringarna har blivit sparade');
 			throw new HTTPRedirect("/admin/scheme");
 		}
 		return $this->render('add');
@@ -104,7 +104,7 @@ class AdminController extends Controller {
 		$item->text = $new_content;
 		$item->commit();
 
-		flash('success', "{$mainname}/{$name} har sparats.");
+		flash('alert alert-success', "{$mainname}/{$name} har sparats.");
 		echo 'done.';
 		throw new HTTPRedirect("/admin");
 	}

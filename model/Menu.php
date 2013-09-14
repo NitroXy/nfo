@@ -29,7 +29,7 @@ class Menu {
                 array_push($this->items, $menu);
         }
 
-	public function render($sel, $c = 'nav nav-tabs nav-justified') {
+	public function render($sel, $c = 'nav nav-tabs') {
                 $ob = false;
                 if(!ob_get_status()) {
                     ob_start();
@@ -44,7 +44,7 @@ class Menu {
                                     echo '<a class="dropdown-toggle" role="menu" data-toggle="dropdown" href="#">';
                                         echo $i->menu_name.'<span class="caret"></span>';
                                     echo '</a>';
-                                $i->render($sel, 'dropdown-menu submenu');
+                                $i->render($sel, 'dropdown-menu submenu push-left');
                                 echo '</li>';
                         } else {
                             $i->render($sel);
