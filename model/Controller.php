@@ -63,7 +63,7 @@ class Controller {
 			$view = $path->args();
 			$view = count($view) > 0 ? $view[0] : 'index';
 
-			$filename = "view/$controller/$view.php";
+			$filename = "../view/$controller/$view.php";
 			if(file_exists($filename)) {
 				return new SimpleController($path->controller());
 			}
@@ -112,7 +112,7 @@ class Controller {
 		$path = $this->build_path_array($view);
 		$this->_PASSALONG = $data;
 
-		$filename = "view/" . implode("/", $path);
+		$filename = "../view/" . implode("/", $path);
 		return $this->_render_view($filename, $data, true);
 	}
 

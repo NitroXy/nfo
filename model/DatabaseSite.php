@@ -1,6 +1,6 @@
 <?php
-require_once "libs/php-markdown/Michelf/Markdown.php";
-require_once "libs/php-markdown/Michelf/MarkdownExtra.php";
+require_once "../libs/php-markdown/Michelf/Markdown.php";
+require_once "../libs/php-markdown/Michelf/MarkdownExtra.php";
 use \Michelf\MarkdownExtra;
 
 class DatabaseSite extends BasicObject {
