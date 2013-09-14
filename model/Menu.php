@@ -28,7 +28,7 @@ class Menu {
 	public function render($sel) {
 		ob_start();
 
-		echo "<ul>";
+		echo "<ul class=\"nav nav-tabs nav-justified\">";
 		foreach($this->items as $i) {
 			$i->render($sel);
 		}

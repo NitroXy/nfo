@@ -53,10 +53,23 @@
 
 	$submenu = $controller->BuildSubMenu();
 ?>
-<html>
+<!DOCTYPE html>
+<html lang="sv">
 	<head>
             <title> NitroXy <?=$event?> - Info </title>
             <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+
+            <!-- Include bootstrap ... -->
+            <!-- Latest compiled and minified CSS -->
+            <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+
+            <!-- Optional theme -->
+            <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-theme.min.css">
+
+            <!-- Latest compiled and minified JavaScript -->
+            <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+            <!-- Our complementary stylesheet -->
             <link rel="stylesheet" type="text/css" href="/style.css"/>
 	</head>
 	<body>
