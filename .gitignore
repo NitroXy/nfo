@@ -3,3 +3,5 @@
 Icon?
 ._*
 *.priv
+config.php
+nxauth.php
