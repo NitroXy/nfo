@@ -1,0 +1,30 @@
+/*
+ * To counteract some of the effects of bootstrap, bugs...
+ * */
+
+#header {
+    width: 1000px;
+    margin-left: 20px;
+}
+
+#navigation_menu {
+    width: 1000px;
+}
+
+#content {
+    width: 900px;
+    margin-left: 50px;
+}
+
+#footer {
+    width: 1000px;
+    margin-left: 20px;
+}
+
+#footer .madeby {
+    float: right;
+}
+
+ul.submenu {
+    position: relative;
+}

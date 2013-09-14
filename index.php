@@ -43,6 +43,12 @@
 	$menu->AddItem("/kiosk", "Kiosk");
 	$menu->AddItem("/activity", "Activity");
 
+        $me = new Menu();
+	$me->AddItem("/main", "Schema");
+	$me->AddItem("/info", "Allmän information");
+        $me->setMenuName("Test");
+        $menu->AddSubMenu($me);
+
 	//Add admin check right here !
 	if(is_admin()) {
 	    $menu->AddItem("/admin", "Admin");
@@ -50,14 +56,16 @@
 	if(is_loggedin()) {
 	    $u = NXAuth::user();
 	}
-
-	$submenu = $controller->BuildSubMenu();
 ?>
 <!DOCTYPE html>
 <html lang="sv">
 	<head>
             <title> NitroXy <?=$event?> - Info </title>
             <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+
+            <!-- Use jquery -->
+            <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+            <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 
             <!-- Include bootstrap ... -->
             <!-- Latest compiled and minified CSS -->
@@ -68,68 +76,71 @@
 
             <!-- Latest compiled and minified JavaScript -->
             <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+            
+            <script>
+                $(document).ready(function() {
+                    $('.dropdown-toggle').dropdown();
+                }
+            </script>
 
             <!-- Our complementary stylesheet -->
             <link rel="stylesheet" type="text/css" href="/style.css"/>
 	</head>
 	<body>
-	<div id="wrapper">
-		<div id="header">
-		<h1> NitroXy <?=$event?> - Info </h1>
-		<?=$menu->render($path->raw_path());?>
-		<div id="submenu">
-			<?=$submenu->render($path->raw_path());?>
-		</div>
+            <div id="header">
+            <h1> NitroXy <?=$event?> - Info </h1>
+            <div id="navigation_menu">
+                <?=$menu->render($path->raw_path());?>
+            </div>
 
-		</div>
-		<div id="content">
-		<?php
+            </div>
+            <div id="content">
+            <?php
 
-			//Display the controller
-			try {
-                            $content =  exec_controller($controller, $path);
+                    //Display the controller
+                    try {
+                        $content =  exec_controller($controller, $path);
 
-                            //Show flash messages
-                            foreach($flash as $class => $msg) {
-                                    if(is_array($msg)) {
-                                        foreach($msg as $m) { 
-                                            ?> <p class="<?=$class?>"> <?=$m?> </p> <?
-                                        }
-                                    } else {
-                                        ?> <p class="<?=$class?>"> <?=$msg?> </p> <?
+                        //Show flash messages
+                        foreach($flash as $class => $msg) {
+                                if(is_array($msg)) {
+                                    foreach($msg as $m) { 
+                                        ?> <p class="<?=$class?>"> <?=$m?> </p> <?
                                     }
-                            }
+                                } else {
+                                    ?> <p class="<?=$class?>"> <?=$msg?> </p> <?
+                                }
+                        }
 
 
-                            //Show content
-                            echo $content;
-			} catch(HTTPRedirect $e){
-                            //Set flash for next redirect
-                            if(isset($flash)) {
-                                $_SESSION['flash'] = serialize($flash);
-                            }
+                        //Show content
+                        echo $content;
+                    } catch(HTTPRedirect $e){
+                        //Set flash for next redirect
+                        if(isset($flash)) {
+                            $_SESSION['flash'] = serialize($flash);
+                        }
 
-                            header("Location: {$e->url}");
-                            exit();
-			} catch (HTTPError $e){ 
-                            echo "<h2> {$e->title()} </h2> <p> {$e->message()} </p>";
-			} catch(Exception $e){
-                            echo "<h2> Error </h2> <p> {$e->getMessage()} </p>";
-			}
-		?>
-		</div>
-		<div id="footer">
-		<hr>
-		<p> Sidan är gjord utav cpluss för NitroXy </p>
+                        header("Location: {$e->url}");
+                        exit();
+                    } catch (HTTPError $e){ 
+                        echo "<h2> {$e->title()} </h2> <p> {$e->message()} </p>";
+                    } catch(Exception $e){
+                        echo "<h2> Error </h2> <p> {$e->getMessage()} </p>";
+                    }
+            ?>
+            </div>
+            <div id="footer">
+            <hr>
+            <p class="madeby"> Sidan är gjord utav cpluss för NitroXy </p>
 
-		<div id="login_menu">
-			<? if(is_loggedin()) { ?>
-			<p> Inloggad som <?=$u->username?>, <a href="/user/logout"> logga ut </a> </p>
-			<? } else { ?>
-			<p> <a href="/user/login"> Logga In </a> </p>
-			<? } ?>
-		</div>
-		</div>
-	</div>
+            <div id="login_menu">
+                    <? if(is_loggedin()) { ?>
+                    <p> Inloggad som <?=$u->username?>, <a href="/user/logout"> logga ut </a> </p>
+                    <? } else { ?>
+                    <p> <a class="btn btn-default" href="/user/login"> Logga In </a> </p>
+                    <? } ?>
+            </div>
+            </div>
 	</body>
 </html>
