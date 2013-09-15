@@ -207,7 +207,7 @@ class AdminController extends Controller {
 	public function image_del() {
 		$image = getdata('img');
 		if(!isset($image)) {
-			flash('error', 'Kunde inte hitta bilden');
+			flash('alert alert-danger', 'Kunde inte hitta bilden');
 			throw new HTTPRedirect('/admin/images');
 		}
 
@@ -247,6 +247,45 @@ class AdminController extends Controller {
 
 		return $this->render('image_add');
 	}
+
+        public function timetable($id = null) {
+            if(isset($id)) {
+                $it = SchemeItem::selection(array('id' => $id))[0];
+                if(!isset($it)) {
+                    return '<p class="alert alert-danger">Kunde inte hitta schemaelement med id='.$id.'</p>';
+                }
+
+                if(is_post()) {
+                    $it->timestamp = postdata('timestamp');
+                    $it->text = postdata('text');
+                    $it->href = postdata('href');
+                    $it->commit();
+
+                    flash('alert alert-success', 'Schemaelementet har blivit uppdaterat.');
+                    throw new HTTPRedirect('/admin/timetable');
+                }
+
+                return $this->render('timetable_edit', array('it' => $it));
+            }
+
+
+            $items = SchemeItem::selection(array());
+            return $this->render('timetable', array('meh' => $items));
+        }
+        public function timetable_add() {
+            if(is_post()) {
+                $it = new SchemeItem;
+                $it->timestamp = postdata('timestamp');
+                $it->text = postdata('text');
+                $it->href = postdata('href');
+                $it->commit();
+
+                flash('alert alert-success', 'Schemaelementet har skapats.');
+                throw new HTTPRedirect('/admin/timetable');
+            }
+
+            return $this->render('/admin/template_add');
+        }
 }
 
 ?>
