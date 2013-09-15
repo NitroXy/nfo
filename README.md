@@ -5,6 +5,7 @@ Vad du behöver göra innan montering
 
 	* Fixa en burk med linux på (helst debian)
 	* Installera valfri webbserver (apache?), samt mysql med lite andra saker
+        * Fixa en API nyckel från nitroxy.com/admin/api
 
 Monteringsguide
 
