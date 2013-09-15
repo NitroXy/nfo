@@ -14,6 +14,10 @@ class Path {
 		array_shift($parts);
 		array_shift($parts);
 
+                if(empty($parts)) {
+                    $parts = array('main');
+                }
+
 		$filename = array_pop($parts);
 		$pathinfo = pathinfo($filename);
 		array_push($parts, $pathinfo['filename']);

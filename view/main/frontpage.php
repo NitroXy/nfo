@@ -4,6 +4,6 @@
 </div>
 <?
 	if($newsfeed != '') { ?>
-	<h2>Nyhetsflöde</h2>
+	<h3>Nyhetsflöde</h3>
 	<?=$newsfeed?>
 <? } ?>
