@@ -12,7 +12,6 @@ require("helpers/flash.php");
 
 // Models
 require("model/Controller.php");
-require("model/DynamicController.php");
 require("model/Path.php");
 require("model/Menu.php");
 require("model/Newsfeed.php");

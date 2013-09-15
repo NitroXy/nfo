@@ -68,6 +68,11 @@ class Controller {
 				return new SimpleController($path->controller());
 			}
 
+                        $site = DatabaseSite::from_name($controller, $view);
+                        if(isset($site)) {
+                            return new DatabaseController($controller);
+                        }
+
 			throw new HTTPError404();
 		}
 
@@ -156,6 +161,17 @@ class SimpleController extends Controller {
 	public function __call($name, $args) {
 		BasicObject::$output_htmlspecialchars = true;
 		return $this->render($name);
+	}
+}
+
+class DatabaseController extends Controller {
+	public function __call($name, $args) {
+		$site = DatabaseSite::from_name($this->name, $name);
+		if(!isset($site)) {
+			//This SHOULD not happen
+			return "<p> What teh fakk?! </p>";
+		}
+		return $site->render();
 	}
 }
 

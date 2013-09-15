@@ -88,14 +88,12 @@
 	</head>
 	<body>
             <div id="header">
-            <div class="page-header">
                 <h1> NitroXy <?=$event?> - Info </h1>
-            <div id="navigation_menu">
-                <?=$menu->render($path->raw_path());?>
-            </div>
+                <div id="navigation_menu">
+                    <?=$menu->render($path->raw_path());?>
+                </div>
             </div>
 
-            </div>
             <div id="content">
             <?php
 

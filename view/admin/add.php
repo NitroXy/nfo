@@ -1,7 +1,7 @@
 <h4> Information angående att ändra eller lägga till schemaelement </h4>
 <p> Datumet måste vara i rätt format, annars läggs inte schemaelementet in, eller kan tiden bli "0000-00-00 00:00:00". Utan det <u>måste</u> vara giltligt format och en giltlig tid. </p>
 <p> Länken på schemaelementet är det bäst om du skriver till exempel: </p>
-<p class="info">
+<p class="well">
 	/esport
 </p>
 <p>för att länkarna skall vara bra <u>bör</u> du inte inkludera hela URLen </p>

@@ -1,13 +1,8 @@
 <h3> Riktlinjer </h3>
-<p> Du redigerar med helt enkel och väldigt vanlig HTML. Du kan också skriva in javascript (rekommenderas ej). </p>
-<p> Det finns vissa standarder att följa för att hålla sidan snygg och ren: </p>
-<ul>
-	<li> Använd helst h3 till rubriker, och absolut inte h1; eftersom att det blir alldeles för stort i sådant fall. </li>
-	<li> Stava rätt ... även om inte jag gör det </li>
-</ul>
+<p> Du redigerar här med något som kallas för Markdown. <a href="https://nitroxy.com/formatting.php">Här</a> är en snabbguide.
 
 <p> Länkar som referrerar till en annan del på <u>denna</u> sidan <b>bör</b> skrivas på liknande sätt: </p>
-<div class="info">
+<div class="well well-sm">
 	/esport
 </div>
 <p> För att inte länkarna skall förstöras vid förflyttning utav sidan. </p>

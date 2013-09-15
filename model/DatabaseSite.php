@@ -29,7 +29,12 @@ class DatabaseSite extends BasicObject {
 	}
 
 	public function render() {
-		return html_entity_decode($this->text, ENT_QUOTES, "UTF-8");
+		$markdown = new MarkdownExtra();
+
+		$markdown->no_markup = true;
+		$markdown->nl2br = true;
+
+		return html_entity_decode($markdown->transform($this->text), ENT_QUOTES, "UTF-8");
 	}
 }
 
