@@ -6,6 +6,10 @@
 	//Get the path
 	$path = Path::from_path_info();
 
+	if(is_loggedin()) {
+	    $u = NXAuth::user();
+	}
+
 	//Execute a controller
 	function exec_controller($controller, $path) {
             //Run controller
@@ -23,38 +27,28 @@
 	
 	try {
 	    $controller = Controller::factory($path);
+            $controller->pre_route($path->args());
+            $content = $controller->route($path->args());
+        } catch(HTTPRedirect $e) {
+            if(isset($flash)) {
+                $_SESSION['flash'] = serialize($flash);
+            }
+
+            header("Location: {$e->url}");
+            exit();
 	} catch (HTTPError $e){ 
-	    echo "<h2> {$e->title()} </h2> <p> {$e->message()} </p>";
-	    die();
+	    $error = "<h3> {$e->title()} </h3> <p> {$e->message()} </p>";
 	} catch(Exception $e){
-	    echo "<h2> Error </h2> <p> {$e->getMessage()} </p>";
-	    die();
+	    $error =  "<h3> Error </h3> <p> {$e->getMessage()} </p>";
 	}
 
-	/*
-	Build the menu, right now this is done manually,
-	but that will _eventually_ change
-	*/
-	$menu = new Menu();
-	$menu->AddItem("/main", "Schema");
-	$menu->AddItem("/info", "Allmän information");
-	$menu->AddItem("/esport", "E-Sport");
-	$menu->AddItem("/kreativ", "Kreativ");
-	$menu->AddItem("/kiosk", "Kiosk");
-	$menu->AddItem("/activity", "Activity");
-
-        $me = new Menu();
-	$me->AddItem("/main", "Schema");
-	$me->AddItem("/info", "Allmän information");
-        $me->setMenuName("Test");
-        $menu->AddSubMenu($me);
+        $menu = new DatabaseMenu;
+        $menu->AddItemAtOrder('/main', 'Nyheter', 1);
+        $menu->AddItemAtOrder('/timetable', 'Schema', 2);
 
 	//Add admin check right here !
 	if(is_admin()) {
 	    $menu->AddItem("/admin", "Admin");
-	}
-	if(is_loggedin()) {
-	    $u = NXAuth::user();
 	}
 ?>
 <!DOCTYPE html>
@@ -66,6 +60,7 @@
             <!-- Use jquery -->
             <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
             <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+            <script src="/scripts/jquery-ui.min.js"></script> 
 
             <!-- Include bootstrap ... -->
             <!-- Latest compiled and minified CSS -->
@@ -76,6 +71,10 @@
 
             <!-- Latest compiled and minified JavaScript -->
             <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+            <!-- Our custom scripts .. -->
+            <script src="/scripts/image.js"></script>
+            <script src="/scripts/preview.js"></script>
             
             <script>
                 $(document).ready(function() {
@@ -90,45 +89,29 @@
             <div id="header">
                 <h1> NitroXy <?=$event?> - Info </h1>
                 <div id="navigation_menu">
-                    <?=$menu->render($path->raw_path());?>
+                    <?=$menu->render($path->raw_parts()[0]);?>
                 </div>
             </div>
 
             <div id="content">
             <?php
-
-                    //Display the controller
-                    try {
-                        $content =  exec_controller($controller, $path);
-
-                        //Show flash messages
-                        foreach($flash as $class => $msg) {
-                                if(is_array($msg)) {
-                                    foreach($msg as $m) { 
-                                        ?> <p class="<?=$class?>"> <?=$m?> </p> <?
-                                    }
-                                } else {
-                                    ?> <p class="<?=$class?>"> <?=$msg?> </p> <?
+                if(isset($error)) {
+                    echo $error;
+                } else {
+                    //Show flash messages
+                    foreach($flash as $class => $msg) {
+                            if(is_array($msg)) {
+                                foreach($msg as $m) { 
+                                    ?> <p class="<?=$class?>"> <?=$m?> </p> <?
                                 }
-                        }
-
-
-                        //Show content
-                        echo $content;
-                    } catch(HTTPRedirect $e){
-                        //Set flash for next redirect
-                        if(isset($flash)) {
-                            $_SESSION['flash'] = serialize($flash);
-                        }
-
-                        header("Location: {$e->url}");
-                        exit();
-                    } catch (HTTPError $e){ 
-                        echo "<h2> {$e->title()} </h2> <p> {$e->message()} </p>";
-                    } catch(Exception $e){
-                        echo "<h2> Error </h2> <p> {$e->getMessage()} </p>";
+                            } else {
+                                ?> <p class="<?=$class?>"> <?=$msg?> </p> <?
+                            }
                     }
+                    echo $content;
+                }
             ?>
+                <div class="panel panel-default" id="holder"></div>
             </div>
             <div id="footer">
             <hr>

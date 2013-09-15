@@ -7,6 +7,10 @@
     margin-left: 20px;
 }
 
+img {
+    width: 600px;
+}
+
 #navigation_menu {
     width: 1000px;
 }
@@ -15,6 +19,13 @@
     width: 900px;
     margin-left: 50px;
     clear: both;
+}
+
+#content h1,h2,h3,h4,h5,h6 {
+    margin-left: -10px;
+}
+#content p {
+    margin-left: 10px;
 }
 
 #footer {
@@ -26,3 +37,7 @@
     float: right;
 }
 
+#images img {
+    margin: 5px;
+    width: 240px;
+}

@@ -1,125 +1,251 @@
 <?php
+require_once "../libs/php-markdown/Michelf/Markdown.php";
+require_once "../libs/php-markdown/Michelf/MarkdownExtra.php";
+use \Michelf\MarkdownExtra;
 
 class AdminController extends Controller {
 	public function pre_route($path) {
-		if(!is_loggedin() || !is_admin()) {
-			throw new HTTPError404();
+		if(!is_loggedin()) {
+			throw new HTTPRedirect('/user/login');
 		}
-	}
-	public function route($path) {
-		/* Ugglyhack deluxe ! */
-		if(!is_post()) {
-			if(empty($path)) {
-				return $this->index(); 
-			}
-
-			$site = $path[0];
-
-			if($site == "scheme") {
-				return $this->scheme($path[1]);
-			}
-			if($site == "add") {
-				return $this->add();
-			}
-
-			return $this->generate_simple_site($site);
-		}
-		if($path[0] == "scheme") {
-			return $this->scheme($path[1]);
-		} else if($path[0] == "add") {
-			return $this->add();
-		} else {
-			return $this->update($path[1], $path[2]);
-		}
-	}
-
-	public function scheme($id=null) {
-		//Update or add item 
-		if(is_post()) {
-			if(isset($id)) {
-				$item = SchemeItem::from_id($id);
-				if(!isset($item)) {
-					flash('alert alert-danger', 'Hittade ingen schemaelement med id='.$id);
-					throw new HTTPRedirect("/admin/scheme");
-				}
-
-				$item->timestamp = postdata('timestamp');
-				$item->text = postdata('name');
-				$item->href = postdata('href');
-				$item->commit();
-
-				flash('alert alert-success', 'Ändringarna har blivit sparade');
-				throw new HTTPRedirect("/admin/scheme");
-			}
-		}
-
-		if(!isset($id)) {
-			$scheme_items = SchemeItem::all();
-			return $this->render('scheme', array('items' => $scheme_items));
-		}
-
-		$item = SchemeItem::from_id($id);
-		//Show individual item
-		return $this->render('edit', array('id' => $id, 'item' => $item));
-	}
-
-	public function add() {
-		if(is_post()) {
-			$item = new SchemeItem;
-
-			$item->timestamp = postdata('timestamp');
-			$item->text = postdata('name');
-			$item->href = postdata('href');
-			$item->commit();
-
-			flash('alert alert-success', 'Ändringarna har blivit sparade');
-			throw new HTTPRedirect("/admin/scheme");
-		}
-		return $this->render('add');
-	}
-
-	public function generate_simple_site($name) {
-		$items = DatabaseSite::selection(array('name' => $name));
-
-		if(!isset($items))
-			throw new HTTPError404();
-
-		$contents = array();
-		$names = array();
-		foreach($items as $item) {
-			array_push($contents, $item->render());
-			array_push($names, (isset($item->href) ? $item->href : $item->name));
-		}
-
-		return $this->render('simplesite', array('contents' => $contents, 'names' => $names, 'mainname' => $name));
-	}
-
-	public function update($mainname=null, $name=null)
-	{
-		$new_content = postdata('text');
-		$item = DatabaseSite::from_name($mainname, $name);
-		if(!isset($item))
-			throw new HTTPError404();
-
-		$item->text = $new_content;
-		$item->commit();
-
-		flash('alert alert-success', "{$mainname}/{$name} har sparats.");
-		echo 'done.';
-		throw new HTTPRedirect("/admin");
 	}
 
 	public function index() {
-		global $event;
+		return $this->render('index');
+	}
 
-		//Generate list of available entries that you can edit
-		$entries = array();
-		$items = DatabaseSite::selection(array('href' => 'index'));
+	/* 
+		DatabaseSite management
+	*/
+	public function edit($idx = null) {
+		if(!isset($idx)) {
+			$sites = DatabaseSite::selection(array());
+			return $this->render('picking_site', array('sites' => $sites));
+		}
 
-		foreach($items as $it)
-			array_push($entries, $it->name);
+		$new = DatabaseSite::from_id($idx);
+		if(!isset($new)) {
+			flash('alert alert-danger', 'Kunde inte hitta någon sida med id='.$idx);
+			return "";
+		}
 
-		return $this->render('index', array('event' => $event, 'entries' => $entries));
+		if(is_post()) {
+			$name = postdata('href');
+
+			$text = postdata('text');
+			$new->text = $text;
+			$new->display_order = postdata('order');
+			$new->display_name = postdata('name');
+			$new->name = postdata('href');
+			$new->commit();
+
+			flash('alert alert-success', 'Sidan har sparats ... ');
+			throw new HTTPRedirect('/admin/edit');
+		}
+
+		return $this->render('edit', array('s' => $new, 'id' => $idx));
+	}
+	public function add() {
+                var_dump(explode('/', 'esport/derp'));
+		if(is_post()) {
+			//Add new one ...
+			$new = new DatabaseSite;
+			$new->text = postdata('text');
+			$new->display_name = postdata('name');
+
+                        $path = explode('/', postdata('href'));
+                        if(count($path) > 1) {
+                            $new->name = $path[0];
+                            $new->href = $path[1];
+                        } else {
+                            $new->name = postdata('href');
+                            $new->href = 'index';
+                        }
+
+			$order = postdata('order');
+			if(!isset($order) || $order == "") {
+				$sites = DatabaseSite::selection(array());
+				$order = count($sites);
+			}
+			$new->display_order = $order;
+
+			$new->commit();
+
+			flash('alert alert-success', 'Sidan har lagts till');
+			throw new HTTPRedirect('/admin/edit');
+		}
+
+		return $this->render('add');
+	}
+	public function delete($idx = null) {
+		if(!isset($idx)) {
+			return "<p class=\"alert alert-danger\"> Kan inte ta bort en sida utan id. </p>";
+		}
+
+		$new = DatabaseSite::from_id($idx);
+		if(!isset($new)) {
+			return '<p class="alert alert-danger"> Kunde inte hitta en sida med det angivna id. </p>';
+		}
+		
+		if(is_post()) {
+			//Remove it
+			$new->delete();
+			flash('alert alert-success', 'Sidan har tagits bort');
+			throw new HTTPRedirect('/admin/edit');
+		}
+
+		return $this->render('site_confirm_delete', array('s' => $new));
+	}
+
+	public function preview() {
+		if(is_post()) {
+			$markdown = new MarkdownExtra();
+
+			$markdown->no_markup = true;
+			$markdown->nl2br = true;
+
+			return html_entity_decode($markdown->transform(postdata('text')), ENT_QUOTES, "UTF-8");
+		}
+		
+		return "";
+	}
+
+	/* News management */
+	public function news($id = null) {
+		if(!isset($id)) {
+			//List the news
+			$news = NewsItem::all();
+			return $this->render('news_list', array('news' => $news));
+		}
+
+		$new = NewsItem::from_id($id);
+		if(!isset($new)) {
+			flash('alert alert-danger', 'Kunde inte hitta nyhet med det angivna id='.$id);
+			throw new HTTPRedirect('/admin/news');
+		}
+
+		if(is_post()) {
+                        global $u;
+
+			$new->topic = postdata('topic');
+			$new->name = $u->username;
+			$new->text = postdata('text');
+			$new->commit();
+
+			flash('alert alert-success', 'Nyheten blev uppdaterad');
+			throw new HTTPRedirect('/admin/news');
+		}
+
+		return $this->render('news_edit', array('n' => $new));
+	}
+	public function news_add() {
+		if(is_post()) {
+                        global $u;
+
+			$new = new NewsItem;
+			$new->topic = postdata('topic');
+			$new->name = $u->username;
+			$new->text = postdata('text');
+			$new->commit();
+
+			flash('alert alert-success', 'Nyheten har blivit tillagd');
+			throw new HTTPRedirect('/admin/news');
+		}
+
+		return $this->render('news_add');
+	}
+	public function news_del($id = null) {
+		if(!isset($id)) {
+			flash('alert alert-danger', 'Kunde inte hitta en nyhet med id='.$id);
+			throw new HTTPRedirect('/admin/news');
+		}
+
+		$new = NewsItem::from_id($id);
+		if(!isset($new)) {
+			flash('alert alert-danger', 'Kunde inte radera nyhet med id='.$id);
+			throw new HTTPRedirect('/admin/news');
+		}
+
+		if(is_post()) {
+			$new->delete();
+			flash('alert alert-success', 'Tog bort nyheten "'.$new->topic.'"');
+			throw new HTTPRedirect('/admin/news');
+		}
+
+		return $this->render('news_confirm_del', array('n' => $new));
+	}
+
+	/*
+		Image handling here !
+	*/
+	public function images() {
+		$image = getdata('img');
+		if(!isset($image)) {
+			/*
+				List all files in the directory
+					images/uploaded
+				with the file extension of an image ... (most known images atleast)
+			*/
+			$files = glob('images/uploaded/*.{JPG,PNG,JPEG,jpg,jpeg,png,GIF,gif}', GLOB_BRACE);
+			return $this->render('images_list', array('images' => $files));
+		}
+
+		return $this->render('images_view', array('image' => $image));
+	}
+
+	/*
+		AJAX request to list all of the images
+	*/
+	public function image_embedded_pick() {
+		$files = glob('/images/uploaded/*.{JPG,PNG,JPEG,jpg,jpeg,png,GIF,gif}', GLOB_BRACE);
+		foreach($files as $f) {
+			echo '<a onclick="image_insert(\''.$f.'\')" href="#"><img src="/'.$f.'"></a>';
+		}
+		die();
+	}
+
+	public function image_del() {
+		$image = getdata('img');
+		if(!isset($image)) {
+			flash('error', 'Kunde inte hitta bilden');
+			throw new HTTPRedirect('/admin/images');
+		}
+
+		if(is_post()) {
+			unlink($image);
+			flash('alert alert-success', 'Bilden "/'.$image.'" har blivit borttagen');
+			throw new HTTPRedirect('/admin/images');
+		}
+
+		return $this->render('confirm_delete', array('image' => $image));
+	}
+
+	public function image_add() {
+		//Upload new image
+		if(is_post()) {
+			if($_FILES["file"]["error"] > 0) {
+				flash('alert alert-danger', 'Fel uppstod: '.$_FILES["file"]["error"]);
+				throw new HTTPRedirect('/admin/images');
+			}
+
+                        $dir = dirname(__FILE__);
+                        $meh = explode('/', $dir);
+                        array_pop($meh);
+                        $dir = implode('/', $meh);
+
+			if(file_exists($dir.'/public/images/uploaded/'.$_FILES["file"]["name"])) {
+				flash('alert alert-danger', 'En bild med detta namnet finns redan');
+				throw new HTTPRedirect('/admin/images');
+			}
+
+			$filename = str_replace(" ", "_", $_FILES["file"]["name"]);
+			move_uploaded_file($_FILES["file"]["tmp_name"], $dir."/public/images/uploaded/".$filename);
+
+			flash('alert alert-success', 'Bilden laddades upp, och det gick förhoppningsvis bra :)');
+			throw new HTTPRedirect('/admin/images');
+		}
+
+		return $this->render('image_add');
 	}
 }
 

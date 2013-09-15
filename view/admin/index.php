@@ -1,11 +1,12 @@
-<h3> Admin-sida för NitroXy <?=$event?> - Info </h3>
-<p> Om du vill göra schema-ändringar klicka <a href="/admin/scheme"> här </a> </p>
+<h2> Administration - Var försiktig! </h2>
+<p> Välkommen till administrationssidan, du kan välja vad du vill göra nedan: </p>
+<div class="list-group">
+	<a class="list-group-item" href="/admin/edit"> Redigera sidor </a> 
+	<a class="list-group-item" href="/admin/images"> Hantera bilder </a> 
+	<a class="list-group-item" href="/admin/news"> Hantera nyheter </a> 
+</div>
 
-<hr>
-<h4> Sidoändringar </h4>
-<p> Välj nedan vilken sida du vill redigera </p>
-<ul class="select_menu">
-<? foreach($entries as $entry) { ?>
-	<li><a href="/admin/<?=$entry?>"> <?=$entry?> </a></li>
-<? } ?>
-</ul>
+<h3> Förklaringar: </h3>
+<p> I <i>"Redigera sidor"</i> kan du ändra på sidornas text samt vilka bilder som syns. </p>
+<p> I <i>"Hantera bilder"</i> kan du ladda upp eller ta bort bilder som <b>kan</b> visas på hemsidan, dvs. bilder som du kan använda i antingen sidorna eller dina nyhetsinlägg. </p>
+<p> I <i>"Hantera nyheter"</i> kan du ändra befintliga nyheter eller skapa nya </p>

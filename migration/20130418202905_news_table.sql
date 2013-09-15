@@ -1,5 +1,7 @@
 CREATE TABLE `news` (
 	`id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	`topic` TEXT NOT NULL,
-	`text` TEXT NOT NULL
-);
+	`text` TEXT NOT NULL,
+	`name` VARCHAR(64) NOT NULL,
+	`timestamp` TIMESTAMP
+) Engine=InnoDB;

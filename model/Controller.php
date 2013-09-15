@@ -166,12 +166,12 @@ class SimpleController extends Controller {
 
 class DatabaseController extends Controller {
 	public function __call($name, $args) {
-		$site = DatabaseSite::from_name($this->name, $name);
-		if(!isset($site)) {
-			//This SHOULD not happen
-			return "<p> What teh fakk?! </p>";
-		}
-		return $site->render();
+            $site = DatabaseSite::from_name($this->name, $name);
+            if(!isset($site)) {
+                    //This SHOULD not happen
+                    return "<p> What teh fakk?! </p>";
+            }
+            return $site->render();
 	}
 }
 
