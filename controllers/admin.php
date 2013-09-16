@@ -46,7 +46,6 @@ class AdminController extends Controller {
 		return $this->render('edit', array('s' => $new, 'id' => $idx));
 	}
 	public function add() {
-                var_dump(explode('/', 'esport/derp'));
 		if(is_post()) {
 			//Add new one ...
 			$new = new DatabaseSite;
@@ -54,11 +53,15 @@ class AdminController extends Controller {
 			$new->display_name = postdata('name');
 
                         $path = explode('/', postdata('href'));
+                        if($path[0] == "") {
+                            array_shift($path);
+                        }
+
                         if(count($path) > 1) {
                             $new->name = $path[0];
                             $new->href = $path[1];
                         } else {
-                            $new->name = postdata('href');
+                            $new->name = $path[0];
                             $new->href = 'index';
                         }
 
