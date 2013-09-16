@@ -86,7 +86,7 @@
             <!-- Our complementary stylesheet -->
             <link rel="stylesheet" type="text/css" href="/style.css"/>
 	</head>
-	<body>
+	<body style="width: 1000px; margin: auto;">
             <header id="header">
                 <h1> NitroXy <?=$event?> Info 
                 <small> Nå information snabbt och enkelt </small> </h1>
