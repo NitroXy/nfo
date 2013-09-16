@@ -64,10 +64,11 @@
 
             <!-- Include bootstrap ... -->
             <!-- Latest compiled and minified CSS -->
-            <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+            <!--<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">-->
+            <link rel="stylesheet" href="http://bootswatch.com/united/bootstrap.min.css">
 
             <!-- Optional theme -->
-            <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-theme.min.css">
+            <!--<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-theme.min.css">-->
 
             <!-- Latest compiled and minified JavaScript -->
             <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
@@ -86,8 +87,9 @@
             <link rel="stylesheet" type="text/css" href="/style.css"/>
 	</head>
 	<body>
-            <div id="header">
-                <h1> NitroXy <?=$event?> - Info </h1>
+            <div class="page-header" id="header">
+                <h1> NitroXy <?=$event?> Info 
+                <small> Nå information snabbt och enkelt </small> </h1>
                 <div id="navigation_menu">
                     <?  
                         if(count($path->raw_parts()) > 0) {   
@@ -117,7 +119,7 @@
                     echo $content;
                 }
             ?>
-                <div class="panel panel-default" id="holder"></div>
+                <div style="display:none;" class="panel panel-default" id="holder"></div>
             </div>
             <div id="footer">
             <hr>

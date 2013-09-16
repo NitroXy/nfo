@@ -52,7 +52,7 @@ class Menu {
                 }
 
                 if($c == 'nav') {
-                    echo '<div class="navbar"> <div class="navbar-inner"> <div class="container">';
+                    echo '<div class="navbar navbar-default"> <div class="navbar-inner"> <div class="container">';
                     echo '<ul class="nav navbar-nav">';
                 } else {
                     echo "<ul class=\"".$c."\" role=\"menu\" aria-labelledby=\"dLabel\">";
