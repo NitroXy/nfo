@@ -9,13 +9,23 @@ class MenuItem {
 	}
 
 	public function render($sel) {
-		if($sel == $this->name or ($sel == "main" and $this->href == "/main")) {
+                $meh = explode('/', $this->href);
+                array_shift($meh);
+
+		if($sel == $meh[0] or ($sel == "main" and $this->href == "/main")) {
 			$class = "active";
 		} else {
 			$class = "";
 		}
-		echo'<li> <a class="'.$class.'" href="'.$this->href.'"> '.$this->name.' </a> </li>';
+		echo'<li class="'.$class.'"> <a href="'.$this->href.'"> '.$this->name.' </a> </li>';
 	}
+
+        public function getLink() {
+            return $this->href;
+        }
+        public function getName() {
+            return $this->name;
+        }
 }
 
 class Menu {
@@ -60,13 +70,22 @@ class Menu {
 
 		foreach($this->items as $i) {
                         if(get_class($i) == 'Menu') {
-                                //Render as a nice menu
-                                echo '<li class="dropdown">';
-                                    echo '<a class="dropdown-toggle" role="menu" data-toggle="dropdown" href="#">';
-                                        echo $i->menu_name.'<span class="caret"></span>';
-                                    echo '</a>';
-                                $i->render($sel, 'dropdown-menu submenu');
-                                echo '</li>';
+                            $class = "";
+                            if(count($i->getItems()) > 0) {
+                                $meh = explode('/', $i->getItems()[0]->getLink());
+                                array_shift($meh);
+
+                                if($meh[0] == $sel) {
+                                    $class = "active";
+                                }
+                            }  
+
+                            echo '<li class="dropdown '.$class.'">';
+                                echo '<a class="dropdown-toggle" role="menu" data-toggle="dropdown" href="#">';
+                                    echo $i->menu_name.'<span class="caret"></span>';
+                                echo '</a>';
+                            $i->render('', 'dropdown-menu submenu');
+                            echo '</li>';
                         } else {
                             $i->render($sel);
                         }
@@ -88,6 +107,9 @@ class Menu {
 
         public function setMenuName($na) {
                 $this->menu_name = $na;
+        }
+        public function getItems() {
+            return $this->items;
         }
 }
 
