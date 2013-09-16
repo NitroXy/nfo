@@ -89,7 +89,13 @@
             <div id="header">
                 <h1> NitroXy <?=$event?> - Info </h1>
                 <div id="navigation_menu">
-                    <?=$menu->render($path->raw_parts()[0]);?>
+                    <?  
+                        if(count($path->raw_parts()) > 0) {   
+                            echo $menu->render($path->raw_parts()[0]);
+                        } else {
+                            echo $menu->render('');
+                        }
+                    ?>
                 </div>
             </div>
 
