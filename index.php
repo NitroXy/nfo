@@ -87,7 +87,7 @@
             <link rel="stylesheet" type="text/css" href="/style.css"/>
 	</head>
 	<body>
-            <div class="page-header" id="header">
+            <header id="header">
                 <h1> NitroXy <?=$event?> Info 
                 <small> Nå information snabbt och enkelt </small> </h1>
                 <div id="navigation_menu">
@@ -99,7 +99,7 @@
                         }
                     ?>
                 </div>
-            </div>
+            </header>
 
             <div id="content">
             <?php
