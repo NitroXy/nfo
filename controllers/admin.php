@@ -36,7 +36,7 @@ class AdminController extends Controller {
 			$new->text = $text;
 			$new->display_order = postdata('order');
 			$new->display_name = postdata('name');
-			$new->name = postdata('href');
+			//$new->name = postdata('href');
 			$new->commit();
 
 			flash('alert alert-success', 'Sidan har sparats ... ');
