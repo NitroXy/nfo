@@ -72,7 +72,8 @@ class Menu {
                         if(get_class($i) == 'Menu') {
                             $class = "";
                             if(count($i->getItems()) > 0) {
-                                $meh = explode('/', $i->getItems()[0]->getLink());
+				$items = $i->getItems();
+                                $meh = explode('/', $items[0]->getLink());
                                 array_shift($meh);
 
                                 if($meh[0] == $sel) {
