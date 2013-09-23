@@ -253,7 +253,8 @@ class AdminController extends Controller {
 
         public function timetable($id = null) {
             if(isset($id)) {
-                $it = SchemeItem::selection(array('id' => $id))[0];
+                $its = SchemeItem::selection(array('id' => $id));
+                $it = $its[0];
                 if(!isset($it)) {
                     return '<p class="alert alert-danger">Kunde inte hitta schemaelement med id='.$id.'</p>';
                 }
