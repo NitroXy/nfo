@@ -33,7 +33,7 @@ function is_admin() {
         }
     }
 
-    if(isset(get_rights())) {
+    if(null !== get_rights()) {
         return true;
     }
 
@@ -47,7 +47,16 @@ function ensure_right($right) {
 }
 
 function has_right($right) {
-    foreach(get_rights() as $r) {
+    if(is_admin()) {
+        return true;
+    }
+
+    $rs = get_rights();
+    if(!isset($rs)) {
+        return false;
+    }
+
+    foreach($rs as $r) {
         if($right == "Administratör") {
             return true; //Has all rights .. uglyhack :D
         }
@@ -61,7 +70,7 @@ function has_right($right) {
 function get_rights() {
     $u = NXAuth::user();
 
-    $rights = Rights::from_username($u->username);
+    $rights = Right::from_username($u->username);
     if(!isset($rights)) {
         return null;
     }
