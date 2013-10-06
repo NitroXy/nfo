@@ -17,5 +17,6 @@ require("model/Menu.php");
 require("model/Newsfeed.php");
 require("model/Scheme.php");
 require("model/DatabaseSite.php");
+require("model/Rights.php");
 
 ?>

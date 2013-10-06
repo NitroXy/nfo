@@ -33,10 +33,43 @@ function is_admin() {
         }
     }
 
-    //Now check the special-assigned moderators (GLs)
-    //TBA
+    if(isset(get_rights())) {
+        return true;
+    }
 
-    return true;
+    return false;
+}
+
+function ensure_right($right) {
+    if(!has_right($right)) {
+        throw new HTTPError403();
+    }
+}
+
+function has_right($right) {
+    foreach(get_rights() as $r) {
+        if($right == $r) {
+            return true;
+        }
+    }   
+    return false;
+}
+
+function get_rights() {
+    $u = NXAuth::user();
+
+    $rights = Rights::from_username($u->username);
+    if(!isset($rights)) {
+        return null;
+    }
+
+    $ret = array();
+    foreach($_rights as $right => $bit) {
+        if($rights->permissions & $bit) {
+            $ret[] = $right;
+        }
+    }
+    return $ret;
 }
 
 /* no idea why I put it here ... */
