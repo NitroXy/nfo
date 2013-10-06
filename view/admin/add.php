@@ -25,6 +25,7 @@
     </tr>
 </table>
 </p>
+<p> Om du vill ha awesome markdown, så rör du inte checkboxen som det står "HTML" vid... </p>
 <p class="alert alert-info well-sm"> <b>Notera:</b> om du lämnar positionsfältet tomt läggs det automatiskt längst bak. </p>
 
 <form id="form" method="post" action="/admin/add">
@@ -41,6 +42,10 @@
     <div style="padding-top: 5px; padding-bottom: 5px;" class="input-group">
         <span class="input-group-addon"> Länk </span>
         <input type="text" name="href" class="form-control"/>
+    </div>
+    
+    <div style="float: right: padding-top: 5px; padding-bottom: 5px;" class="input-group">
+        <input name="html" type="checkbox"> HTML (notera att du inte kan ändra detta senare) </input>
     </div>
     
     <textarea class="form-control" name="text" id="text" rows="30"></textarea>

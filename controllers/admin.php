@@ -76,6 +76,12 @@ class AdminController extends Controller {
 			}
 			$new->display_order = $order;
 
+                        if(postdata('html') == 'Yes') {
+                            $new->text_type = 'HTML';
+                        } else {
+                            $new->text_type = 'Markdown';
+                        }
+
 			$new->commit();
 
 			flash('alert alert-success', 'Sidan har lagts till');
