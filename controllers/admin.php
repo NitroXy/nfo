@@ -304,6 +304,24 @@ class AdminController extends Controller {
 
             return $this->render('/admin/template_add');
         }
+        public function timetable_del($id = null) {
+            if(!isset($id)) {
+                return "No id set, error...";
+            }
+
+            $it = SchemeItem::from_id($id);
+            if(is_post()) {
+                $it->delete();
+                flash('alert alert-success', 'Schemaelementet har blivit borttaget ..');
+                throw new HTTPRedirect('/admin/timetable');
+            }
+
+            return $this->render('/admin/timetable_del', array('id' => $id));
+        }
+
+        public function rights() {
+            
+        }
 }
 
 ?>

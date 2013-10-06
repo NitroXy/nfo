@@ -77,7 +77,7 @@ function get_rights() {
 
     $ret = array();
     foreach($_rights as $right => $bit) {
-        if($rights->permissions & $bit) {
+        if($rights->permissions & (1 << $bit)) {
             $ret[] = $right;
         }
     }
