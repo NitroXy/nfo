@@ -200,7 +200,7 @@ class AdminController extends Controller {
 		AJAX request to list all of the images
 	*/
 	public function image_embedded_pick() {
-		$files = glob('/images/uploaded/*.{JPG,PNG,JPEG,jpg,jpeg,png,GIF,gif}', GLOB_BRACE);
+		$files = glob('images/uploaded/*.{JPG,PNG,JPEG,jpg,jpeg,png,GIF,gif}', GLOB_BRACE);
 		foreach($files as $f) {
 			echo '<a onclick="image_insert(\''.$f.'\')" href="#"><img src="/'.$f.'"></a>';
 		}
