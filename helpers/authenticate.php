@@ -15,7 +15,7 @@ function is_admin() {
     //If this is a nx administrator, he becomes such as here as well
     $groups = NXAPI::groups(array('user' => $u->user_id));
     foreach($groups as $group) {
-        if($group == "Administratörer") {
+        if($group == "Administatörer") {
             return true;
         }
     }
