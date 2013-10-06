@@ -23,4 +23,19 @@ $db = Config::fix_database();
 $event = 17;
 $dir = dirname(__FILE__);
 
+//specify rights ... just because I'm lazy and tired
+//     is controlled by the bits in an integer
+//          NAME        : BIT
+//          admin       : 1
+//          siteadmin   : 2
+//          imageadmin  : 3
+//          newsadmin   : 4
+//          schemeadmin : 5
+//
+$_rights = array( 'Administratör'       => 1, 
+                  'Sido-moderator'      => 2,
+                  'Bild-moderator'      => 3,
+                  'Nyhets-moderator'    => 4,
+                  'Schema-moderator'    => 5 );
+
 ?>
