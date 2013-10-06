@@ -11,13 +11,16 @@ class AdminController extends Controller {
 	}
 
 	public function index() {
-		return $this->render('index');
+                $rights = get_rights();
+		return $this->render('index', array('rights' => $rights));
 	}
 
 	/* 
 		DatabaseSite management
 	*/
 	public function edit($idx = null) {
+                ensure_right("Sido-moderator");
+
 		if(!isset($idx)) {
 			$sites = DatabaseSite::selection(array());
 			return $this->render('picking_site', array('sites' => $sites));
@@ -46,6 +49,7 @@ class AdminController extends Controller {
 		return $this->render('edit', array('s' => $new, 'id' => $idx));
 	}
 	public function add() {
+                ensure_right("Sido-moderator");
 		if(is_post()) {
 			//Add new one ...
 			$new = new DatabaseSite;
@@ -81,6 +85,7 @@ class AdminController extends Controller {
 		return $this->render('add');
 	}
 	public function delete($idx = null) {
+                ensure_right("Sido-moderator");
 		if(!isset($idx)) {
 			return "<p class=\"alert alert-danger\"> Kan inte ta bort en sida utan id. </p>";
 		}
@@ -115,6 +120,8 @@ class AdminController extends Controller {
 
 	/* News management */
 	public function news($id = null) {
+                ensure_right("Nyhets-moderator");
+
 		if(!isset($id)) {
 			//List the news
 			$news = NewsItem::all();
@@ -142,6 +149,7 @@ class AdminController extends Controller {
 		return $this->render('news_edit', array('n' => $new));
 	}
 	public function news_add() {
+                ensure_right("Sido-moderator");
 		if(is_post()) {
                         global $u;
 
@@ -158,6 +166,7 @@ class AdminController extends Controller {
 		return $this->render('news_add');
 	}
 	public function news_del($id = null) {
+                ensure_right("Sido-moderator");
 		if(!isset($id)) {
 			flash('alert alert-danger', 'Kunde inte hitta en nyhet med id='.$id);
 			throw new HTTPRedirect('/admin/news');
@@ -182,6 +191,7 @@ class AdminController extends Controller {
 		Image handling here !
 	*/
 	public function images() {
+                ensure_right("Bild-moderator");
 		$image = getdata('img');
 		if(!isset($image)) {
 			/*
@@ -208,6 +218,7 @@ class AdminController extends Controller {
 	}
 
 	public function image_del() {
+                ensure_right("Bild-moderator");
 		$image = getdata('img');
 		if(!isset($image)) {
 			flash('alert alert-danger', 'Kunde inte hitta bilden');
@@ -224,6 +235,7 @@ class AdminController extends Controller {
 	}
 
 	public function image_add() {
+                ensure_right("Bild-moderator");
 		//Upload new image
 		if(is_post()) {
 			if($_FILES["file"]["error"] > 0) {
@@ -252,6 +264,7 @@ class AdminController extends Controller {
 	}
 
         public function timetable($id = null) {
+            ensure_right("Schema-moderator");
             if(isset($id)) {
                 $its = SchemeItem::selection(array('id' => $id));
                 $it = $its[0];
@@ -277,6 +290,7 @@ class AdminController extends Controller {
             return $this->render('timetable', array('meh' => $items));
         }
         public function timetable_add() {
+            ensure_right("Schema-moderator");
             if(is_post()) {
                 $it = new SchemeItem;
                 $it->timestamp = postdata('timestamp');

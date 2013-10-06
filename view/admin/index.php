@@ -1,10 +1,21 @@
 <h2> Administration - Var försiktig! </h2>
 <p> Välkommen till administrationssidan, du kan välja vad du vill göra nedan: </p>
 <div class="list-group">
-	<a class="list-group-item" href="/admin/edit"> Redigera sidor </a> 
-	<a class="list-group-item" href="/admin/images"> Hantera bilder </a> 
-	<a class="list-group-item" href="/admin/news"> Hantera nyheter </a> 
-        <a class="list-group-item" href="/admin/timetable"> Hantera schema </a>
+        <? if(has_right('Sido-moderator')) { ?>
+            <a class="list-group-item" href="/admin/edit"> Redigera sidor </a> 
+        <? } ?>
+
+        <? if(has_right('Bild-moderator')) { ?>
+            <a class="list-group-item" href="/admin/images"> Hantera bilder </a> 
+        <? } ?>
+
+        <? if(has_right('Nyhets-moderator')) { ?>
+            <a class="list-group-item" href="/admin/news"> Hantera nyheter </a> 
+        <? } ?>
+
+        <? if(has_right('Schema-moderator')) { ?>
+            <a class="list-group-item" href="/admin/timetable"> Hantera schema </a>
+        <? } ?>
 </div>
 
 <h3> Förklaringar: </h3>

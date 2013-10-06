@@ -48,6 +48,9 @@ function ensure_right($right) {
 
 function has_right($right) {
     foreach(get_rights() as $r) {
+        if($right == "Administratör") {
+            return true; //Has all rights .. uglyhack :D
+        }
         if($right == $r) {
             return true;
         }
