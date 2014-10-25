@@ -43,8 +43,8 @@
 	}
 
         $menu = new DatabaseMenu;
-        $menu->AddItemAtOrder('/main', 'Nyheter', 1);
-        $menu->AddItemAtOrder('/timetable', 'Schema', 2);
+        //$menu->AddItemAtOrder('/main', 'Nyheter', 1);
+        $menu->AddItemAtOrder('/timetable', 'Schema', 1);
 
 	//Add admin check right here !
 	if(is_admin()) {

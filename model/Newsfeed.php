@@ -6,7 +6,7 @@ class NewsItem extends BasicObject {
 	}
 
 	public static function all() {
-		return static::selection(array("@order" => "timestamp:desc"));
+		return static::selection(array("@order" => "timestamp"));
 	}
 
 	public function render() {

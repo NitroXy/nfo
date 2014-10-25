@@ -282,6 +282,8 @@ class AdminController extends Controller {
                     $it->timestamp = postdata('timestamp');
                     $it->text = postdata('text');
                     $it->href = postdata('href');
+                    $it->duration = postdata('duration');
+                    $it->color = postdata('color');
                     $it->commit();
 
                     flash('alert alert-success', 'Schemaelementet har blivit uppdaterat.');
@@ -302,6 +304,8 @@ class AdminController extends Controller {
                 $it->timestamp = postdata('timestamp');
                 $it->text = postdata('text');
                 $it->href = postdata('href');
+                $it->duration = postdata('duration');
+                $it->color = postdata('color');
                 $it->commit();
 
                 flash('alert alert-success', 'Schemaelementet har skapats.');

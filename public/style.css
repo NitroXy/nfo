@@ -41,3 +41,14 @@ img {
     margin: 5px;
     width: 240px;
 }
+
+.colorme_table {
+    background: #aaa;
+}
+
+.timetable tr td,th {
+    border: 1px solid #aaa;
+}
+.timetable {
+    border: 1px solid #aaa;
+}

@@ -11,13 +11,13 @@ class Path {
         private $raw_parts;
 
 	static public function from_path_info() {
-		$parts = isset($_SERVER['PATH_INFO']) ? explode('/', rtrim($_SERVER['PATH_INFO'], '/')) : array('', 'main');
+		$parts = isset($_SERVER['PATH_INFO']) ? explode('/', rtrim($_SERVER['PATH_INFO'], '/')) : array('', 'timetable');
 		array_shift($parts);
 		array_shift($parts);
                 $raw_parts = $parts;
 
                 if(empty($parts)) {
-                    $parts = array('main');
+                    $parts = array('timetable');
                 }
 
 		$filename = array_pop($parts);
@@ -28,7 +28,7 @@ class Path {
 		$path->controller = basename(array_shift($parts));
 		$path->args = $parts;
 		$path->filename = "../controllers/{$path->controller}.php";
-		$path->raw_path = isset($_SERVER['PATH_INFO']) ? $_SERVER['PATH_INFO'] : "main";
+		$path->raw_path = isset($_SERVER['PATH_INFO']) ? $_SERVER['PATH_INFO'] : "timetable";
                 $path->raw_parts = $raw_parts;
 		return $path;
 	}
