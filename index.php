@@ -24,7 +24,7 @@
 	    $flash = unserialize($_SESSION['flash']);
 	    unset($_SESSION['flash']);
 	}
-	
+
 	try {
 	    $controller = Controller::factory($path);
             $controller->pre_route($path->args());
@@ -36,7 +36,7 @@
 
             header("Location: {$e->url}");
             exit();
-	} catch (HTTPError $e){ 
+	} catch (HTTPError $e){
 	    $error = "<h3> {$e->title()} </h3> <p> {$e->message()} </p>";
 	} catch(Exception $e){
 	    $error =  "<h3> Error </h3> <p> {$e->getMessage()} </p>";
@@ -60,7 +60,7 @@
             <!-- Use jquery -->
             <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
             <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-            <script src="/scripts/jquery-ui.min.js"></script> 
+            <script src="/scripts/jquery-ui.min.js"></script>
 
             <!-- Include bootstrap ... -->
             <!-- Latest compiled and minified CSS -->
@@ -76,7 +76,7 @@
             <!-- Our custom scripts .. -->
             <script src="/scripts/image.js"></script>
             <script src="/scripts/preview.js"></script>
-            
+
             <script>
                 $(document).ready(function() {
                     $('.dropdown-toggle').dropdown();
@@ -88,11 +88,11 @@
 	</head>
 	<body style="width: 1000px; margin: auto;">
             <header id="header">
-                <h1> NitroXy <?=$event?> Info 
+                <h1> NitroXy <?=$event?> Info
                 <small> Nå information snabbt och enkelt </small> </h1>
                 <div id="navigation_menu">
-                    <?  
-                        if(count($path->raw_parts()) > 0) {   
+                    <?php
+                        if(count($path->raw_parts()) > 0) {
 			    $parts = $path->raw_parts();
                             echo $menu->render($parts[0]);
                         } else {
@@ -110,11 +110,11 @@
                     //Show flash messages
                     foreach($flash as $class => $msg) {
                             if(is_array($msg)) {
-                                foreach($msg as $m) { 
-                                    ?> <p class="<?=$class?>"> <?=$m?> </p> <?
+                                foreach($msg as $m) {
+                                    ?> <p class="<?=$class?>"> <?=$m?> </p> <?php
                                 }
                             } else {
-                                ?> <p class="<?=$class?>"> <?=$msg?> </p> <?
+                                ?> <p class="<?=$class?>"> <?=$msg?> </p> <?php
                             }
                     }
                     echo $content;
@@ -127,11 +127,11 @@
             <p class="madeby"> Sidan är gjord utav <a href="http://cpluss.se">cpluss</a> för NitroXy </p>
 
             <div id="login_menu">
-                    <? if(is_loggedin()) { ?>
+                    <?php if(is_loggedin()) { ?>
                     <p> Inloggad som <?=$u->username?>, <a href="/user/logout"> logga ut </a> </p>
-                    <? } else { ?>
+                    <?php } else { ?>
                     <p> <a class="btn btn-default" href="/user/login"> Logga In </a> </p>
-                    <? } ?>
+                    <?php } ?>
             </div>
             </div>
 	</body>

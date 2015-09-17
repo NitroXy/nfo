@@ -3,7 +3,7 @@
 <?php
     foreach($sites as $site) { ?>
         <a class="list-group-item" href="/admin/edit/<?=$site->id?>"> <?=$site->name?> - <?=$site->display_name?> </a>
-<?  } ?>
+<?php  } ?>
 </div>
 
 <a href="/admin/add" class="btn btn-default"> Lägg till sida </a>

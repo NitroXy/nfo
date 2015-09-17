@@ -4,5 +4,5 @@
 <?php
 	foreach($news as $n) { ?>
             <a class="list-group-item" href="/admin/news/<?=$n->id?>"> <?=$n->timestamp?> - <?=$n->topic?> </a>
-<?  } ?>
+<?php  } ?>
 <a style="margin-top: 20px;" class="btn btn-default" href="/admin"> Tillbaka </a>

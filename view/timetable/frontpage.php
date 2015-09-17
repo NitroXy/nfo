@@ -3,12 +3,12 @@
     <table class="timetable table">
         <tr>
             <th> Timma </th>
-            <?  $i = 1;
+            <?php  $i = 1;
                 foreach($scheme as $d => $days) { ?>
                 <th colspan="<?=$spans[$d]?>"> Dag <?=$i++?> </th>
-            <? } ?>
+            <?php } ?>
         </tr>
-        <?
+        <?php
             $minhour = 1;
             $maxhour = 24;
 
@@ -45,7 +45,7 @@
 
                         if(isset($skipr[$d][$h])) {
                         }
-                    } else { 
+                    } else {
                         if(!isset($skipr[$d][$h])) {
                             for($j = 1; $j <= $spans[$d]; $j++) {
                                 echo "<td></td>";
@@ -63,8 +63,8 @@
     </table>
 </div>
 
-<?
+<?php
 	if($newsfeed != '') { ?>
       <h3>Nyhetsflöde</h3>
       <?=$newsfeed?>
-<? } ?>
+<?php } ?>
