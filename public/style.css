@@ -46,11 +46,51 @@ img {
     background: #aaa;
 }
 
-.timetable tr td,th {
-    border: 1px solid #aaa;
-}
 .timetable {
-    border: 1px solid #aaa;
+	border: 1px solid #aaa;
+	table-layout: fixed;
+	width: 100%;
+}
+
+.timetable th {
+	padding: 8px;
+	text-align: center;
+}
+
+.timetable tr > td,
+.timetable tr > th {
+	border: 0;
+	border-right: 1px solid #aaa;
+	border-left: 1px solid #aaa;
+	border-bottom: 1px solid #aaa;
+}
+
+.timetable td.has-item {
+	border: 0;
+	font-size: 0;
+	border-bottom: 0;
+}
+
+.timetable .item {
+	display: inline-block;
+	padding: 9px 8px;
+	font-size: 14px;
+}
+
+.overlap-1 > div.item {
+	width: 100%;
+}
+
+.overlap-2 > div.item {
+	width: 50%;
+}
+
+.overlap-3 > div.item {
+	width: 33.333%;
+}
+
+.overlap-4 > div.item {
+	width: 25%;
 }
 
 .form-control[type="color"] {

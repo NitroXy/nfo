@@ -1,90 +1,58 @@
 <?php
 
+define('DAY_OFFSET', 719528);
+
 class TimetableController extends Controller {
 	public function index() {
-		//$items = SchemeItem::all();
-		$items = [];
-
-        $r = $this->run_raw_query('select DAY(timestamp) as day, count(*) as count from scheme_items group by DAY(timestamp);');
-
-        $spans = [ ];
-        // Process the days
-        foreach($r as $d) {
-            // Assemble this day
-            $day = $d['day'];
-            $items[$day] = [];
-            $spans[$day] = 1;
-
-            // Get the items that occur in this day
-            $r2 = $this->run_raw_query('select TIME(timestamp) as time, text, duration, color from scheme_items where DAY(timestamp)='.$day.';');
-            foreach($r2 as $t) {
-                $time = intval(explode(':', $t['time'])[0], 10);
-                $text = $t['text'];
-                $duration = $t['duration'];
-                $color = $t['color'];
-
-                // Check if this overlaps with any other
-                foreach($r2 as $t2) {
-                    if($t['text'] == $t2['text']) {
-                        continue;
-                    }
-
-                    $t2_time = intval(explode(':', $t2['time'])[0], 10);
-                    if($t2_time >= $time &&
-                       ($t2_time + $t2['duration']) <= ($time + $duration)) {
-                        // overlap
-                        $spans[$day] = 2;
-                    }
-                }
-
-                $items[$day][$time] = [ $text, $duration, $color ];
-            }
-        }
-
-		return $this->render('frontpage', array('scheme' => $items, 'spans' => $spans, 'newsfeed' => '' /*Newsfeed::Render()*/));
+		$slots = $this->generate_slots();
+		return $this->render('frontpage', [
+			'slots' => $slots,
+		]);
 	}
 
-   public function run_raw_query($q) {
-        global $db;
-        $r = $db->query($q);
-        $res = [];
+	protected function get_span(){
+		global $db;
+		return $db->query('SELECT TO_DAYS(MIN(`timestamp`)), TO_DAYS(MAX(`timestamp`)) FROM `scheme_items`')->fetch_array();
+	}
 
-        while($row = $r->fetch_assoc()) {
-            $res[] = $row;
-        }
+	/**
+	 * Returns an array [$day][$hour] = $items where $day and $hour
+	 * corresponds to the date and items is all scheme items on that slot.
+	 */
+	protected function generate_slots(){
+		list($min, $max) = $this->get_span();
 
-        return $res;
-    }
+		$items = $this->run_raw_query('SELECT UNIX_TIMESTAMP(`timestamp`) AS `begin`, UNIX_TIMESTAMP(`timestamp`)+`duration`*3600 AS `end`, `text`, `color` FROM `scheme_items`');
+		$result = array();
+		for ( $day = $min; $day <= $max; $day++ ){
+			$daystamp = static::timestamp_from_days($day);
+			for ( $hour = 0; $hour < 24; $hour++ ){
+				$timestamp = $daystamp + $hour * 3600;
 
-	public function get() {
-        global $db;
+				/* a bit inefficient, for each slot it iterates over each item.
+				 * quick-and-dirty but would be very slow for a larger set. need to fix
+				 * this later when under less time contstraints */
+				$result[$day-$min][$hour] = array_filter($items, function($x) use($timestamp){
+					return $timestamp >= $x['begin'] && $timestamp <= $x['end'];
+				});
+			}
+		}
+		return $result;
+	}
 
-        $r = $this->run_raw_query('select DAY(timestamp) as day, count(*) as count from scheme_items group by DAY(timestamp);');
+	protected static function timestamp_from_days($days, $offset=0){
+		return ($days - DAY_OFFSET) * 86400 + $offset;
+	}
 
-        $output = [ ];
-        // Process the days
-        foreach($r as $d) {
-            // Assemble this day
-            $day = $d['day'];
-            //$n = $d['count'];
-            echo '> '.$day.'<br>';
+	protected function run_raw_query($q) {
+		global $db;
+		$r = $db->query($q);
+		$res = [];
 
-            // Get the items that occur in this day
-            $r2 = $this->run_raw_query('select TIME(timestamp) as time, count(*) as count, text, duration from scheme_items where DAY(timestamp)='.$day.' group by time;');
-            foreach($r2 as $t) {
-                $time = $t['time'];
-                $tn = $t['count'];
-                $text = $t['text'];
-                $duration = $t['duration'];
+		while($row = $r->fetch_assoc()) {
+			$res[] = $row;
+		}
 
-                if($tn > 1) {
-                    // New column ...
-                }
-
-                echo '----> '.$time.'('.$duration.') "'.$text.'"<br>';
-            }
-        }
-		die();
+		return $res;
 	}
 }
-?>
