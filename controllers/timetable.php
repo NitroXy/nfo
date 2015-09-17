@@ -3,6 +3,7 @@
 class TimetableController extends Controller {
 	public function index() {
 		//$items = SchemeItem::all();
+		$items = [];
 
         $r = $this->run_raw_query('select DAY(timestamp) as day, count(*) as count from scheme_items group by DAY(timestamp);');
 
