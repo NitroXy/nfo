@@ -8,9 +8,10 @@ class SchemeItem extends ValidatingBasicObject {
 	public static function all() {
 		return static::selection(array("@order" => "timestamp"));
 	}
-	public static function from_day($day)
-	{
-		//Todo!
+
+	public function validation_hooks(){
+		$this->validate_presence_of('timestamp');
+		$this->validate_presence_of('text');
 	}
 
 	public function render() {
