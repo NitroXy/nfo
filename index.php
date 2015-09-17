@@ -78,9 +78,9 @@
             <script src="/scripts/preview.js"></script>
 
             <script>
-                $(document).ready(function() {
-                    $('.dropdown-toggle').dropdown();
-                }
+            $(function() {
+              $('.dropdown-toggle').dropdown();
+            });
             </script>
 
             <!-- Our complementary stylesheet -->
