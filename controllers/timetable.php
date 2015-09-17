@@ -55,7 +55,7 @@ class TimetableController extends Controller {
 
         return $res;
     }
-	
+
 	public function get() {
         global $db;
 

@@ -58,14 +58,14 @@
             <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
 
             <!-- Use jquery -->
-            <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-            <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+            <script src="//code.jquery.com/jquery-1.10.1.min.js"></script>
+            <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
             <script src="/scripts/jquery-ui.min.js"></script>
 
             <!-- Include bootstrap ... -->
             <!-- Latest compiled and minified CSS -->
             <!--<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">-->
-            <link rel="stylesheet" href="http://bootswatch.com/united/bootstrap.min.css">
+            <link rel="stylesheet" href="//bootswatch.com/united/bootstrap.min.css">
 
             <!-- Optional theme -->
             <!--<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-theme.min.css">-->
