@@ -4,3 +4,6 @@
 [submodule "libs/nxauth"]
 	path = libs/nxauth
 	url = https://github.com/NitroXy/nxauth
+[submodule "libs/BasicObject"]
+	path = libs/BasicObject
+	url = https://github.com/NitroXy/BasicObject.git

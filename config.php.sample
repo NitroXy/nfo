@@ -15,10 +15,6 @@ class Config {
 	}
 }
 
-require_once("model/BasicObject.php");
-require_once("model/ValidatingBasicObject.php");
-BasicObject::$output_htmlspecialchars = true;
-
 $db = Config::fix_database();
 $event = 17;
 $dir = dirname(__FILE__);
@@ -32,7 +28,7 @@ $dir = dirname(__FILE__);
 //          newsadmin   : 4
 //          schemeadmin : 5
 //
-$_rights = array( 'Administratör'       => 1, 
+$_rights = array( 'Administratör'       => 1,
                   'Sido-moderator'      => 2,
                   'Bild-moderator'      => 3,
                   'Nyhets-moderator'    => 4,

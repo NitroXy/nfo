@@ -10,6 +10,12 @@ require("nxauth.php");
 require("helpers/authenticate.php");
 require("helpers/flash.php");
 
+// libs
+
+require_once("libs/BasicObject/BasicObject.php");
+require_once("libs/BasicObject/ValidatingBasicObject.php");
+BasicObject::$output_htmlspecialchars = true;
+
 // Models
 require("model/Controller.php");
 require("model/Path.php");
