@@ -11,15 +11,15 @@ class AdminController extends Controller {
 	}
 
 	public function index() {
-                $rights = get_rights();
+		$rights = get_rights();
 		return $this->render('index', array('rights' => $rights));
 	}
 
-	/* 
-		DatabaseSite management
-	*/
+	/*
+		 DatabaseSite management
+	 */
 	public function edit($idx = null) {
-                ensure_right("Sido-moderator");
+		ensure_right("Sido-moderator");
 
 		if(!isset($idx)) {
 			$sites = DatabaseSite::selection(array());
@@ -48,26 +48,27 @@ class AdminController extends Controller {
 
 		return $this->render('edit', array('s' => $new, 'id' => $idx));
 	}
+
 	public function add() {
-                ensure_right("Sido-moderator");
+		ensure_right("Sido-moderator");
 		if(is_post()) {
 			//Add new one ...
 			$new = new DatabaseSite;
 			$new->text = postdata('text');
 			$new->display_name = postdata('name');
 
-                        $path = explode('/', postdata('href'));
-                        if($path[0] == "") {
-                            array_shift($path);
-                        }
+			$path = explode('/', postdata('href'));
+			if($path[0] == "") {
+				array_shift($path);
+			}
 
-                        if(count($path) > 1) {
-                            $new->name = $path[0];
-                            $new->href = $path[1];
-                        } else {
-                            $new->name = $path[0];
-                            $new->href = 'index';
-                        }
+			if(count($path) > 1) {
+				$new->name = $path[0];
+				$new->href = $path[1];
+			} else {
+				$new->name = $path[0];
+				$new->href = 'index';
+			}
 
 			$order = postdata('order');
 			if(!isset($order) || $order == "") {
@@ -76,11 +77,11 @@ class AdminController extends Controller {
 			}
 			$new->display_order = $order;
 
-                        if(postdata('html') == 'Yes') {
-                            $new->text_type = 'HTML';
-                        } else {
-                            $new->text_type = 'Markdown';
-                        }
+			if(postdata('html') == 'Yes') {
+				$new->text_type = 'HTML';
+			} else {
+				$new->text_type = 'Markdown';
+			}
 
 			$new->commit();
 
@@ -90,8 +91,9 @@ class AdminController extends Controller {
 
 		return $this->render('add');
 	}
+
 	public function delete($idx = null) {
-                ensure_right("Sido-moderator");
+		ensure_right("Sido-moderator");
 		if(!isset($idx)) {
 			return "<p class=\"alert alert-danger\"> Kan inte ta bort en sida utan id. </p>";
 		}
@@ -100,7 +102,7 @@ class AdminController extends Controller {
 		if(!isset($new)) {
 			return '<p class="alert alert-danger"> Kunde inte hitta en sida med det angivna id. </p>';
 		}
-		
+
 		if(is_post()) {
 			//Remove it
 			$new->delete();
@@ -120,13 +122,13 @@ class AdminController extends Controller {
 
 			return html_entity_decode($markdown->transform(postdata('text')), ENT_QUOTES, "UTF-8");
 		}
-		
+
 		return "";
 	}
 
 	/* News management */
 	public function news($id = null) {
-                ensure_right("Nyhets-moderator");
+		ensure_right("Nyhets-moderator");
 
 		if(!isset($id)) {
 			//List the news
@@ -141,7 +143,7 @@ class AdminController extends Controller {
 		}
 
 		if(is_post()) {
-                        global $u;
+			global $u;
 
 			$new->topic = postdata('topic');
 			$new->name = $u->username;
@@ -154,10 +156,11 @@ class AdminController extends Controller {
 
 		return $this->render('news_edit', array('n' => $new));
 	}
+
 	public function news_add() {
-                ensure_right("Sido-moderator");
+		ensure_right("Sido-moderator");
 		if(is_post()) {
-                        global $u;
+			global $u;
 
 			$new = new NewsItem;
 			$new->topic = postdata('topic');
@@ -172,7 +175,7 @@ class AdminController extends Controller {
 		return $this->render('news_add');
 	}
 	public function news_del($id = null) {
-                ensure_right("Sido-moderator");
+		ensure_right("Sido-moderator");
 		if(!isset($id)) {
 			flash('alert alert-danger', 'Kunde inte hitta en nyhet med id='.$id);
 			throw new HTTPRedirect('/admin/news');
@@ -194,17 +197,17 @@ class AdminController extends Controller {
 	}
 
 	/*
-		Image handling here !
-	*/
+		 Image handling here !
+	 */
 	public function images() {
-                ensure_right("Bild-moderator");
+		ensure_right("Bild-moderator");
 		$image = getdata('img');
 		if(!isset($image)) {
 			/*
-				List all files in the directory
-					images/uploaded
-				with the file extension of an image ... (most known images atleast)
-			*/
+				 List all files in the directory
+				 images/uploaded
+				 with the file extension of an image ... (most known images atleast)
+			 */
 			$files = glob('images/uploaded/*.{JPG,PNG,JPEG,jpg,jpeg,png,GIF,gif}', GLOB_BRACE);
 			return $this->render('images_list', array('images' => $files));
 		}
@@ -213,8 +216,8 @@ class AdminController extends Controller {
 	}
 
 	/*
-		AJAX request to list all of the images
-	*/
+		 AJAX request to list all of the images
+	 */
 	public function image_embedded_pick() {
 		$files = glob('images/uploaded/*.{JPG,PNG,JPEG,jpg,jpeg,png,GIF,gif}', GLOB_BRACE);
 		foreach($files as $f) {
@@ -224,7 +227,7 @@ class AdminController extends Controller {
 	}
 
 	public function image_del() {
-                ensure_right("Bild-moderator");
+		ensure_right("Bild-moderator");
 		$image = getdata('img');
 		if(!isset($image)) {
 			flash('alert alert-danger', 'Kunde inte hitta bilden');
@@ -241,7 +244,7 @@ class AdminController extends Controller {
 	}
 
 	public function image_add() {
-                ensure_right("Bild-moderator");
+		ensure_right("Bild-moderator");
 		//Upload new image
 		if(is_post()) {
 			if($_FILES["file"]["error"] > 0) {
@@ -249,10 +252,10 @@ class AdminController extends Controller {
 				throw new HTTPRedirect('/admin/images');
 			}
 
-                        $dir = dirname(__FILE__);
-                        $meh = explode('/', $dir);
-                        array_pop($meh);
-                        $dir = implode('/', $meh);
+			$dir = dirname(__FILE__);
+			$meh = explode('/', $dir);
+			array_pop($meh);
+			$dir = implode('/', $meh);
 
 			if(file_exists($dir.'/public/images/uploaded/'.$_FILES["file"]["name"])) {
 				flash('alert alert-danger', 'En bild med detta namnet finns redan');
@@ -269,69 +272,69 @@ class AdminController extends Controller {
 		return $this->render('image_add');
 	}
 
-        public function timetable($id = null) {
-            ensure_right("Schema-moderator");
-            if(isset($id)) {
-                $its = SchemeItem::selection(array('id' => $id));
-                $it = $its[0];
-                if(!isset($it)) {
-                    return '<p class="alert alert-danger">Kunde inte hitta schemaelement med id='.$id.'</p>';
-                }
+	public function timetable($id = null) {
+		ensure_right("Schema-moderator");
+		if(isset($id)) {
+			$its = SchemeItem::selection(array('id' => $id));
+			$it = $its[0];
+			if(!isset($it)) {
+				return '<p class="alert alert-danger">Kunde inte hitta schemaelement med id='.$id.'</p>';
+			}
 
-                if(is_post()) {
-                    $it->timestamp = postdata('timestamp');
-                    $it->text = postdata('text');
-                    $it->href = postdata('href');
-                    $it->duration = postdata('duration');
-                    $it->color = postdata('color');
-                    $it->commit();
+			if(is_post()) {
+				$it->timestamp = postdata('timestamp');
+				$it->text = postdata('text');
+				$it->href = postdata('href');
+				$it->duration = postdata('duration');
+				$it->color = postdata('color');
+				$it->commit();
 
-                    flash('alert alert-success', 'Schemaelementet har blivit uppdaterat.');
-                    throw new HTTPRedirect('/admin/timetable');
-                }
+				flash('alert alert-success', 'Schemaelementet har blivit uppdaterat.');
+				throw new HTTPRedirect('/admin/timetable');
+			}
 
-                return $this->render('timetable_edit', array('it' => $it));
-            }
+			return $this->render('timetable_edit', array('it' => $it));
+		}
 
 
-            $items = SchemeItem::selection(array());
-            return $this->render('timetable', array('meh' => $items));
-        }
-        public function timetable_add() {
-            ensure_right("Schema-moderator");
-            if(is_post()) {
-                $it = new SchemeItem;
-                $it->timestamp = postdata('timestamp');
-                $it->text = postdata('text');
-                $it->href = postdata('href');
-                $it->duration = postdata('duration');
-                $it->color = postdata('color');
-                $it->commit();
+		$items = SchemeItem::selection(array());
+		return $this->render('timetable', array('meh' => $items));
+	}
 
-                flash('alert alert-success', 'Schemaelementet har skapats.');
-                throw new HTTPRedirect('/admin/timetable');
-            }
+	public function timetable_add() {
+		ensure_right("Schema-moderator");
+		if(is_post()) {
+			$it = new SchemeItem;
+			$it->timestamp = postdata('timestamp');
+			$it->text = postdata('text');
+			$it->href = postdata('href');
+			$it->duration = postdata('duration');
+			$it->color = postdata('color');
+			$it->commit();
 
-            return $this->render('/admin/template_add');
-        }
-        public function timetable_del($id = null) {
-            if(!isset($id)) {
-                return "No id set, error...";
-            }
+			flash('alert alert-success', 'Schemaelementet har skapats.');
+			throw new HTTPRedirect('/admin/timetable');
+		}
 
-            $it = SchemeItem::from_id($id);
-            if(is_post()) {
-                $it->delete();
-                flash('alert alert-success', 'Schemaelementet har blivit borttaget ..');
-                throw new HTTPRedirect('/admin/timetable');
-            }
+		return $this->render('/admin/template_add');
+	}
 
-            return $this->render('/admin/timetable_del', array('id' => $id));
-        }
+	public function timetable_del($id = null) {
+		if(!isset($id)) {
+			return "No id set, error...";
+		}
 
-        public function rights() {
-            
-        }
+		$it = SchemeItem::from_id($id);
+		if(is_post()) {
+			$it->delete();
+			flash('alert alert-success', 'Schemaelementet har blivit borttaget ..');
+			throw new HTTPRedirect('/admin/timetable');
+		}
+
+		return $this->render('/admin/timetable_del', array('id' => $id));
+	}
+
+	public function rights() {
+
+	}
 }
-
-?>
