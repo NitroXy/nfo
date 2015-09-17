@@ -1,7 +1,10 @@
-<h3> Välj schemaelement </h3>
-<a class="btn btn-success" href="/admin/timetable_add">Lägg till</a>
+<h3>Välj aktivitet</h3>
+<a class="btn btn-primary" href="/admin/timetable/new"><span class="glyphicon glyphicon-plus"></span> Lägg till</a>
 <div style="margin-top: 20px;" class="list-group">
-    <?php foreach($meh as $it) { ?>
-    <a class="list-group-item" href="/admin/timetable/<?=$it->id?>"><?=$it->timestamp?> - <?=$it->text?></a>
-    <?php } ?>
+	<?php foreach($items as $item): ?>
+		<a class="list-group-item" href="/admin/timetable/<?=$item->id?>">
+			<span class="color-preview" style="background-color: <?=$item->color?>;"></span>
+			<?=$item->timestamp?> - <?=$item->text?>
+		</a>
+	<?php endforeach; ?>
 </div>

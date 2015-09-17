@@ -1,6 +1,6 @@
 <?php
 
-class SchemeItem extends BasicObject {
+class SchemeItem extends ValidatingBasicObject {
 	protected static function table_name() {
 		return "scheme_items";
 	}

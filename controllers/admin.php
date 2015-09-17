@@ -274,64 +274,89 @@ class AdminController extends Controller {
 
 	public function timetable($id = null) {
 		ensure_right("Schema-moderator");
-		if(isset($id)) {
-			$its = SchemeItem::selection(array('id' => $id));
-			$it = $its[0];
-			if(!isset($it)) {
-				return '<p class="alert alert-danger">Kunde inte hitta schemaelement med id='.$id.'</p>';
+
+		/* mini router */
+		if ( is_post() ){
+			if ( isset($_POST['remove']) ){
+				return $this->timetable_remove($id);
+			} else {
+				return $this->timetable_update($id);
 			}
-
-			if(is_post()) {
-				$it->timestamp = postdata('timestamp');
-				$it->text = postdata('text');
-				$it->href = postdata('href');
-				$it->duration = postdata('duration');
-				$it->color = postdata('color');
-				$it->commit();
-
-				flash('alert alert-success', 'Schemaelementet har blivit uppdaterat.');
-				throw new HTTPRedirect('/admin/timetable');
+		} else {
+			if ( $id === 'new' ){
+				return $this->timetable_add();
+			} elseif ( $id !== null ){
+				return $this->timetable_show($id);
+			} else {
+				return $this->timetable_index();
 			}
-
-			return $this->render('timetable_edit', array('it' => $it));
 		}
+	}
 
-
+	protected function timetable_index(){
 		$items = SchemeItem::selection(array());
-		return $this->render('timetable', array('meh' => $items));
+		return $this->render('timetable', [
+			'items' => $items
+		]);
 	}
 
-	public function timetable_add() {
-		ensure_right("Schema-moderator");
-		if(is_post()) {
-			$it = new SchemeItem;
-			$it->timestamp = postdata('timestamp');
-			$it->text = postdata('text');
-			$it->href = postdata('href');
-			$it->duration = postdata('duration');
-			$it->color = postdata('color');
-			$it->commit();
+	protected function timetable_add() {
+		$item = new SchemeItem;
+		$item->timestamp = date('Y-m-d H:00');
+		$item->duration = 1;
+		$item->color = '#ffffff';
+		return $this->render('timetable_edit', [
+			'item' => $item,
+		]);
+	}
 
-			flash('alert alert-success', 'Schemaelementet har skapats.');
+	protected function timetable_remove($id){
+		$item = SchemeItem::from_id($id);
+		if ( $item !== null ) {
+			$item->delete();
+			flash('success', 'Aktiviteten togs bort.');
+		} else {
+			flash('error', "Kunde inte hitta aktivitet med id {$id}.");
+		}
+		throw new HTTPRedirect('/admin/timetable');
+	}
+
+	protected function timetable_show($id){
+		$item = SchemeItem::from_id($id);
+		if ( $item === null ) {
+			flash('error', "Kunde inte hitta aktivitet med id {$id}.");
 			throw new HTTPRedirect('/admin/timetable');
 		}
 
-		return $this->render('/admin/template_add');
+		return $this->render('timetable_edit', [
+			'item' => $item,
+		]);
+
 	}
 
-	public function timetable_del($id = null) {
-		if(!isset($id)) {
-			return "No id set, error...";
-		}
+	protected function timetable_update(){
+		$item = SchemeItem::update_attributes(postdata('SchemeItem'), [
+			'permit' => ['timestamp', 'text', 'href', 'duration', 'color'],
+			'create' => true,
+			'empty_to_null' => false,
+		]);
 
-		$it = SchemeItem::from_id($id);
-		if(is_post()) {
-			$it->delete();
-			flash('alert alert-success', 'Schemaelementet har blivit borttaget ..');
+		try {
+			$exists = !!$item->id;
+			$item->commit();
+
+			if ( $exists ){
+				flash('success', 'Aktiviteten uppdaterades.');
+			} else {
+				flash('success', 'Aktiviteten skapades.');
+			}
+
 			throw new HTTPRedirect('/admin/timetable');
-		}
+		} catch ( ValidationException $e ){}
 
-		return $this->render('/admin/timetable_del', array('id' => $id));
+		return $this->render('timetable_edit', [
+			'item' => $item,
+		]);
 	}
 
 	public function rights() {
