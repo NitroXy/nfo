@@ -9,36 +9,24 @@ class DatabaseSite extends BasicObject {
 	}
 
 	public static function from_only_name($name) {
-		$sel = static::selection(array('name' => $name));
-
-		if(empty($sel)) {
-			return null;
-		}
-
-		return $sel[0];
+		return from_field('name', $name);
 	}
 
 	public static function from_name($name, $href) {
-		$sel = static::selection(array('name' => $name, 'href' => $href));
-
-		if(empty($sel)) {
-			return null;
-		}
-
-		return $sel[0];
+		return static::first(array('name' => $name, 'href' => $href));
 	}
 
 	public function render() {
-            if($this->text_type == "HTML") {
-                    return $this->text;
-            } else { //Default markdown
-		$markdown = new MarkdownExtra();
+		if($this->text_type == "HTML") {
+			return $this->text;
+		} else { //Default markdown
+			$markdown = new MarkdownExtra();
 
-		$markdown->no_markup = true;
-		$markdown->nl2br = true;
+			$markdown->no_markup = true;
+			$markdown->nl2br = true;
 
-		return html_entity_decode($markdown->transform($this->text), ENT_QUOTES, "UTF-8");
-            }
+			return html_entity_decode($markdown->transform($this->text), ENT_QUOTES, "UTF-8");
+		}
 	}
 }
 
