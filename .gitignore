@@ -5,3 +5,5 @@ Icon?
 *.priv
 config.php
 nxauth.php
+
+/vendor/

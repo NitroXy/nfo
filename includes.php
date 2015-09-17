@@ -25,4 +25,4 @@ require("model/Scheme.php");
 require("model/DatabaseSite.php");
 require("model/Rights.php");
 
-?>
+require 'vendor/autoload.php';

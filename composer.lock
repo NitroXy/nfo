@@ -1,0 +1,66 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
+    ],
+    "hash": "7923f1acd8cb30f9e748a6ba89fef926",
+    "content-hash": "4f1fab839708b5d2f7c73aa2f184d32b",
+    "packages": [
+        {
+            "name": "nitroxy/php-forms",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/NitroXy/php-forms.git",
+                "reference": "91daf447da7e5d2bb9050c700d3ba12e4c62aba0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/NitroXy/php-forms/zipball/91daf447da7e5d2bb9050c700d3ba12e4c62aba0",
+                "reference": "91daf447da7e5d2bb9050c700d3ba12e4c62aba0",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "easybook/geshi": "~1.0",
+                "phpunit/phpunit": "4.6.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "NitroXy\\PHPForms\\": [
+                        "src/",
+                        "src/lib/"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "David Sveningsson",
+                    "email": "ext@nitroxy.com"
+                },
+                {
+                    "name": "Andreas Tarandi",
+                    "email": "torandi@nitroxy.com"
+                }
+            ],
+            "description": "Form builder",
+            "time": "2015-04-13 22:13:25"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": []
+}
