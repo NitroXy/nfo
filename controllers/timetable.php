@@ -22,19 +22,31 @@ class TimetableController extends Controller {
 	protected function generate_slots(){
 		list($min, $max) = $this->get_span();
 
-		$items = $this->run_raw_query('SELECT UNIX_TIMESTAMP(`timestamp`) AS `begin`, UNIX_TIMESTAMP(`timestamp`)+`duration`*3600 AS `end`, `text`, `color` FROM `scheme_items`');
+		$items = $this->run_raw_query('SELECT UNIX_TIMESTAMP(`timestamp`) AS `begin`, UNIX_TIMESTAMP(`timestamp`)+`duration`*3600 AS `end`, `text`, `color`, 1 as `first` FROM `scheme_items`');
 		$result = array();
 		for ( $day = $min; $day <= $max; $day++ ){
 			$daystamp = static::timestamp_from_days($day);
+
+			/* reset 'first' so title is shown again for activities spaning over multiple days */
+			$items = array_map(function($x){
+				$x['first'] = true;
+				return $x;
+			}, $items);
+
 			for ( $hour = 0; $hour < 24; $hour++ ){
 				$timestamp = $daystamp + $hour * 3600;
 
 				/* a bit inefficient, for each slot it iterates over each item.
 				 * quick-and-dirty but would be very slow for a larger set. need to fix
 				 * this later when under less time contstraints */
-				$result[$day-$min][$hour] = array_filter($items, function($x) use($timestamp){
-					return $timestamp >= $x['begin'] && $timestamp <= $x['end'];
-				});
+				$result[$day-$min][$hour] = array_filter($items, function($v, $k) use(&$items, $timestamp){
+					if ( $timestamp >= $v['begin'] && $timestamp <= $v['end'] ){
+						$items[$k]['first'] = false;
+						return true;
+					} else {
+						return false;
+					}
+				}, ARRAY_FILTER_USE_BOTH);
 			}
 		}
 		return $result;

@@ -24,7 +24,11 @@
 						<td class="<?php if ( $n > 0 ): ?>has-item overlap-<?=$n?><?php endif; ?>">
 							<?php foreach ( $items as $item ): ?>
 								<div class="item" style="background-color: <?=$item['color']?>;">
-									<?=$item['text']?>
+									<?php if ( $item['first'] ): ?>
+										<?=$item['text']?>
+									<?php else: ?>
+										&nbsp;
+									<?php endif; ?>
 								</div>
 							<?php endforeach ?>
 						</td>
