@@ -5,8 +5,10 @@ define('DAY_OFFSET', 719528);
 class TimetableController extends Controller {
 	public function index() {
 		$slots = $this->generate_slots();
+		list($min, $max) = $this->get_span();
 		return $this->render('frontpage', [
 			'slots' => $slots,
+			'start' => $min,
 		]);
 	}
 

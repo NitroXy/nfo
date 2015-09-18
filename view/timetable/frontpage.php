@@ -11,7 +11,10 @@
     <tr>
       <th>Timma</th>
 			<?php foreach ( array_keys($slots) as $day ): ?>
-        <th>Dag <?=$day+1?></th>
+        <th>
+					Dag <?=$day+1?><br/>
+					<small><?=strftime('%A', $this->timestamp_from_days($day + $start))?></small>
+				</th>
       <?php endforeach; ?>
     </tr>
 		</thead>
