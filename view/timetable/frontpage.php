@@ -23,7 +23,7 @@
 						<?php $items = $rows[$hour]; $n = count($items) ?>
 						<td class="<?php if ( $n > 0 ): ?>has-item overlap-<?=$n?><?php endif; ?>">
 							<?php foreach ( $items as $item ): ?>
-								<div class="item" style="background-color: <?=$item['color']?>;">
+								<div class="item item-<?=$item['luminance']>160?'dark':'light'?>" style="background-color: <?=$item['background']?>;">
 									<?php if ( $item['first'] ): ?>
 										<?=$item['text']?>
 									<?php else: ?>

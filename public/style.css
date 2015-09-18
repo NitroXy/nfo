@@ -75,6 +75,15 @@ img {
 	display: inline-block;
 	padding: 9px 8px;
 	font-size: 14px;
+	font-weight: bold;
+}
+
+.timetable .item-light {
+	color: #fff;
+}
+
+.timetable .item-dark {
+	color: #000;
 }
 
 .overlap-1 > div.item {

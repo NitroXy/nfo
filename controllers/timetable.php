@@ -22,7 +22,18 @@ class TimetableController extends Controller {
 	protected function generate_slots(){
 		list($min, $max) = $this->get_span();
 
-		$items = $this->run_raw_query('SELECT UNIX_TIMESTAMP(`timestamp`) AS `begin`, UNIX_TIMESTAMP(`timestamp`)+`duration`*3600 AS `end`, `text`, `color`, 1 as `first` FROM `scheme_items`');
+		$items = $this->run_raw_query('SELECT UNIX_TIMESTAMP(`timestamp`) AS `begin`, UNIX_TIMESTAMP(`timestamp`)+`duration`*3600 AS `end`, `text`, `color` as `background`, 1 as `first` FROM `scheme_items`');
+
+		/* calculate a good-enough text color */
+		$items = array_map(function($x){
+			$int = hexdec(substr($x['background'],1));
+			$r = 0xFF & ($int >> 0x10);
+			$g = 0xFF & ($int >> 0x8);
+			$b = 0xFF & $int;
+			$x['luminance'] = sqrt(0.299 * $r*$r + 0.587 * $g*$g + 0.114 * $b*$b);
+			return $x;
+		}, $items);
+
 		$result = array();
 		for ( $day = $min; $day <= $max; $day++ ){
 			$daystamp = static::timestamp_from_days($day);
