@@ -1,5 +1,8 @@
 <?php
 
+// Ensure environment is proper
+require('sanity_checks.php');
+
 // Basic functionality
 require("config.php");
 
