@@ -111,14 +111,7 @@
 					</button>
 				</div>
 				<div class="collapse navbar-collapse" id="navbar">
-					<?php
-					if(count($path->raw_parts()) > 0) {
-						$parts = $path->raw_parts();
-						echo $menu->render($parts[0]);
-					} else {
-						echo $menu->render('');
-					}
-					?>
+					<?=$menu->render($path->controller());?>
 				</div>
 			</nav>
 		</header>
