@@ -1,7 +1,7 @@
 <?php
 /*
-	Most of things from mvc_rewrite Controller class
-*/
+	 Most of things from mvc_rewrite Controller class
+ */
 
 class HTTPRedirect extends Exception {
 	public $url;
@@ -68,10 +68,10 @@ class Controller {
 				return new SimpleController($path->controller());
 			}
 
-                        $site = DatabaseSite::from_name($controller, $view);
-                        if(isset($site)) {
-                            return new DatabaseController($controller);
-                        }
+      $site = DatabaseSite::from_name($controller, $view);
+      if(isset($site)) {
+        return new DatabaseController($controller);
+      }
 
 			throw new HTTPError404();
 		}
@@ -87,15 +87,15 @@ class Controller {
 		$this->name = $name;
 	}
 
-	/*
-		Called before route, to do authentication
-	*/
+	/**
+	 * Called before route, to do authentication
+	 */
 	public function pre_route($path) { }
 
-	/*
-		Check for a function named as the first index in $path, and if exists call it.
-		Otherwise go for the 404.
-	*/
+	/**
+	 * Check for a function named as the first index in $path, and if exists call it.
+	 * Otherwise go for the 404.
+	 */
 	public function route($path) {
 		$func = 'index';
 		if(count($path) > 0) {
@@ -110,9 +110,9 @@ class Controller {
 		return call_user_func_array($func, $path);
 	}
 
-	/*
-		Render a view with filename $view
-	*/
+	/**
+	 * Render a view with filename $view
+	 */
 	public function render($view, $data=array()) {
 		$path = $this->build_path_array($view);
 		$this->_PASSALONG = $data;
@@ -136,9 +136,9 @@ class Controller {
 		return $content;
 	}
 
-	/* 
-		Helper function to handle paths/urls
-	*/
+	/**
+	 * Helper function to handle paths/urls
+	 */
 	private function build_path_array($arg) {
 		if(is_array($arg)) {
 			return $arg;
@@ -166,13 +166,11 @@ class SimpleController extends Controller {
 
 class DatabaseController extends Controller {
 	public function __call($name, $args) {
-            $site = DatabaseSite::from_name($this->name, $name);
-            if(!isset($site)) {
-                    //This SHOULD not happen
-                    return "<p> What teh fakk?! </p>";
-            }
-            return $site->render();
+    $site = DatabaseSite::from_name($this->name, $name);
+    if(!isset($site)) {
+      //This SHOULD not happen
+      return "<p> What teh fakk?! </p>";
+    }
+    return $site->render();
 	}
 }
-
-?>
