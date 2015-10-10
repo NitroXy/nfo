@@ -62,7 +62,6 @@ class Menu {
 		}
 
 		if($c == 'nav') {
-			echo '<div class="navbar navbar-default"> <div class="navbar-inner"> <div class="container">';
 			echo '<ul class="nav navbar-nav">';
 		} else {
 			echo "<ul class=\"".$c."\" role=\"menu\" aria-labelledby=\"dLabel\">";
@@ -92,9 +91,6 @@ class Menu {
 			}
 		}
 		echo "</ul>";
-		if($c == 'nav') {
-			echo '</div></div></div>';
-		}
 
 		if($ob) {
 			$content = ob_get_contents();

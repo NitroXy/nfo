@@ -87,23 +87,37 @@
 		<!-- Our complementary stylesheet -->
 		<link rel="stylesheet" type="text/css" href="/style.css"/>
 	</head>
-	<body style="width: 1000px; margin: auto;">
-		<header id="header">
-			<h1> NitroXy <?=$event?> Info
-				<small> Nå information snabbt och enkelt </small> </h1>
-			<div id="navigation_menu">
-				<?php
-				if(count($path->raw_parts()) > 0) {
-					$parts = $path->raw_parts();
-					echo $menu->render($parts[0]);
-				} else {
-					echo $menu->render('');
-				}
-				?>
-			</div>
+	<body>
+		<header class="container">
+			<h1>
+				NitroXy <?=$event?> Info
+				<small>Nå information snabbt och enkelt</small>
+			</h1>
+			<nav id="navigation_menu" class="navbar navbar-default">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
+						Meny
+						<div class="bar">
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</div>
+					</button>
+				</div>
+				<div class="collapse navbar-collapse" id="navbar">
+					<?php
+					if(count($path->raw_parts()) > 0) {
+						$parts = $path->raw_parts();
+						echo $menu->render($parts[0]);
+					} else {
+						echo $menu->render('');
+					}
+					?>
+				</div>
+			</nav>
 		</header>
 
-		<div id="content">
+		<div id="content" class="container">
 			<?php if ( isset($error) ): ?>
 				<?=$error?>
 			<?php else: ?>
@@ -121,7 +135,8 @@
 
 			<div style="display:none;" class="panel panel-default" id="holder"></div>
 		</div>
-		<div id="footer">
+
+		<footer class="container">
 			<hr>
 			<p class="madeby"> Sidan är gjord utav <a href="http://cpluss.se">cpluss</a> för NitroXy </p>
 
@@ -132,6 +147,6 @@
 					<p> <a class="btn btn-default" href="/user/login"> Logga In </a> </p>
 				<?php } ?>
 			</div>
-		</div>
+		</footer>
 	</body>
 </html>

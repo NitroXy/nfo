@@ -1,24 +1,42 @@
-/*
- * To counteract some of the effects of bootstrap, bugs...
- * */
+h1 > small {
+	white-space: nowrap;
+	display: none;
+}
 
-#header {
-    width: 1000px;
-    margin-left: 20px;
+@media (min-width: 400px){
+	h1 > small {
+		display: inline;
+	}
+}
+
+nav .navbar-toggle {
+	width: 100%;
+	margin: 0;
+	height: 50px;
+	border: 0;
+	color: #fff;
+	text-align: left;
+}
+
+nav .bar {
+	float: right;
+	margin-top: 3px;
+}
+
+.navbar-default .navbar-toggle:hover,
+.navbar-default .navbar-toggle:focus {
+	background: inherit;
 }
 
 img {
     width: 600px;
 }
 
-#navigation_menu {
-    width: 1000px;
-}
-
 #content {
-    width: 900px;
-    margin-left: 50px;
-    clear: both;
+	/* extra padding? not sure why but cpluss original code has the headings
+	 * shifted to the left by 10px, this extra padding is to keep the content
+	 * within the container (but makes some items appear unaligned) */
+	padding: 0 25px;
 }
 
 #content h1,h2,h3,h4,h5,h6 {
@@ -28,12 +46,11 @@ img {
     margin-left: 10px;
 }
 
-#footer {
-    width: 1000px;
-    margin-left: 20px;
+footer {
+	font-size: 80%;
 }
 
-#footer .madeby {
+footer .madeby {
     float: right;
 }
 
