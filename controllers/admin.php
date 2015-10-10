@@ -337,7 +337,7 @@ class AdminController extends Controller {
 
 	protected function timetable_update(){
 		$item = SchemeItem::update_attributes(postdata('SchemeItem'), [
-			'permit' => ['timestamp', 'text', 'href', 'duration', 'color'],
+			'permit' => ['timestamp', 'text', 'short_name', 'href', 'duration', 'color'],
 			'create' => true,
 			'empty_to_null' => false,
 		]);

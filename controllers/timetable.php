@@ -24,7 +24,7 @@ class TimetableController extends Controller {
 	protected function generate_slots(){
 		list($min, $max) = $this->get_span();
 
-		$items = $this->run_raw_query('SELECT UNIX_TIMESTAMP(`timestamp`) AS `begin`, UNIX_TIMESTAMP(`timestamp`)+`duration`*3600 AS `end`, `text`, `color` as `background`, 1 as `first` FROM `scheme_items`');
+		$items = $this->run_raw_query('SELECT UNIX_TIMESTAMP(`timestamp`) AS `begin`, UNIX_TIMESTAMP(`timestamp`)+`duration`*3600 AS `end`, `text`, `short_name`, `color` as `background`, 1 as `first` FROM `scheme_items`');
 
 		/* calculate a good-enough text color */
 		$items = array_map(function($x){

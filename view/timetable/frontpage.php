@@ -28,7 +28,9 @@
 							<?php foreach ( $items as $item ): ?>
 								<div class="item item-<?=$item['luminance']>160?'dark':'light'?>" style="background-color: <?=$item['background']?>;">
 									<?php if ( $item['first'] ): ?>
-										<?=$item['text']?>
+										<span class="icon"></span>
+										<span class="visible-xs"><?=$item['short_name']?></span>
+										<span class="hidden-xs"><?=$item['text']?></span>
 									<?php else: ?>
 										&nbsp;
 									<?php endif; ?>

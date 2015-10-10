@@ -4,7 +4,7 @@
 	<?php foreach($items as $item): ?>
 		<a class="list-group-item" href="<?=$root?>/admin/timetable/<?=$item->id?>">
 			<span class="color-preview" style="background-color: <?=$item->color?>;"></span>
-			<?=$item->timestamp?> - <?=$item->text?>
+			<?=$item->timestamp?> - <?=$item->text?> (<?=$item->short_name?>)
 		</a>
 	<?php endforeach; ?>
 </div>

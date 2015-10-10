@@ -7,6 +7,7 @@
 Form::from_object($item, function($f) use($item) {
 	$f->text_field('timestamp', 'Tid', ['hint' => 'YYYY-MM-DD HH:MM', 'required' => true]);
 	$f->text_field('text', 'Titel', ['required' => true, 'placeholder' => 'Ny aktivitet']);
+	$f->text_field('short_name', 'Kortnamn', ['required' => true, 'placeholder' => 'Aktivitet', 'hint' => 'Kortnamnet visas i mobil']);
 	$f->text_field('href', 'Länk', ['type' => 'url', 'placeholder' => 'http://example.net']);
 	$f->text_field('duration', 'Längd', ['hint' => 'Antal timmar', 'type' => 'number', 'step' => '0.5']);
 	$f->text_field('color', 'Färg', ['type' => 'color']);
