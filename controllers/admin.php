@@ -412,7 +412,6 @@ class AdminController extends Controller {
 		throw new HTTPRedirect('/admin/timetable-preset');
 	}
 
-
 	protected function timetablePresetUpdate(){
 		$preset = SchemePreset::update_attributes(postdata('SchemePreset'), [
 			'permit' => ['name', 'color'],

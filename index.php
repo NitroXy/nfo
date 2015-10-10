@@ -50,6 +50,7 @@
 		header("Location: {$root}{$e->url}");
 		exit();
 	} catch (HTTPError $e){
+		$e->set_http_status();
 		$error = "<h3> {$e->title()} </h3> <p> {$e->message()} </p>";
 	} catch(Exception $e){
 		$error =	"<h3> Error </h3> <p> {$e->getMessage()} </p>";
