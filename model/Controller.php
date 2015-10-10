@@ -63,9 +63,13 @@ function error_404(){
 
 class Controller {
 	public $name;
+	protected $format;
+	protected $default_format = 'html';
 	private $_PASSALONG = array();
 
 	static public function factory($path) {
+		$format = $path->format();
+
 		if(!file_exists($path->filename())) {
 			//Test if a view is present
 			$controller = $path->controller();
@@ -74,12 +78,12 @@ class Controller {
 
 			$filename = "../view/$controller/$view.php";
 			if(file_exists($filename)) {
-				return new SimpleController($path->controller());
+				return new SimpleController($path->controller(), $format);
 			}
 
       $site = DatabaseSite::from_name($controller, $view);
       if(isset($site)) {
-        return new DatabaseController($controller);
+        return new DatabaseController($controller, $format);
       }
 
 			throw new HTTPError404();
@@ -89,11 +93,16 @@ class Controller {
 		require($path->filename());
 		//Create controller
 		$classname = "{$path->controller()}Controller";
-		return new $classname($path->controller());
+		return new $classname($path->controller(), $format);
 	}
 
-	public function __construct($name) {
+	public function __construct($name, $format) {
 		$this->name = $name;
+		$this->format = $format;
+	}
+
+	public function format(){
+		return $this->format != null ? $this->format : $this->default_format;
 	}
 
 	/**
