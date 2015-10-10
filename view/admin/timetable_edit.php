@@ -26,5 +26,4 @@ Form::from_object($item, function($f) use($item) {
 		}
 		$f->link('Avbryt', "$root/admin/timetable", false, ['class' => 'btn btn-default pull-left']);
 	});
-}, ['action' => $item->id ? "$root/admin/timetable/{$item->id}" : "$root//admin/timetable"]);
-?>
+}, ['action' => $item->id ? "$root/admin/timetable/{$item->id}" : "$root/admin/timetable"]);
