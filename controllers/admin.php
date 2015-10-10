@@ -293,7 +293,7 @@ class AdminController extends Controller {
 	}
 
 	protected function timetable_index(){
-		$items = SchemeItem::selection(array());
+		$items = SchemeItem::selection(['@order' => 'timestamp']);
 		return $this->render('timetable', [
 			'items' => $items
 		]);
