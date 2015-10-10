@@ -1,15 +1,15 @@
 <ol class="breadcrumb">
   <li><a href="<?=$root?>/">NFO</a></li>
   <li><a href="<?=$root?>/admin">Admin</a></li>
-  <li><a href="<?=$root?>/admin/timetable-preset">Schema-mallar</a></li>
+  <li><a href="<?=$root?>/admin/timetable-preset">Schema-grupper</a></li>
 	<?php if ( $preset->id ): ?>
 		<li class="active"><?=$preset->name?></li>
 	<?php else: ?>
-		<li class="active">Ny mall</li>
+		<li class="active">Ny grupp</li>
 	<?php endif; ?>
 </ol>
 
-<h1>Schema-mallar</h1>
+<h1>Schema-grupper</h1>
 
 <div class="row">
 	<div class="col-sm-6">

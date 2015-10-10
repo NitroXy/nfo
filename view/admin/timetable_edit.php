@@ -18,7 +18,7 @@ Form::from_object($item, function($f) use($item) {
 		$f->text_field('duration', 'Längd', ['hint' => 'Antal timmar', 'type' => 'number', 'step' => '0.5']);
 	});
 	$f->fieldset('Visuellt utseende', function($f){
-		$f->select(FormSelect::from_selection($f, 'preset_id', 'name', SchemePreset::all(), 'Mall', ['null' => true, 'hint' => 'Fördefinierad mall.', 'class' => 'preset-selector']));
+		$f->select(FormSelect::from_selection($f, 'preset_id', 'name', SchemePreset::all(), 'Grupp', ['null' => true, 'hint' => 'Vilken schema-grupp den här aktiviteten tillhör. Om en grupp är vald används färg, ikon osv från gruppen.', 'class' => 'preset-selector']));
 		$f->text_field('color', 'Färg', ['type' => 'color', 'class' => 'hidden-preset']);
 	});
 	$f->group(false, function($f) use($item) {

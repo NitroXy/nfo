@@ -439,9 +439,9 @@ class AdminController extends Controller {
 			$preset->commit();
 
 			if ( $exists ){
-				flash('success', 'Mallen uppdaterades.');
+				flash('success', 'Gruppen uppdaterades.');
 			} else {
-				flash('success', 'Mallen skapades.');
+				flash('success', 'Gruppen skapades.');
 			}
 
 			throw new HTTPRedirect('/admin/timetable-preset');
