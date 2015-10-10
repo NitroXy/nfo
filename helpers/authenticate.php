@@ -86,10 +86,11 @@ function get_rights() {
 
 /* no idea why I put it here ... */
 function postdata($s) {
-    return $_POST[$s];
+    return isset($_POST[$s]) ? $_POST[$s] : null;
 }
+
 function getdata($s) {
-    return $_GET[$s];
+    return isset($_GET[$s]) ? $_GET[$s] : null;
 }
 
 function is_post() {
