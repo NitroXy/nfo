@@ -358,6 +358,77 @@ class AdminController extends Controller {
 		]);
 	}
 
+	public function timetablePreset($id=null){
+		/* mini router */
+		if ( is_post() ){
+			if ( isset($_POST['remove']) ){
+				return $this->timetablePresetRemove($id);
+			} else {
+				return $this->timetablePresetUpdate($id);
+			}
+		} else if ( $id === null ){
+			return $this->timetablePresetList();
+		} else if ( $id === 'new' ){
+			return $this->timetablePresetNew();
+		} else {
+			return $this->timetablePresetEdit($id);
+		}
+	}
+
+	public function timetablePresetList(){
+		return $this->render('timetable/preset/list', [
+			'presets' => SchemePreset::all(),
+		]);
+	}
+
+	public function timetablePresetNew(){
+		$preset = new SchemePreset();
+		return $this->render('timetable/preset/edit', [
+			'preset' => $preset,
+		]);
+	}
+
+	public function timetablePresetEdit($id){
+		$preset = SchemePreset::from_id($id) or error_404();
+		return $this->render('timetable/preset/edit', [
+			'preset' => $preset,
+		]);
+	}
+
+	public function timetablePresetRemove($id){
+		$preset = SchemePreset::from_id($id) or error_404();
+		$preset->delete();
+
+		flash('success', 'Mallen togs bort.');
+		throw new HTTPRedirect('/admin/timetable-preset');
+	}
+
+
+	protected function timetablePresetUpdate(){
+		$preset = SchemePreset::update_attributes(postdata('SchemePreset'), [
+			'permit' => ['name', 'color'],
+			'create' => true,
+			'empty_to_null' => false,
+		]);
+
+		try {
+			$exists = !!$preset->id;
+			$preset->commit();
+
+			if ( $exists ){
+				flash('success', 'Mallen uppdaterades.');
+			} else {
+				flash('success', 'Mallen skapades.');
+			}
+
+			throw new HTTPRedirect('/admin/timetable-preset');
+		} catch ( ValidationException $e ){}
+
+		return $this->render('timetable/preset/edit', [
+			'preset' => $preset,
+		]);
+	}
+
 	public function rights() {
 
 	}

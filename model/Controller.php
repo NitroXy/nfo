@@ -39,6 +39,7 @@ class HTTPError404 extends HTTPError {
 	public function title(){ return "404 Not Found"; }
 	public function message(){ return "Sidan du försöker nå är inte tillgänglig."; }
 }
+
 class HTTPError403 extends HTTPError {
 	public function __construct() {
 		parent::__construct(403);
@@ -50,6 +51,14 @@ class HTTPError403 extends HTTPError {
 
 	public function title(){ return "403 Forbidden."; }
 	public function message(){ return "Du saknar behörighet till sidan du försöker nå."; }
+}
+
+/**
+ * Wrapper for generating a 403 error.
+ * Sample usage: "$user = User::from_id($id) or error_404();"
+ */
+function error_404(){
+	throw new HTTPError404();
 }
 
 class Controller {

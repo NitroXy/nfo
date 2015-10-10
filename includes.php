@@ -17,6 +17,7 @@ require("nxauth.php");
 // Helpers
 require("helpers/authenticate.php");
 require("helpers/flash.php");
+require("helpers/url.php");
 
 // libs
 require_once("libs/BasicObject/BasicObject.php");
