@@ -9,6 +9,8 @@ class MenuItem {
 	}
 
 	public function render($sel) {
+		global $root;
+
 		$meh = explode('/', $this->href);
 		array_shift($meh);
 
@@ -17,7 +19,7 @@ class MenuItem {
 		} else {
 			$class = "";
 		}
-		echo'<li class="'.$class.'"> <a href="'.$this->href.'"> '.$this->name.' </a> </li>';
+		echo'<li class="'.$class."\"> <a href=\"{$root}{$this->href}\"> ".$this->name.' </a> </li>';
 	}
 
 	public function getLink() {

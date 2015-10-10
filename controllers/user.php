@@ -1,16 +1,15 @@
 <?php
 
 class UserController extends Controller {
-    public function login() {
-        NXAuth::login();
+	public function login() {
+		global $root;
+		NXAuth::login();
+		throw new HTTPRedirect('/');
+	}
 
-        throw new HTTPRedirect('/');
-    }
-    public function logout() {
-        NXAuth::logout();
-
-        throw new HTTPRedirect('/');
-    }
+	public function logout() {
+		global $root;
+		NXAuth::logout();
+		throw new HTTPRedirect('/');
+	}
 }
-
-?>

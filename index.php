@@ -35,7 +35,7 @@
 			$_SESSION['flash'] = serialize($flash);
 		}
 
-		header("Location: {$e->url}");
+		header("Location: {$root}{$e->url}");
 		exit();
 	} catch (HTTPError $e){
 		$error = "<h3> {$e->title()} </h3> <p> {$e->message()} </p>";
@@ -57,11 +57,14 @@
 	<head>
 		<title> NitroXy <?=$event?> - Info </title>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+		<script>
+			var root = '<?=$root?>';
+		</script>
 
 		<!-- Use jquery -->
 		<script src="//code.jquery.com/jquery-1.10.1.min.js"></script>
 		<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-		<script src="/scripts/jquery-ui.min.js"></script>
+		<script src="<?=$root?>/scripts/jquery-ui.min.js"></script>
 
 		<!-- Include bootstrap ... -->
 		<!-- Latest compiled and minified CSS -->
@@ -75,8 +78,8 @@
 		<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 
 		<!-- Our custom scripts .. -->
-		<script src="/scripts/image.js"></script>
-		<script src="/scripts/preview.js"></script>
+		<script src="<?=$root?>/scripts/image.js"></script>
+		<script src="<?=$root?>/scripts/preview.js"></script>
 
 		<script>
 		$(function() {
@@ -85,7 +88,7 @@
 		</script>
 
 		<!-- Our complementary stylesheet -->
-		<link rel="stylesheet" type="text/css" href="/style.css"/>
+		<link rel="stylesheet" type="text/css" href="<?=$root?>/style.css"/>
 	</head>
 	<body>
 		<header class="container">
@@ -142,9 +145,9 @@
 
 			<div id="login_menu">
 				<?php if(is_loggedin()) { ?>
-					<p> Inloggad som <?=$u->username?>, <a href="/user/logout"> logga ut </a> </p>
+					<p> Inloggad som <?=$u->username?>, <a href="<?=$root?>/user/logout"> logga ut </a> </p>
 				<?php } else { ?>
-					<p> <a class="btn btn-default" href="/user/login"> Logga In </a> </p>
+					<p> <a class="btn btn-default" href="<?=$root?>/user/login"> Logga In </a> </p>
 				<?php } ?>
 			</div>
 		</footer>

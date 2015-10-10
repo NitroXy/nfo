@@ -11,11 +11,12 @@ Form::from_object($item, function($f) use($item) {
 	$f->text_field('duration', 'Längd', ['hint' => 'Antal timmar', 'type' => 'number', 'step' => '0.5']);
 	$f->text_field('color', 'Färg', ['type' => 'color']);
 	$f->group(false, function($f) use($item) {
+		global $root;
 		$f->submit('Spara', 'save', ['class' => 'pull-right', 'name' => 'save']);
 		if ( $item->id ){
 			$f->submit('Ta bort', 'remove', ['class' => 'btn-danger pull-right', 'name' => 'remove']);
 		}
-		$f->link('Avbryt', '/admin/timetable', false, ['class' => 'btn btn-default pull-left']);
+		$f->link('Avbryt', "$root/admin/timetable", false, ['class' => 'btn btn-default pull-left']);
 	});
-}, ['action' => $item->id ? "/admin/timetable/{$item->id}" : "/admin/timetable"]);
+}, ['action' => $item->id ? "$root/admin/timetable/{$item->id}" : "$root//admin/timetable"]);
 ?>

@@ -19,7 +19,7 @@
         <td> /esport/sc2 </td>
         <td> En undersida till E-Sport, dvs. Starcraft 2, som automatiskt kommer hamna under '/esport' i menyn. </td>
     </tr>
-    <tr> 
+    <tr>
         <td> osv </td>
         <td> ... </td>
     </tr>
@@ -28,7 +28,7 @@
 <p> Om du vill ha awesome markdown, så rör du inte checkboxen som det står "HTML" vid... </p>
 <p class="alert alert-info well-sm"> <b>Notera:</b> om du lämnar positionsfältet tomt läggs det automatiskt längst bak. </p>
 
-<form id="form" method="post" action="/admin/add">
+<form id="form" method="post" action="<?=$root?>/admin/add">
     <div style="padding-top: 5px; padding-bottom: 5px;" class="input-group">
         <span class="input-group-addon"> Namn </span>
         <input type="text" name="name" class="form-control"/>
@@ -43,11 +43,11 @@
         <span class="input-group-addon"> Länk </span>
         <input type="text" name="href" class="form-control"/>
     </div>
-    
+
     <div style="float: right: padding-top: 5px; padding-bottom: 5px;" class="input-group">
         <input name="html" type="checkbox"> HTML (notera att du inte kan ändra detta senare) </input>
     </div>
-    
+
     <textarea class="form-control" name="text" id="text" rows="30"></textarea>
 
     <a style="margin-top: 15px" class="btn btn-success" href="#" onclick="image_add()">Infoga bild</a>
@@ -55,7 +55,7 @@
     <input style="margin-top: 15px;" class="btn btn-info" type="submit" value="Spara"/>
 
     <br>
-    <a style="margin-top: 15px;" class="btn btn-default" href="/admin/edit">Tillbaka</a>
+    <a style="margin-top: 15px;" class="btn btn-default" href="<?=$root?>/admin/edit">Tillbaka</a>
 
 </form>
 
@@ -76,4 +76,3 @@
 		return true;
 	});
 </script>
-

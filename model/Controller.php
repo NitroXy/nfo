@@ -122,6 +122,8 @@ class Controller {
 	}
 
 	public function _render_view($filename, $data=array(), $wrap) {
+		global $root;
+
 		$fullpath = "{$filename}.php";
 		if(!file_exists($fullpath)){
 			throw new HTTPError404();

@@ -1,11 +1,10 @@
-<h2> Hantera bilder </h2>
-<a href="/admin/image_add" class="btn btn-success"> Lägg till bild </a>
-<div id="images">
-<?php
-	foreach($images as $image) { ?>
-		<a href='/admin/images/?img=<?=$image?>'><img class="img-rounded" src="/<?=$image?>"></a>
-<?php  } ?>
-</div>
-<br>
+<h2>Hantera bilder</h2>
+<a href="<?=$root?>/admin/image_add" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Lägg till bild</a>
 
-<a href="/admin" class="btn btn-default">Tillbaka</a>
+<div id="images">
+	<?php foreach($images as $image): ?>
+		<a href='<?=$root?>/admin/images/?img=<?=$image?>'><img class="img-rounded" src="/<?=$image?>"></a>
+	<?php endforeach ?>
+</div>
+
+<a href="<?=$root?>/admin" class="btn btn-default">Tillbaka</a>

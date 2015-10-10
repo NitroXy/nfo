@@ -8,7 +8,7 @@ function is_admin() {
     if(!is_loggedin()) {
             return false;
     }
-    
+
     global $event;
     $u = NXAuth::user();
 
@@ -63,7 +63,7 @@ function has_right($right) {
         if($right == $r) {
             return true;
         }
-    }   
+    }
     return false;
 }
 
