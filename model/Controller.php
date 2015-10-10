@@ -179,6 +179,21 @@ class Controller {
 	public function BuildSubMenu() {
 		return new Menu();
 	}
+
+	protected function ensure_format() {
+		if(func_num_args() < 1) {
+			throw new Exception("Coder is a stupid. Send some arguments plox");
+		}
+
+		$this->default_format = func_get_arg(0);
+
+		foreach(func_get_args() as $arg) {
+			if($this->format() == $arg) {
+				return;
+			}
+		}
+		throw new HTTPError404();
+	}
 }
 
 class SimpleController extends Controller {

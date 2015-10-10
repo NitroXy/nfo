@@ -37,6 +37,11 @@
 				echo $content;
 				exit;
 
+			case 'png':
+				header('Content-Type: image/png');
+				echo $content;
+				exit;
+
 			case 'html':
 			default:
 				break;

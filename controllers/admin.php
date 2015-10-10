@@ -413,11 +413,26 @@ class AdminController extends Controller {
 	}
 
 	protected function timetablePresetUpdate(){
-		$preset = SchemePreset::update_attributes(postdata('SchemePreset'), [
+		$data = postdata('SchemePreset');
+		$preset = SchemePreset::update_attributes($data, [
 			'permit' => ['name', 'color'],
 			'create' => true,
 			'empty_to_null' => false,
 		]);
+
+		/* remove icon */
+		if ( isset($data['icon_remove']) ){
+			$preset->icon = null;
+		}
+
+		/* upload icon */
+		if ( !empty($_FILES['icon']['tmp_name']) ){
+			if ( $_FILES['icon']['error'] !== 0 ){
+				flash('error', 'Icon upload failed');
+			} else {
+				$preset->icon = $this->timetablePresetIcon($_FILES['icon']['tmp_name']);
+			}
+		}
 
 		try {
 			$exists = !!$preset->id;
@@ -435,6 +450,17 @@ class AdminController extends Controller {
 		return $this->render('timetable/preset/edit', [
 			'preset' => $preset,
 		]);
+	}
+
+	protected function timetablePresetIcon($filename){
+		if ( !is_uploaded_file($filename) ){
+			throw new Exception("is_uploaded_file failed");
+		}
+
+		$filename = escapeshellarg($filename);
+		$cmd = "convert {$filename} -resize 20 png:-";
+
+		return shell_exec($cmd);
 	}
 
 	public function rights() {

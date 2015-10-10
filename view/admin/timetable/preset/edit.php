@@ -15,8 +15,14 @@
 	<div class="col-sm-6">
 		<?php
 		Form::from_object($preset, function($f) use ($preset) {
+			$icon_attr = [];
+			if ( $preset->have_icon() ){
+				$icon_attr = ['remove' => true, 'current' => "<img src=\"{$preset->icon_url}\"/>"];
+			}
+
 			$f->text_field('name', 'Namn', ['required' => true]);
 			$f->text_field('color', 'Färg', ['type' => 'color']);
+			$f->upload_field('icon', 'Ikon', $icon_attr);
 			$f->group(false, function($f) use($preset) {
 				global $root;
 				$f->submit('Spara', 'save', ['class' => 'pull-right', 'name' => 'save']);
@@ -25,7 +31,7 @@
 				}
 				$f->link('Avbryt', "$root/admin/timetable-preset", false, ['class' => 'btn btn-default pull-left']);
 			});
-		}, ['action' => $preset->id ? "$root/admin/timetable-preset/{$preset->id}" : "$root/admin/timetable-preset"]);
+		}, ['action' => $preset->id ? "$root/admin/timetable-preset/{$preset->id}" : "$root/admin/timetable-preset", 'enctype' => 'multipart/form-data']);
 		?>
 	</div>
 </div>

@@ -12,6 +12,11 @@
 			<div class="list-group">
 				<?php foreach ( $presets as $preset ): ?>
 					<a class="list-group-item" href="<?=url('/admin/timetable-preset/:id', $preset->id)?>">
+						<span class="icon-preview">
+							<?php if ( $preset->have_icon() ): ?>
+								<img src="<?=$preset->icon_url?>"/>
+							<?php endif; ?>
+						</span>
 						<span class="color-preview" style="background-color: <?=$preset->color?>;"></span>
 						<?=$preset->name?>
 					</a>
