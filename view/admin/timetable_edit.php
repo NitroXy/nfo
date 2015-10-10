@@ -5,12 +5,19 @@
 <?php endif; ?>
 <?php
 Form::from_object($item, function($f) use($item) {
-	$f->text_field('timestamp', 'Tid', ['hint' => 'YYYY-MM-DD HH:MM', 'required' => true]);
-	$f->text_field('text', 'Titel', ['required' => true, 'placeholder' => 'Ny aktivitet']);
-	$f->text_field('short_name', 'Kortnamn', ['required' => true, 'placeholder' => 'Aktivitet', 'hint' => 'Kortnamnet visas i mobil']);
-	$f->text_field('href', 'Länk', ['type' => 'url', 'placeholder' => 'http://example.net']);
-	$f->text_field('duration', 'Längd', ['hint' => 'Antal timmar', 'type' => 'number', 'step' => '0.5']);
-	$f->text_field('color', 'Färg', ['type' => 'color']);
+	$f->fieldset('Aktivitet', function($f){
+		$f->text_field('text', 'Titel', ['required' => true, 'placeholder' => 'Ny aktivitet']);
+		$f->text_field('short_name', 'Kortnamn', ['required' => true, 'placeholder' => 'Aktivitet', 'hint' => 'Kortnamnet visas i mobil']);
+		$f->text_field('href', 'Länk', ['type' => 'url', 'placeholder' => 'http://example.net']);
+	});
+	$f->fieldset('Tid', function($f){
+		$f->text_field('duration', 'Längd', ['hint' => 'Antal timmar', 'type' => 'number', 'step' => '0.5']);
+		$f->text_field('timestamp', 'Tid', ['hint' => 'YYYY-MM-DD HH:MM', 'required' => true]);
+	});
+	$f->fieldset('Visuellt utseende', function($f){
+		$f->select(FormSelect::from_selection($f, 'preset_id', 'name', SchemePreset::all(), 'Mall', ['null' => true, 'hint' => 'Fördefinierad mall.', 'class' => 'preset-selector']));
+		$f->text_field('color', 'Färg', ['type' => 'color', 'class' => 'hidden-preset']);
+	});
 	$f->group(false, function($f) use($item) {
 		global $root;
 		$f->submit('Spara', 'save', ['class' => 'pull-right', 'name' => 'save']);

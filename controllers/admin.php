@@ -335,10 +335,13 @@ class AdminController extends Controller {
 
 	protected function timetable_update(){
 		$item = SchemeItem::update_attributes(postdata('SchemeItem'), [
-			'permit' => ['timestamp', 'text', 'short_name', 'href', 'duration', 'color'],
+			'permit' => ['timestamp', 'text', 'short_name', 'href', 'duration', 'color', 'preset_id'],
 			'create' => true,
 			'empty_to_null' => false,
 		]);
+
+		/* set to null if not set (cannot use emty_to_null because most other fields expect empty) */
+		$item->preset_id = $item->preset_id === '' ? null : $item->preset_id;
 
 		try {
 			$exists = !!$item->id;

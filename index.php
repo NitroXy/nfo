@@ -82,6 +82,7 @@
 		<!-- Our custom scripts .. -->
 		<script src="<?=$root?>/scripts/image.js"></script>
 		<script src="<?=$root?>/scripts/preview.js"></script>
+		<script src="<?=$root?>/scripts/nfo.js"></script>
 
 		<script>
 		$(function() {
