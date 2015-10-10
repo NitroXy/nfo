@@ -77,38 +77,8 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<script>
-			var root = '<?=$root?>';
-		</script>
-
-		<!-- Use jquery -->
-		<script src="//code.jquery.com/jquery-1.10.1.min.js"></script>
-		<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-		<script src="<?=$root?>/scripts/jquery-ui.min.js"></script>
-
-		<!-- Include bootstrap ... -->
-		<!-- Latest compiled and minified CSS -->
-		<!--<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">-->
-		<link rel="stylesheet" href="//bootswatch.com/united/bootstrap.min.css">
-
-		<!-- Optional theme -->
-		<!--<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-theme.min.css">-->
-
-		<!-- Latest compiled and minified JavaScript -->
-		<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-
-		<!-- Our custom scripts .. -->
-		<script src="<?=$root?>/scripts/image.js"></script>
-		<script src="<?=$root?>/scripts/preview.js"></script>
-		<script src="<?=$root?>/scripts/nfo.js"></script>
-
-		<script>
-		$(function() {
-			$('.dropdown-toggle').dropdown();
-		});
-		</script>
-
-		<!-- Our complementary stylesheet -->
+		<script>var root = '<?=$root?>';</script>
+		<link rel="stylesheet" type="text/css" href="//bootswatch.com/united/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="<?=$root?>/style.css"/>
 	</head>
 	<body>
@@ -165,5 +135,12 @@
 				<?php } ?>
 			</div>
 		</footer>
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/js/bootstrap.min.js"></script>
+		<script src="<?=$root?>/scripts/jquery-ui.min.js"></script>
+		<script src="<?=$root?>/scripts/image.js"></script>
+		<script src="<?=$root?>/scripts/preview.js"></script>
+		<script src="<?=$root?>/scripts/nfo.js"></script>
 	</body>
 </html>

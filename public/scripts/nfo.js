@@ -13,6 +13,8 @@
 				$('input.hidden-preset[name="SchemeItem[color]"]').val(preset.color);
 			}
 		}).change();
+
+		$('.dropdown-toggle').dropdown();
 	}
 
 	$(init);
