@@ -98,8 +98,12 @@ class Controller {
 	 */
 	public function route($path) {
 		$func = 'index';
+
 		if(count($path) > 0) {
 			$func = array_shift($path);
+
+			/* transform foo-bar to fooBar (function names cannot contain dashes) */
+			$func = preg_replace_callback('/-(.)/', function($m){ return strtoupper($m[1]); }, $func);
 		}
 
 		$func = array($this, $func);
