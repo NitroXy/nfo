@@ -26,7 +26,7 @@
 						<?php $items = $rows[$hour]; $n = count($items) ?>
 						<td class="<?php if ( $n > 0 ): ?>has-item overlap-<?=$n?><?php endif; ?>">
 							<?php foreach ( $items as $item ): ?>
-								<div class="item item-<?=$item['luminance']>160?'dark':'light'?>" style="background-color: <?=$item['background']?>;">
+								<div class="item item-<?=$item['luminance']>160?'dark':'light'?><?php if ( $item['first'] ) echo ' first' ?>" style="background-color: <?=$item['background']?>;">
 									<?php if ( $item['first'] ): ?>
 										<span class="icon"></span>
 										<span class="visible-xs"><?=$item['short_name']?></span>
