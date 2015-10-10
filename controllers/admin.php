@@ -327,8 +327,14 @@ class AdminController extends Controller {
 			throw new HTTPRedirect('/admin/timetable');
 		}
 
+		$presets = [];
+		foreach ( SchemePreset::all() as $x ){
+			$presets[$x->id] = $x->as_json();
+		}
+
 		return $this->render('timetable_edit', [
 			'item' => $item,
+			'presets' => $presets,
 		]);
 
 	}

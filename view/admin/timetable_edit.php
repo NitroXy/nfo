@@ -3,11 +3,14 @@
 <?php else: ?>
 	<h2>Skapa ny aktivitet</h2>
 <?php endif; ?>
+
+<script>var presets = <?php echo json_encode($presets); ?></script>
+
 <?php
 Form::from_object($item, function($f) use($item) {
 	$f->fieldset('Aktivitet', function($f){
 		$f->text_field('text', 'Titel', ['required' => true, 'placeholder' => 'Ny aktivitet']);
-		$f->text_field('short_name', 'Kortnamn', ['required' => true, 'placeholder' => 'Aktivitet', 'hint' => 'Kortnamnet visas i mobil']);
+		$f->text_field('short_name', 'Kortnamn', ['required' => true, 'placeholder' => 'Aktivitet', 'hint' => 'Kortnamnet ersätter namnet i mobilversionen', 'max-length' => 10]);
 		$f->text_field('href', 'Länk', ['type' => 'url', 'placeholder' => 'http://example.net']);
 	});
 	$f->fieldset('Tid', function($f){

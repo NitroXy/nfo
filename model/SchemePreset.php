@@ -15,9 +15,10 @@ class SchemePreset extends ValidatingBasicObject {
 		$this->validate_presence_of('color');
 	}
 
-	public function render() {
-		return "<div class=\"scheme_item\"><span class=\"datetime\">{$this->timestamp}</span><a href=\"{$this->href}\"> <span>{$this->text}</span></a></div>";
+	public function as_json(){
+		return [
+			'name' => $this->name,
+			'color' => $this->color,
+		];
 	}
 }
-
-?>
