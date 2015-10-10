@@ -22,7 +22,7 @@ class AdminController extends Controller {
 		ensure_right("Sido-moderator");
 
 		if(!isset($idx)) {
-			$sites = DatabaseSite::selection(array());
+			$sites = DatabaseSite::selection(['@order' => 'href']);
 			return $this->render('picking_site', array('sites' => $sites));
 		}
 
