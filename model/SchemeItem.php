@@ -18,5 +18,3 @@ class SchemeItem extends ValidatingBasicObject {
 		return "<div class=\"scheme_item\"><span class=\"datetime\">{$this->timestamp}</span><a href=\"{$this->href}\"> <span>{$this->text}</span></a></div>";
 	}
 }
-
-?>

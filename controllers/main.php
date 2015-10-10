@@ -1,6 +1,5 @@
 <?php
-require_once "../libs/php-markdown/Michelf/Markdown.php";
-require_once "../libs/php-markdown/Michelf/MarkdownExtra.php";
+
 use \Michelf\MarkdownExtra;
 
 class MainController extends Controller {
@@ -47,5 +46,3 @@ class MainController extends Controller {
 		return $this->render('view', array('n' => $n));
 	}
 }
-
-?>

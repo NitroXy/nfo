@@ -19,19 +19,14 @@ require("helpers/authenticate.php");
 require("helpers/flash.php");
 
 // libs
-
 require_once("libs/BasicObject/BasicObject.php");
 require_once("libs/BasicObject/ValidatingBasicObject.php");
+require_once "libs/php-markdown/Michelf/Markdown.php";
+require_once "libs/php-markdown/Michelf/MarkdownExtra.php";
 BasicObject::$output_htmlspecialchars = true;
 
-// Models
+/* controller pulls lots of shit, cannot rely on autoloader unless there is some refactoring */
 require("model/Controller.php");
-require("model/Path.php");
-require("model/Menu.php");
-require("model/Newsfeed.php");
-require("model/Scheme.php");
-require("model/DatabaseSite.php");
-require("model/Rights.php");
 
 require 'vendor/autoload.php';
 

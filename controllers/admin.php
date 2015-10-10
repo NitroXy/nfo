@@ -1,7 +1,5 @@
 <?php
-global $repo_root;
-require_once "$repo_root/libs/php-markdown/Michelf/Markdown.php";
-require_once "$repo_root/libs/php-markdown/Michelf/MarkdownExtra.php";
+
 use \Michelf\MarkdownExtra;
 
 class AdminController extends Controller {

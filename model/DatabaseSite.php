@@ -1,6 +1,5 @@
 <?php
-require_once "$repo_root/libs/php-markdown/Michelf/Markdown.php";
-require_once "$repo_root/libs/php-markdown/Michelf/MarkdownExtra.php";
+
 use \Michelf\MarkdownExtra;
 
 class DatabaseSite extends BasicObject {
@@ -29,5 +28,3 @@ class DatabaseSite extends BasicObject {
 		}
 	}
 }
-
-?>
