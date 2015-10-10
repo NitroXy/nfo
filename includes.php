@@ -1,7 +1,9 @@
 <?php
 
 $repo_root = __DIR__;
+
 $root = dirname($_SERVER['SCRIPT_NAME']);
+if ( $root === '/' ) $root = '';
 
 // Ensure environment is proper
 require('sanity_checks.php');
