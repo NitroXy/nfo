@@ -37,6 +37,8 @@ img {
 	 * shifted to the left by 10px, this extra padding is to keep the content
 	 * within the container (but makes some items appear unaligned) */
 	padding: 0 25px;
+
+	position: relative;
 }
 
 #content h1,h2,h3,h4,h5,h6 {
@@ -138,4 +140,24 @@ footer .madeby {
 	height: 18px;
 	border: 1px solid #333;
 	border-radius: 3px;
+}
+
+.cms-admin ul {
+	padding-left: 15px;
+}
+
+@media (min-width: 768px){
+	.cms-admin {
+		float: right;
+		width: 200px;
+	}
+}
+
+@media (min-width: 1630px){
+	.cms-admin {
+		float: none;
+		position: absolute;
+		right: -215px;
+		top: -70px;
+	}
 }

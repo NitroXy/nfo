@@ -171,6 +171,11 @@ class DatabaseController extends Controller {
       //This SHOULD not happen
       return "<p> What teh fakk?! </p>";
     }
-    return $site->render();
+
+		$content = $site->render();
+		return $this->render('/cms', [
+			'id' => $site->id,
+			'content' => $content,
+		]);
 	}
 }
