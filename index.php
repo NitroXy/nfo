@@ -30,6 +30,18 @@
 		$controller->pre_route($path->args());
 		$content = $controller->route($path->args());
 
+		/* hack to support other formats than text/html */
+		switch ( $controller->format() ){
+			case 'json':
+				header('Content-Type: application/json; charset=UTF-8');
+				echo $content;
+				exit;
+
+			case 'html':
+			default:
+				break;
+		}
+
 	} catch(HTTPRedirect $e) {
 		if(isset($flash)) {
 			$_SESSION['flash'] = serialize($flash);
