@@ -2,7 +2,7 @@
 
 use \Michelf\MarkdownExtra;
 
-class DatabaseSite extends BasicObject {
+class DatabaseSite extends ValidatingBasicObject {
 	protected static function table_name() {
 		return "databasesite";
 	}
