@@ -3,6 +3,9 @@
 
 	require("includes.php");
 
+	/* event data */
+	$event = Event::cached();
+
 	//Get the path
 	$path = Path::from_path_info();
 
@@ -84,7 +87,7 @@
 <!DOCTYPE html>
 <html lang="sv">
 	<head>
-		<title> NitroXy <?=$event?> - Info </title>
+		<title><?=$event->name?> - Info</title>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -96,7 +99,7 @@
 	<body>
 		<header class="container">
 			<h1>
-				NitroXy <?=$event?> Info
+				<?=$event->name?> Info
 				<small>Nå information snabbt och enkelt</small>
 			</h1>
 			<nav id="navigation_menu" class="navbar navbar-inverse">

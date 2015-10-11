@@ -495,4 +495,10 @@ class AdminController extends Controller {
 	public function rights() {
 
 	}
+
+	public function event(){
+		ensure_post();
+		Event::flush();
+		throw new HTTPRedirect('/admin');
+	}
 }
