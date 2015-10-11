@@ -3,7 +3,7 @@
 
 <div id="images">
 	<?php foreach($images as $image): ?>
-		<a href='<?=$root?>/admin/images/?img=<?=$image?>'><img class="img-rounded" src="/<?=$image?>"></a>
+		<a href='<?=$root?>/admin/images/?img=<?=$image?>'><img class="img-rounded" src="<?=$root?>/<?=$image?>"></a>
 	<?php endforeach ?>
 </div>
 
