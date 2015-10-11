@@ -5,39 +5,27 @@ function is_loggedin() {
 }
 
 function is_admin() {
-    if(!is_loggedin()) {
-            return false;
-    }
+	if(!is_loggedin()) {
+		return false;
+	}
 
-    global $event;
-    $u = NXAuth::user();
+	$u = NXAuth::user();
 
-    //If this is a nx administrator, he becomes such as here as well
-    $groups = NXAPI::groups(array('user' => $u->user_id));
-    foreach($groups as $group) {
-        if($group == "Administatörer") {
-            return true;
-        }
-    }
+	/* user has the nfo_admin right set according to nitroxy.com */
+	if ( NXAPI::has_right(array('user' => $u->user_id, 'right' => 'nfo_admin')) ){
+		return true;
+	}
 
-    //Must be crew in order to be admin.
-    if(!NXAPI::is_crew(array('user' => $u->user_id))) {
-        return false;
-    }
+	//Must be crew in order to be admin.
+	if(!NXAPI::is_crew(array('user' => $u->user_id))) {
+		return false;
+	}
 
-    //Everybody in "Security/Info" is an administrator
-    $crew_groups = NXAPI::crew_groups(array('user' => $u->user_id));
-    foreach($crew_groups as $group) {
-        if($group == "Security/Info") {
-            return true;
-        }
-    }
+	if(null !== get_rights()) {
+		return true;
+	}
 
-    if(null !== get_rights()) {
-        return true;
-    }
-
-    return false;
+	return false;
 }
 
 function ensure_right($right) {
@@ -102,5 +90,3 @@ function ensure_post() {
         throw new HTTPError403();
     }
 }
-
-?>
