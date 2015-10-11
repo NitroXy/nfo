@@ -294,8 +294,23 @@ class AdminController extends Controller {
 
 	protected function timetable_index(){
 		$items = SchemeItem::selection(['@order' => 'timestamp']);
+
+		/* group items by day */
+		$grouped = [];
+		foreach ( $items as $item ){
+			$day = (int)floor(strtotime($item->timestamp) / 86400);
+
+			if ( !array_key_exists($day, $grouped) ){
+				$grouped[$day] = [];
+			}
+
+			$grouped[$day][] = $item;
+		}
+
 		return $this->render('timetable', [
-			'items' => $items
+			'items' => $items,
+			'grouped' => $grouped,
+			'first_day' => (int)floor(strtotime($items[0]->timestamp) / 86400),
 		]);
 	}
 
@@ -304,8 +319,15 @@ class AdminController extends Controller {
 		$item->timestamp = date('Y-m-d H:00');
 		$item->duration = 1;
 		$item->color = '#ffffff';
-		return $this->render('timetable_edit', [
+
+		$presets = [];
+		foreach ( SchemePreset::all() as $x ){
+			$presets[$x->id] = $x->as_json();
+		}
+
+		return $this->render('timetable/edit', [
 			'item' => $item,
+			'presets' => $presets,
 		]);
 	}
 
@@ -332,7 +354,7 @@ class AdminController extends Controller {
 			$presets[$x->id] = $x->as_json();
 		}
 
-		return $this->render('timetable_edit', [
+		return $this->render('timetable/edit', [
 			'item' => $item,
 			'presets' => $presets,
 		]);

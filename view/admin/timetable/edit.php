@@ -6,6 +6,8 @@
 
 <script>var presets = <?php echo json_encode($presets); ?></script>
 
+<div class="row">
+	<div class="col-sm-6">
 <?php
 Form::from_object($item, function($f) use($item) {
 	$f->fieldset('Aktivitet', function($f){
@@ -30,3 +32,6 @@ Form::from_object($item, function($f) use($item) {
 		$f->link('Avbryt', "$root/admin/timetable", false, ['class' => 'btn btn-default pull-left']);
 	});
 }, ['action' => $item->id ? "$root/admin/timetable/{$item->id}" : "$root/admin/timetable"]);
+?>
+	</div>
+</div>

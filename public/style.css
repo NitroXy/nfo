@@ -140,9 +140,9 @@ footer .madeby {
 
 .color-preview {
 	display: inline-block;
-	margin: -2px 5px -3px 0;
-	width: 18px;
-	height: 18px;
+	margin: -2px 5px -5px 0;
+	width: 20px;
+	height: 20px;
 	border: 1px solid #333;
 	border-radius: 3px;
 }
