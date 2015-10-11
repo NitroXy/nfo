@@ -60,7 +60,7 @@
 			var selector = $this.data('target');
 			var $editor = $(selector) || $target.find(selector);
 			var editor = $editor.get(0);
-			var src = $this.find('img').attr('src');
+			var src = $this.find('img').data('image');
 			var md = "![alt-text](" + src + ")";
 			var caret = editor.selectionStart;
 			var content = $editor.val();

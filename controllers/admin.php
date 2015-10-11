@@ -242,27 +242,9 @@ class AdminController extends Controller {
 
 	public function image_add() {
 		ensure_right("Bild-moderator");
-		//Upload new image
-		if(is_post()) {
-			if($_FILES["file"]["error"] > 0) {
-				flash('error', 'Fel uppstod: '.$_FILES["file"]["error"]);
-				throw new HTTPRedirect('/admin/images');
-			}
 
-			$dir = dirname(__FILE__);
-			$meh = explode('/', $dir);
-			array_pop($meh);
-			$dir = implode('/', $meh);
-
-			if(file_exists($dir.'/public/images/uploaded/'.$_FILES["file"]["name"])) {
-				flash('error', 'En bild med detta namnet finns redan');
-				throw new HTTPRedirect('/admin/images');
-			}
-
-			$filename = str_replace(" ", "_", $_FILES["file"]["name"]);
-			move_uploaded_file($_FILES["file"]["tmp_name"], $dir."/public/images/uploaded/".$filename);
-
-			flash('success', 'Bilden laddades upp, och det gick förhoppningsvis bra :)');
+		if ( is_post() ){
+			Image::upload('file');
 			throw new HTTPRedirect('/admin/images');
 		}
 

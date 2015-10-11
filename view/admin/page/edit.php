@@ -24,7 +24,7 @@
 	<ul class="image-gallery collapse">
 		<?php foreach ( Image::all() as $image): ?>
 			<li class="image-thumbnail" data-target=".editor">
-				<img class="img-rounded" src="<?=$image->url?>">
+				<img class="img-rounded" src="<?=$image->thumbnail_url?>" data-image="<?=$image->url?>">
 			</li>
 		<?php endforeach ?>
 	</ul>
