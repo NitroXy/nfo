@@ -52,9 +52,39 @@
 		}).change();
 	}
 
+	function ajaxopen(state){
+		/* temporary wrap in a container so it is possible to find top-level elements */
+		var $container = $('<div></div>');
+		var $partial = $(state.partial);
+		$container.append($partial);
+
+		/* initialize new dom */
+		dominit($container);
+
+		/* bind cancel action */
+		$container.find('*[data-ajax-cancel]').click(function(e){
+			e.preventDefault();
+			$target.empty();
+
+			/* hack: clear #preview (hardcoded id) */
+			$('#preview').empty();
+		});
+
+		/* submit using ajax */
+		$container.find('form').submit(function(e){
+			/* placeholder, not implemented yet due to handling of file upload */
+		});
+
+		var $target = $(state.target);
+		console.log(state);
+		console.log(state.target, $target);
+		$target.html($container);
+		$target.get(0).scrollIntoView();
+	}
+
 	function ajaxbind(element){
 		var $this = $(element);
-		var $target = $($this.data('ajax'));
+		var target = $this.data('ajax');
 		var href = $this.attr('href');
 
 		$this.click(function(e){
@@ -64,32 +94,20 @@
 			$('#preview').empty();
 
 			$.get(href, {_partial: true}).done(function(data){
-				/* temporary wrap in a container so it is possible to find top-level elements */
-				var $container = $('<div></div>');
-				var $partial = $(data);
-				$container.append($partial);
-
-				/* initialize new dom */
-				dominit($container);
-
-				/* bind cancel action */
-				$container.find('*[data-ajax-cancel]').click(function(e){
-					e.preventDefault();
-					$target.empty();
-
-					/* hack: clear #preview (hardcoded id) */
-					$('#preview').empty();
-				});
-
-				/* submit using ajax */
-				$container.find('form').submit(function(e){
-					/* placeholder, not implemented yet due to handling of file upload */
-				});
-
-				$target.html($container);
-				$target.get(0).scrollIntoView();
+				var state = {partial: data, target: target};
+				history.pushState(state, '', href);
+				ajaxopen(state);
 			});
 		});
+	}
+
+	window.onpopstate = function(event){
+		if ( event.state ){
+			ajaxopen(event.state);
+		} else {
+			/* hack: hardcoded id */
+			$('#work').empty();
+		}
 	}
 
 	function init(){
