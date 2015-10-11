@@ -6,7 +6,10 @@
 
 <h2 class="title-buttons clearfix">
 	Välj aktivitet
-	<a class="btn btn-primary pull-right" href="<?=$root?>/admin/timetable/new"><span class="glyphicon glyphicon-plus"></span> Lägg till</a>
+	<div class="btn-group pull-right">
+		<a class="btn btn-default" href="<?=$root?>/admin/timetable-preset"><span class="glyphicon glyphicon-wrench"></span> Grupper</a>
+		<a class="btn btn-primary" href="<?=$root?>/admin/timetable/new"><span class="glyphicon glyphicon-plus"></span> Lägg till</a>
+	</div>
 </h2>
 
 <?php foreach ( $grouped as $day => $items ): ?>
