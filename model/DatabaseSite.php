@@ -7,6 +7,10 @@ class DatabaseSite extends ValidatingBasicObject {
 		return "databasesite";
 	}
 
+	public function validation_hooks(){
+		$this->validate_presence_of('display_name');
+	}
+
 	public static function from_only_name($name) {
 		return from_field('name', $name);
 	}

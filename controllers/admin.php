@@ -30,17 +30,23 @@ class AdminController extends Controller {
 		}
 
 		if(is_post()) {
-			$name = postdata('href');
+			$data = postdata('DatabaseSite');
+			$page = DatabaseSite::update_attributes($data, [
+				'permit' => ['display_name', 'display_order', 'href', 'text'],
+				'create' => true,
+				'empty_to_null' => false,
+			]);
 
-			$text = postdata('text');
-			$new->text = $text;
-			$new->display_order = postdata('order');
-			$new->display_name = postdata('name');
-			//$new->name = postdata('href');
-			$new->commit();
+			try {
+				$page->commit();
+				flash('success', 'Sidan har sparats.');
+				throw new HTTPRedirect('/admin/edit');
+			} catch ( ValidationException $e ){}
 
-			flash('success', 'Sidan har sparats ... ');
-			throw new HTTPRedirect('/admin/edit');
+			return $this->render('page/edit', [
+				's' => $page,
+				'id' => $idx,
+			]);
 		}
 
 		return $this->render('page/edit', array('s' => $new, 'id' => $idx));
