@@ -101,8 +101,14 @@ class Controller {
 		$this->format = $format;
 	}
 
+	public function is_partial(){
+		return getdata('_partial');
+	}
+
 	public function format(){
-		return $this->format != null ? $this->format : $this->default_format;
+		if ( $this->format != null ) return $format;
+		if ( $this->is_partial() ) return 'html_partial';
+		return $this->default_format;
 	}
 
 	/**

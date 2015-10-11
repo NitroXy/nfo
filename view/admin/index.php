@@ -23,7 +23,6 @@
 
 			<?php if(has_right('Schema-moderator')): ?>
 				<a class="list-group-item" href="<?=$root?>/admin/timetable">Schema</a>
-				<a class="list-group-item" href="<?=$root?>/admin/timetable-preset">Schema-grupper</a>
 			<?php endif; ?>
 		</div>
 	</div>

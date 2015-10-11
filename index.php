@@ -42,6 +42,10 @@
 				echo $content;
 				exit;
 
+			case 'html_partial':
+				echo $content;
+				exit;
+
 			case 'html':
 			default:
 				break;
@@ -85,7 +89,8 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<script>var root = '<?=$root?>';</script>
-		<link rel="stylesheet" type="text/css" href="//bootswatch.com/united/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap-theme.min.css">
 		<link rel="stylesheet" type="text/css" href="<?=$root?>/style.css"/>
 	</head>
 	<body>
@@ -94,7 +99,7 @@
 				NitroXy <?=$event?> Info
 				<small>Nå information snabbt och enkelt</small>
 			</h1>
-			<nav id="navigation_menu" class="navbar navbar-default">
+			<nav id="navigation_menu" class="navbar navbar-inverse">
 				<div class="navbar-header">
 					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
 						Meny

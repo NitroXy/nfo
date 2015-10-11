@@ -307,10 +307,17 @@ class AdminController extends Controller {
 			$grouped[$day][] = $item;
 		}
 
+		/* list presets (needed when editing scheme items using javascript) */
+		$presets = [];
+		foreach ( SchemePreset::all() as $x ){
+			$presets[$x->id] = $x->as_json();
+		}
+
 		return $this->render('timetable', [
 			'items' => $items,
 			'grouped' => $grouped,
 			'first_day' => (int)floor(strtotime($items[0]->timestamp) / 86400),
+			'presets' => $presets,
 		]);
 	}
 
@@ -466,7 +473,7 @@ class AdminController extends Controller {
 				flash('success', 'Gruppen skapades.');
 			}
 
-			throw new HTTPRedirect('/admin/timetable-preset');
+			throw new HTTPRedirect('/admin/timetable');
 		} catch ( ValidationException $e ){}
 
 		return $this->render('timetable/preset/edit', [
