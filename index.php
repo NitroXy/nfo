@@ -69,6 +69,13 @@
 	if(is_admin()) {
 		$menu->AddItem("/admin", "Admin");
 	}
+
+	foreach($flash as $class => $msg){
+		if ( !is_array($msg) ){
+			$flash[$class] = array($msg);
+		}
+	}
+
 ?>
 <!DOCTYPE html>
 <html lang="sv">
@@ -109,13 +116,9 @@
 				<?=$error?>
 			<?php else: ?>
 				<?php foreach($flash as $class => $msg): ?>
-					<?php if(is_array($msg)): ?>
-						<?php foreach($msg as $m): ?>
-							<p class="<?=$class?>"><?=$m?></p>
-						<?php endforeach; ?>
-					<?php else: ?>
-						<p class="<?=$class?>"><?=$msg?></p>
-					<?php endif; ?>
+					<?php foreach($msg as $m): ?>
+						<p class="alert <?=flash_bootstrap($class)?>"><?=$m?></p>
+					<?php endforeach; ?>
 				<?php endforeach; ?>
 				<?=$content;?>
 			<?php endif; ?>

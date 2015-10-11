@@ -27,7 +27,7 @@ class AdminController extends Controller {
 
 		$new = DatabaseSite::from_id($idx);
 		if(!isset($new)) {
-			flash('alert alert-danger', 'Kunde inte hitta någon sida med id='.$idx);
+			flash('error', 'Kunde inte hitta någon sida med id='.$idx);
 			return "";
 		}
 
@@ -41,7 +41,7 @@ class AdminController extends Controller {
 			//$new->name = postdata('href');
 			$new->commit();
 
-			flash('alert alert-success', 'Sidan har sparats ... ');
+			flash('success', 'Sidan har sparats ... ');
 			throw new HTTPRedirect('/admin/edit');
 		}
 
@@ -84,7 +84,7 @@ class AdminController extends Controller {
 
 			$new->commit();
 
-			flash('alert alert-success', 'Sidan har lagts till');
+			flash('success', 'Sidan har lagts till');
 			throw new HTTPRedirect('/admin/edit');
 		}
 
@@ -94,18 +94,18 @@ class AdminController extends Controller {
 	public function delete($idx = null) {
 		ensure_right("Sido-moderator");
 		if(!isset($idx)) {
-			return "<p class=\"alert alert-danger\"> Kan inte ta bort en sida utan id. </p>";
+			return "<p class=\"error\"> Kan inte ta bort en sida utan id. </p>";
 		}
 
 		$new = DatabaseSite::from_id($idx);
 		if(!isset($new)) {
-			return '<p class="alert alert-danger"> Kunde inte hitta en sida med det angivna id. </p>';
+			return '<p class="error"> Kunde inte hitta en sida med det angivna id. </p>';
 		}
 
 		if(is_post()) {
 			//Remove it
 			$new->delete();
-			flash('alert alert-success', 'Sidan har tagits bort');
+			flash('success', 'Sidan har tagits bort');
 			throw new HTTPRedirect('/admin/edit');
 		}
 
@@ -137,7 +137,7 @@ class AdminController extends Controller {
 
 		$new = NewsItem::from_id($id);
 		if(!isset($new)) {
-			flash('alert alert-danger', 'Kunde inte hitta nyhet med det angivna id='.$id);
+			flash('error', 'Kunde inte hitta nyhet med det angivna id='.$id);
 			throw new HTTPRedirect('/admin/news');
 		}
 
@@ -149,7 +149,7 @@ class AdminController extends Controller {
 			$new->text = postdata('text');
 			$new->commit();
 
-			flash('alert alert-success', 'Nyheten blev uppdaterad');
+			flash('success', 'Nyheten blev uppdaterad');
 			throw new HTTPRedirect('/admin/news');
 		}
 
@@ -167,7 +167,7 @@ class AdminController extends Controller {
 			$new->text = postdata('text');
 			$new->commit();
 
-			flash('alert alert-success', 'Nyheten har blivit tillagd');
+			flash('success', 'Nyheten har blivit tillagd');
 			throw new HTTPRedirect('/admin/news');
 		}
 
@@ -176,19 +176,19 @@ class AdminController extends Controller {
 	public function news_del($id = null) {
 		ensure_right("Sido-moderator");
 		if(!isset($id)) {
-			flash('alert alert-danger', 'Kunde inte hitta en nyhet med id='.$id);
+			flash('error', 'Kunde inte hitta en nyhet med id='.$id);
 			throw new HTTPRedirect('/admin/news');
 		}
 
 		$new = NewsItem::from_id($id);
 		if(!isset($new)) {
-			flash('alert alert-danger', 'Kunde inte radera nyhet med id='.$id);
+			flash('error', 'Kunde inte radera nyhet med id='.$id);
 			throw new HTTPRedirect('/admin/news');
 		}
 
 		if(is_post()) {
 			$new->delete();
-			flash('alert alert-success', 'Tog bort nyheten "'.$new->topic.'"');
+			flash('success', 'Tog bort nyheten "'.$new->topic.'"');
 			throw new HTTPRedirect('/admin/news');
 		}
 
@@ -229,13 +229,13 @@ class AdminController extends Controller {
 		ensure_right("Bild-moderator");
 		$image = getdata('img');
 		if(!isset($image)) {
-			flash('alert alert-danger', 'Kunde inte hitta bilden');
+			flash('error', 'Kunde inte hitta bilden');
 			throw new HTTPRedirect('/admin/images');
 		}
 
 		if(is_post()) {
 			unlink($image);
-			flash('alert alert-success', 'Bilden "/'.$image.'" har blivit borttagen');
+			flash('success', 'Bilden "/'.$image.'" har blivit borttagen');
 			throw new HTTPRedirect('/admin/images');
 		}
 
@@ -247,7 +247,7 @@ class AdminController extends Controller {
 		//Upload new image
 		if(is_post()) {
 			if($_FILES["file"]["error"] > 0) {
-				flash('alert alert-danger', 'Fel uppstod: '.$_FILES["file"]["error"]);
+				flash('error', 'Fel uppstod: '.$_FILES["file"]["error"]);
 				throw new HTTPRedirect('/admin/images');
 			}
 
@@ -257,14 +257,14 @@ class AdminController extends Controller {
 			$dir = implode('/', $meh);
 
 			if(file_exists($dir.'/public/images/uploaded/'.$_FILES["file"]["name"])) {
-				flash('alert alert-danger', 'En bild med detta namnet finns redan');
+				flash('error', 'En bild med detta namnet finns redan');
 				throw new HTTPRedirect('/admin/images');
 			}
 
 			$filename = str_replace(" ", "_", $_FILES["file"]["name"]);
 			move_uploaded_file($_FILES["file"]["tmp_name"], $dir."/public/images/uploaded/".$filename);
 
-			flash('alert alert-success', 'Bilden laddades upp, och det gick förhoppningsvis bra :)');
+			flash('success', 'Bilden laddades upp, och det gick förhoppningsvis bra :)');
 			throw new HTTPRedirect('/admin/images');
 		}
 
