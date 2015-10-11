@@ -60,6 +60,9 @@
 		$this.click(function(e){
 			e.preventDefault();
 
+			/* hack: clear #preview (hardcoded id) */
+			$('#preview').empty();
+
 			$.get(href, {_partial: true}).done(function(data){
 				/* temporary wrap in a container so it is possible to find top-level elements */
 				var $container = $('<div></div>');

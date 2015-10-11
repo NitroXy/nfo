@@ -19,16 +19,9 @@ class DatabaseSite extends ValidatingBasicObject {
 		return static::first(array('name' => $name, 'href' => $href));
 	}
 
-	public function render() {
-		if($this->text_type == "HTML") {
-			return $this->text;
-		} else { //Default markdown
-			$markdown = new MarkdownExtra();
-
-			$markdown->no_markup = true;
-			$markdown->nl2br = true;
-
-			return html_entity_decode($markdown->transform($this->text), ENT_QUOTES, "UTF-8");
-		}
+	public function formatted_text() {
+		return static::with_tmp_htmlspecialchars(false, function(){
+			return TextParser::transform($this->text);
+		});
 	}
 }

@@ -233,16 +233,14 @@ class SimpleController extends Controller {
 
 class DatabaseController extends Controller {
 	public function __call($name, $args) {
-    $site = DatabaseSite::from_name($this->name, $name);
-    if(!isset($site)) {
-      //This SHOULD not happen
-      return "<p> What teh fakk?! </p>";
-    }
+		$site = DatabaseSite::from_name($this->name, $name);
+		if ( !$site ){
+			error_404();
+		}
 
-		$content = $site->render();
 		return $this->render('/cms', [
 			'id' => $site->id,
-			'content' => $content,
+			'content' => $site->formatted_text(),
 		]);
 	}
 }

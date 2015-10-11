@@ -1,18 +1,12 @@
 <?php
 
-use \Michelf\MarkdownExtra;
-
 class MainController extends Controller {
 	public function index() {
 		$newsfeed = NewsItem::all();
 
-		$markdown = new MarkdownExtra();
-		$markdown->no_markup = true;
-		$markdown->nl2br = true;
-
 		$news = array();
 		foreach($newsfeed as $n) {
-			$text =  html_entity_decode($markdown->transform($n->text), ENT_QUOTES, "UTF-8");
+			$text =  TextParser::transform($n->text);
 			$news[] = array(
 					'topic' => $n->topic,
 					'text' => $text,
@@ -33,13 +27,9 @@ class MainController extends Controller {
 			return '<p class="error">Kan inte hitta nyhet med id='.$id.'</p>';
 		}
 
-		$markdown = new MarkdownExtra();
-		$markdown->no_markup = true;
-		$markdown->nl2br = true;
-		$text = html_entity_decode($markdown->transform($new->text), ENT_QUOTES, "UTF-8");
 		$n = array(
 				'topic' => $new->topic,
-				'text' => $text,
+				'text' => TextParser::transform($new->$text),
 				'name' => $new->name,
 				'timestamp' => $new->timestamp);
 
