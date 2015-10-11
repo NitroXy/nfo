@@ -13,6 +13,6 @@
         }
     ],
     "require": {
-		"nitroxy/php-forms": "dev-master#e0c4b588be94034a6351bf3bf96788914f62f8c2"
+		"nitroxy/php-forms": "dev-master#ba6a36a2f793e3b2769f41264f201e88867a0265"
 	}
 }

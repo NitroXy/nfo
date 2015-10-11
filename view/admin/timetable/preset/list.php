@@ -9,7 +9,7 @@
 <h2 class="title-buttons clearfix">
 	Schema-grupper
 	<div class="btn-group pull-right">
-		<a href="<?=$root?>/admin/timetable-preset/new" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Ny grupp</a>
+		<a href="<?=$root?>/admin/timetable-preset/new" class="btn btn-primary" data-ajax="#work"><span class="glyphicon glyphicon-plus"></span> Ny grupp</a>
 	</div>
 </h2>
 

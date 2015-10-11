@@ -4,6 +4,8 @@
 	<li class="active">Schema</li>
 </ol>
 
+<script>var presets = <?php echo json_encode($presets); ?></script>
+
 <div class="row">
 	<div class="col-sm-6">
 		<h2 class="title-buttons clearfix">

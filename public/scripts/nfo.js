@@ -1,6 +1,27 @@
 (function($){
 	'use strict';
 
+	function dominit(element){
+		var $target = $(element);
+
+		/* disable options when a preset is selected */
+		$target.find('.preset-selector').change(function(){
+			var value = $(this).val();
+			var any = value !== '';
+			$target.find('.hidden-preset').prop('disabled', any);
+
+			if ( any ){
+				var preset = presets[value];
+				$target.find('input.hidden-preset[name="SchemeItem[color]"]').val(preset.color);
+			}
+		}).change();
+
+		/* bind any new ajax-based links */
+		$target.find('a[data-ajax]').each(function(){
+			ajaxbind(this);
+		});
+	}
+
 	function ajaxbind(element){
 		var $this = $(element);
 		var $target = $($this.data('ajax'));
@@ -15,10 +36,8 @@
 				var $partial = $(data);
 				$container.append($partial);
 
-				/* bind any new ajax-based links */
-				$partial.find('a[data-ajax]').each(function(){
-					ajaxbind(this);
-				});
+				/* initialize new dom */
+				dominit($container);
 
 				/* bind cancel action */
 				$container.find('*[data-ajax-cancel]').click(function(e){
@@ -38,24 +57,8 @@
 	}
 
 	function init(){
-		/* disable options when a preset is selected */
-		$('.preset-selector').change(function(){
-			var value = $(this).val();
-			var any = value !== '';
-			$('.hidden-preset').prop('disabled', any);
-
-			if ( any ){
-				var preset = presets[value];
-				$('input.hidden-preset[name="SchemeItem[color]"]').val(preset.color);
-			}
-		}).change();
-
+		dominit(document);
 		$('.dropdown-toggle').dropdown();
-
-		/* handle request for ajax-based forms */
-		$('a[data-ajax]').each(function(){
-			ajaxbind(this);
-		});
 	}
 
 	$(init);
