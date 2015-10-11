@@ -473,7 +473,7 @@ class AdminController extends Controller {
 				flash('success', 'Gruppen skapades.');
 			}
 
-			throw new HTTPRedirect('/admin/timetable-preset');
+			throw new HTTPRedirect('/admin/timetable');
 		} catch ( ValidationException $e ){}
 
 		return $this->render('timetable/preset/edit', [
