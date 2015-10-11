@@ -42,7 +42,7 @@ class AdminController extends Controller {
 			$new->commit();
 
 			flash('success', 'Sidan har sparats ... ');
-			throw new HTTPRedirect('/admin/page');
+			throw new HTTPRedirect('/admin/edit');
 		}
 
 		return $this->render('page/edit', array('s' => $new, 'id' => $idx));
