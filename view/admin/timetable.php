@@ -27,7 +27,7 @@
 							<?php endif; ?>
 						</span>
 						<span class="color-preview" style="background-color: <?=$item->get_color()?>;"></span>
-						<?=strftime('%H:%M', strtotime($item->timestamp))?> - <?=$item->text?> (<?=$item->short_name?>)
+						<?=strftime('%H:%M', strtotime($item->timestamp))?> - <?=strftime('%H:%M', strtotime($item->timestamp) + $item->duration * 3600)?> - <?=$item->text?> (<?=$item->short_name?>)
 					</a>
 				<?php endforeach; ?>
 			</div>
