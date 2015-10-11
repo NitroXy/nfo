@@ -12,12 +12,20 @@
 		$f->text_field('display_name', 'Namn', ['required' => true]);
 		$f->text_field('display_order', 'Sortering', ['required' => true, 'type' => 'number']);
 		$f->text_field('href', 'Länk', ['disabled' => true]);
-		$f->textarea('text', 'Innehåll', ['rows' => 10, 'data-preview' => '#preview', 'hint' => 'Sidorna använder <a href="http://daringfireball.net/projects/markdown/"> Markdown</a>, guide till syntax är <a href="https://nitroxy.com/formatting.php"> här</a>. HTML är tillåtet.']);
+		$f->textarea('text', 'Innehåll', ['rows' => 10, 'class' => 'editor', 'data-preview' => '#preview', 'hint' => 'Sidorna använder <a href="http://daringfireball.net/projects/markdown/"> Markdown</a>, guide till syntax är <a href="https://nitroxy.com/formatting.php"> här</a>. HTML är tillåtet.']);
 	}, ['action' => false]);
 	?>
 
 	<div class="actions clearfix">
 		<a class="btn btn-default pull-left" href="<?=$root?>/admin/edit" data-ajax-cancel>Tillbaka</a>
-		<a class="btn btn-success pull-right" href="#" onclick="image_add()"><span class="glyphicon glyphicon-picture"></span> Infoga bild</a>
+		<button type="button" class="btn btn-success pull-right" data-toggle="collapse" data-target=".image-gallery"><span class="glyphicon glyphicon-picture"></span> Infoga bild</a>
 	</div>
+
+	<ul class="image-gallery collapse">
+		<?php foreach ( Image::all() as $image): ?>
+			<li class="image-thumbnail" data-target=".editor">
+				<img class="img-rounded" src="<?=$image->url?>">
+			</li>
+		<?php endforeach ?>
+	</ul>
 </form>

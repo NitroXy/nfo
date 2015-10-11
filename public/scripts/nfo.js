@@ -50,6 +50,26 @@
 				preview($target, element);
 			}, 200);
 		}).change();
+
+		/* image gallery */
+		$target.find('.image-gallery .image-thumbnail').click(function(e){
+			e.preventDefault();
+
+			/* prepare */
+			var $this = $(this);
+			var selector = $this.data('target');
+			var $editor = $(selector) || $target.find(selector);
+			var editor = $editor.get(0);
+			var src = $this.find('img').attr('src');
+			var md = "![alt-text](" + src + ")";
+			var caret = editor.selectionStart;
+			var content = $editor.val();
+
+			/* append markdown to editor */
+			$editor.val(content.substring(0, caret) + md + content.substring(caret));
+			$editor.focus().change();
+			editor.selectionStart = editor.selectionEnd = caret + md.length;
+		});
 	}
 
 	function ajaxopen(state){
