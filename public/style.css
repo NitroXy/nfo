@@ -175,8 +175,31 @@ footer .madeby {
 
 #preview {
 	margin-top: 15px;
+	position: relative;
 }
 
 #preview:empty {
 	display: none;
+}
+
+#preview:before {
+	content: ' ';
+	position: absolute;
+	background: #fff url(ajax-loader.gif) no-repeat center;
+	background-size: 20px;
+	opacity: 0.0;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	pointer-events: none;
+}
+
+#preview.loading:before {
+	opacity: 0.7;
+	transition: opacity 0.5s;
+	cursor: not-allowed;
+	pointer-events: initial;
 }
