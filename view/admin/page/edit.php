@@ -2,7 +2,7 @@
 
 <p> Sidorna använder <a href="http://daringfireball.net/projects/markdown/"> Markdown</a>, guide till syntax är <a href="https://nitroxy.com/formatting.php"> här</a>. </p>
 
-<form method="post" action="<?=$root?>/admin/edit/<?=$id?>"/>
+<form method="post" action="<?=$root?>/admin/edit/<?=$id?>">
     <div style="padding-top: 5px; padding-bottom: 5px;" class="input-group">
         <span class="input-group-addon"> Namn </span>
         <input type="text" name="name" class="form-control" value="<?=$s->display_name?>"/>
