@@ -1,14 +1,14 @@
-<form method="post" action="<?=url('/admin/edit/:id', $id)?>">
+<form method="post" action="<?=url('/admin/edit/:id', $page->id)?>">
 	<h2 class="title-buttons clearfix">
-		<?=$s->name?> - <?=$s->display_name?>
+		<?=$page->name?> - <?=$page->display_name?>
 		<div class="btn-group pull-right">
-			<a class="btn btn-danger" href="<?=url('/admin/delete:id', $s->id)?>"><span class="glyphicon glyphicon-remove"></span> Ta bort</a>
+			<a class="btn btn-danger" href="<?=url('/admin/delete/:id', $page->id)?>"><span class="glyphicon glyphicon-remove"></span> Ta bort</a>
 			<button class="btn btn-primary" type="submit"><span class="glyphicon glyphicon-floppy-save"></span> Spara</button>
 		</div>
 	</h2>
 
 	<?php
-	Form::from_object($s, function($f){
+	Form::from_object($page, function($f){
 		$f->text_field('display_name', 'Namn', ['required' => true]);
 		$f->text_field('display_order', 'Sortering', ['required' => true, 'type' => 'number']);
 		$f->text_field('href', 'Länk', ['disabled' => true]);

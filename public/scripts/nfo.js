@@ -76,8 +76,6 @@
 		});
 
 		var $target = $(state.target);
-		console.log(state);
-		console.log(state.target, $target);
 		$target.html($container);
 		$target.get(0).scrollIntoView();
 	}

@@ -15,23 +15,21 @@ class AdminController extends Controller {
 	/*
 		 DatabaseSite management
 	 */
-	public function edit($idx = null) {
+	public function edit($id=null) {
 		ensure_right("Sido-moderator");
 
-		if(!isset($idx)) {
-			$sites = DatabaseSite::selection(['@order' => 'href']);
-			return $this->render('page/list', array('sites' => $sites));
+		$all = DatabaseSite::selection(['@order' => 'href']);
+		if ( $id === null ) {
+			return $this->render('page/list', [
+				'sites' => $all,
+				'page' => null,
+			]);
 		}
 
-		$new = DatabaseSite::from_id($idx);
-		if(!isset($new)) {
-			flash('error', 'Kunde inte hitta någon sida med id='.$idx);
-			return "";
-		}
+		$page = DatabaseSite::from_id($id) or error_404();
 
-		if(is_post()) {
-			$data = postdata('DatabaseSite');
-			$page = DatabaseSite::update_attributes($data, [
+		if ( is_post() ){
+			$page = DatabaseSite::update_attributes(postdata('DatabaseSite'), [
 				'permit' => ['display_name', 'display_order', 'href', 'text'],
 				'create' => true,
 				'empty_to_null' => false,
@@ -43,13 +41,20 @@ class AdminController extends Controller {
 				throw new HTTPRedirect('/admin/edit');
 			} catch ( ValidationException $e ){}
 
+			/* fallthrough to re-render form */
+		}
+
+		/* handle edit partial separate from the full request (which includes the page list)*/
+		if ( $this->is_partial() ){
 			return $this->render('page/edit', [
-				's' => $page,
-				'id' => $idx,
+				'page' => $page,
 			]);
 		}
 
-		return $this->render('page/edit', array('s' => $new, 'id' => $idx));
+		return $this->render('page/list', [
+			'sites' => $all,
+			'page' => $page,
+		]);
 	}
 
 	public function add() {

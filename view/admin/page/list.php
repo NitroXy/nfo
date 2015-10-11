@@ -19,8 +19,7 @@
 		</div>
 	</div>
 
-	<div class="col-sm-6" id="work">
-	</div>
+	<div class="col-sm-6" id="work"><?php if ( $page ) include('edit.php'); ?></div>
 </div>
 
 <div class="well" id="preview"></div>
