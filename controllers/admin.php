@@ -22,7 +22,7 @@ class AdminController extends Controller {
 
 		if(!isset($idx)) {
 			$sites = DatabaseSite::selection(['@order' => 'href']);
-			return $this->render('picking_site', array('sites' => $sites));
+			return $this->render('page/list', array('sites' => $sites));
 		}
 
 		$new = DatabaseSite::from_id($idx);
@@ -42,10 +42,10 @@ class AdminController extends Controller {
 			$new->commit();
 
 			flash('success', 'Sidan har sparats ... ');
-			throw new HTTPRedirect('/admin/edit');
+			throw new HTTPRedirect('/admin/page');
 		}
 
-		return $this->render('edit', array('s' => $new, 'id' => $idx));
+		return $this->render('page/edit', array('s' => $new, 'id' => $idx));
 	}
 
 	public function add() {
@@ -109,7 +109,7 @@ class AdminController extends Controller {
 			throw new HTTPRedirect('/admin/edit');
 		}
 
-		return $this->render('site_confirm_delete', array('s' => $new));
+		return $this->render('page/delete', array('s' => $new));
 	}
 
 	public function preview() {
