@@ -7,7 +7,7 @@
 <div class="row">
 	<div class="col-sm-6">
 		<h2 clas="title-buttons">
-			Välj sida att redigera
+			Välj sida<span class="hidden-xs hidden-sm"> att redigera</span>
 			<div class="btn-group pull-right">
 				<a href="<?=$root?>/admin/add" class="btn btn-primary" data-ajax="#work"><span class="glyphicon glyphicon-plus"></span> Ny sida</a>
 			</div>
