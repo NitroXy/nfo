@@ -29,7 +29,13 @@ nav .bar {
 }
 
 img {
-	max-width: 600px;
+	max-width: 100%;
+}
+
+@media (min-width: 570px){
+	img {
+		max-width: 600px;
+	}
 }
 
 #content {
@@ -165,4 +171,12 @@ footer .madeby {
 		right: -215px;
 		top: -70px;
 	}
+}
+
+#preview {
+	margin-top: 15px;
+}
+
+#preview:empty {
+	display: none;
 }

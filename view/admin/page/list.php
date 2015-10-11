@@ -22,3 +22,5 @@
 	<div class="col-sm-6" id="work">
 	</div>
 </div>
+
+<div class="well" id="preview"></div>

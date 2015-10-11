@@ -1,7 +1,5 @@
 <?php
 
-use \Michelf\MarkdownExtra;
-
 class AdminController extends Controller {
 	public function pre_route($path) {
 		if(!is_loggedin()) {
@@ -112,17 +110,12 @@ class AdminController extends Controller {
 		return $this->render('page/delete', array('s' => $new));
 	}
 
-	public function preview() {
-		if(is_post()) {
-			$markdown = new MarkdownExtra();
-
-			$markdown->no_markup = true;
-			$markdown->nl2br = true;
-
-			return html_entity_decode($markdown->transform(postdata('text')), ENT_QUOTES, "UTF-8");
+	public function markdown() {
+		if ( is_post() ) {
+			return TextParser::transform($this->post_body(false));
+		} else {
+			throw new HTTPerror405();
 		}
-
-		return "";
 	}
 
 	/* News management */

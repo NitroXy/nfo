@@ -27,6 +27,19 @@ abstract class HTTPError extends Exception {
 	public abstract function message();
 }
 
+class HTTPError405 extends HTTPError {
+	public function __construct() {
+		parent::__construct(405);
+	}
+
+	public function set_http_status() {
+		header('HTTP/1.1 405 Method Not Allowed');
+	}
+
+	public function title(){ return "405 Method Not Allowed"; }
+	public function message(){ return "Metoden du använde för att nå denna sidan är inte giltig för denna resursen."; }
+}
+
 class HTTPError404 extends HTTPError {
 	public function __construct() {
 		parent::__construct(404);
@@ -109,6 +122,15 @@ class Controller {
 		if ( $this->format != null ) return $format;
 		if ( $this->is_partial() ) return 'html_partial';
 		return $this->default_format;
+	}
+
+	protected function post_body($decode=false){
+		$data = file_get_contents('php://input');
+		switch ( $decode ){
+			case 'json': return json_decode($data);
+			case false: return $data;
+			default: throw new Exception("Unknown post body decoder $decoder");
+		}
 	}
 
 	/**

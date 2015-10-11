@@ -12,10 +12,9 @@
 		$f->text_field('display_name', 'Namn', ['required' => true]);
 		$f->text_field('display_order', 'Sortering', ['required' => true, 'type' => 'number']);
 		$f->text_field('href', 'Länk', ['disabled' => true]);
-		$f->textarea('text', 'Innehåll', ['rows' => 10, 'hint' => 'Sidorna använder <a href="http://daringfireball.net/projects/markdown/"> Markdown</a>, guide till syntax är <a href="https://nitroxy.com/formatting.php"> här</a>. HTML är tillåtet.']);
+		$f->textarea('text', 'Innehåll', ['rows' => 10, 'data-preview' => '#preview', 'hint' => 'Sidorna använder <a href="http://daringfireball.net/projects/markdown/"> Markdown</a>, guide till syntax är <a href="https://nitroxy.com/formatting.php"> här</a>. HTML är tillåtet.']);
 	}, ['action' => false]);
 	?>
-	<a style="margin-top: 15px;" class="btn btn-warning" href="#" onclick="preview()">Förhandsgranska</a>
 
 	<div class="actions clearfix">
 		<a class="btn btn-default pull-left" href="<?=$root?>/admin/edit" data-ajax-cancel>Tillbaka</a>

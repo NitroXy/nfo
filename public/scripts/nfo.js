@@ -1,6 +1,26 @@
 (function($){
 	'use strict';
 
+	var preview_timer = null;
+
+	function preview($container, element){
+		var $this = $(element);
+		var selector = $this.data('preview');
+		var $target = $(selector) || $container.find(selector);
+		$target.addClass('loading');
+		$.ajax({
+			url: root + '/admin/markdown?_partial=true',
+			method: 'post',
+			contentType: 'text/markdown',
+			processData: false,
+			data: $this.val(),
+		}).done(function(parsed){
+			$target.html(parsed);
+		}).always(function(){
+			$target.removeClass('loading');
+		});
+	}
+
 	function dominit(element){
 		var $target = $(element);
 
@@ -20,6 +40,16 @@
 		$target.find('a[data-ajax]').each(function(){
 			ajaxbind(this);
 		});
+
+		/* bind any preview listeners */
+		$target.find('textarea[data-preview]').on('change keyup paste', function(){
+			var element = this;
+			if ( preview_timer ) clearTimeout(preview_timer);
+			preview_timer = setTimeout(function(){
+				preview_timer = null;
+				preview($target, element);
+			}, 200);
+		}).change();
 	}
 
 	function ajaxbind(element){
@@ -43,6 +73,9 @@
 				$container.find('*[data-ajax-cancel]').click(function(e){
 					e.preventDefault();
 					$target.empty();
+
+					/* hack: clear #preview (hardcoded id) */
+					$('#preview').empty();
 				});
 
 				/* submit using ajax */
