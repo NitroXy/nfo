@@ -11,3 +11,7 @@ if ( !file_exists(__DIR__ . '/nxauth.php') ){
 if ( !file_exists(__DIR__ . '/vendor/autoload.php') ){
 	die('please run `composer install`');
 }
+
+if ( !is_writable($upload_dir) ){
+	die("$upload_dir is not writable");
+}

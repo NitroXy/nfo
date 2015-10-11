@@ -1,6 +1,7 @@
 <?php
 
 $repo_root = __DIR__;
+$upload_dir = "{$repo_root}/public/images/uploaded";
 
 $root = dirname($_SERVER['SCRIPT_NAME']);
 if ( $root === '/' ) $root = '';
