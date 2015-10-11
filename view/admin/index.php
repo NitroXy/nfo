@@ -1,3 +1,8 @@
+<ol class="breadcrumb">
+  <li><a href="<?=$root?>/">NFO</a></li>
+  <li class="active"">Admin</li>
+</ol>
+
 <h2> Administration - Var försiktig! </h2>
 
 <div class="row">

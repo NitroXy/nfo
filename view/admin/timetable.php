@@ -1,3 +1,9 @@
+<ol class="breadcrumb">
+  <li><a href="<?=$root?>/">NFO</a></li>
+  <li><a href="<?=$root?>/admin">Admin</a></li>
+	<li class="active">Schema</li>
+</ol>
+
 <h2 class="title-buttons clearfix">
 	Välj aktivitet
 	<a class="btn btn-primary pull-right" href="<?=$root?>/admin/timetable/new"><span class="glyphicon glyphicon-plus"></span> Lägg till</a>

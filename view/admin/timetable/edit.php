@@ -1,3 +1,14 @@
+<ol class="breadcrumb">
+  <li><a href="<?=$root?>/">NFO</a></li>
+  <li><a href="<?=$root?>/admin">Admin</a></li>
+  <li><a href="<?=$root?>/admin/timetable">Schema</a></li>
+	<?php if ( $item->id ): ?>
+		<li class="active"><?=$item->text?></li>
+	<?php else: ?>
+		<li class="active">Ny aktivitet</li>
+	<?php endif; ?>
+</ol>
+
 <?php if ( $item->id ): ?>
 	<h2>Redigerar aktivitet</h2>
 <?php else: ?>

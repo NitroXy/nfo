@@ -9,7 +9,7 @@
 	<?php endif; ?>
 </ol>
 
-<h1>Schema-grupper</h1>
+<h2>Schema-grupper</h2>
 
 <div class="row">
 	<div class="col-sm-6">
