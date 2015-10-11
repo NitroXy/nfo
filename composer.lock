@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "ad105669b2bb6f76a057622b3214a796",
-    "content-hash": "ed7d3823d5e8d6e33c18591a16cbd458",
+    "hash": "479d4045f2cc55a2e95bd58bd82792de",
+    "content-hash": "98ab89a085f8bfa465cabac4191a7e05",
     "packages": [
         {
             "name": "nitroxy/php-forms",
@@ -13,12 +13,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/NitroXy/php-forms.git",
-                "reference": "35a110709eff12c10e529b5e4fbc6f4d21340a75"
+                "reference": "e0c4b588be94034a6351bf3bf96788914f62f8c2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/NitroXy/php-forms/zipball/35a110709eff12c10e529b5e4fbc6f4d21340a75",
-                "reference": "35a110709eff12c10e529b5e4fbc6f4d21340a75",
+                "url": "https://api.github.com/repos/NitroXy/php-forms/zipball/e492a42b869c6c3119d038528848f0a0559b65e8",
+                "reference": "e0c4b588be94034a6351bf3bf96788914f62f8c2",
                 "shasum": ""
             },
             "require": {
@@ -52,7 +52,7 @@
                 }
             ],
             "description": "Form builder",
-            "time": "2015-10-10 21:46:18"
+            "time": "2015-10-11 01:05:04"
         }
     ],
     "packages-dev": [],

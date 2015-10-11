@@ -1,13 +1,15 @@
-<ol class="breadcrumb">
-  <li><a href="<?=$root?>/">NFO</a></li>
-  <li><a href="<?=$root?>/admin">Admin</a></li>
-  <li><a href="<?=$root?>/admin/timetable">Schema</a></li>
-	<?php if ( $item->id ): ?>
-		<li class="active"><?=$item->text?></li>
-	<?php else: ?>
-		<li class="active">Ny aktivitet</li>
-	<?php endif; ?>
-</ol>
+<?php if ( !$this->is_partial() ): ?>
+	<ol class="breadcrumb">
+		<li><a href="<?=$root?>/">NFO</a></li>
+		<li><a href="<?=$root?>/admin">Admin</a></li>
+		<li><a href="<?=$root?>/admin/timetable">Schema</a></li>
+		<?php if ( $item->id ): ?>
+			<li class="active"><?=$item->text?></li>
+		<?php else: ?>
+			<li class="active">Ny aktivitet</li>
+		<?php endif; ?>
+	</ol>
+<?php endif; ?>
 
 <?php if ( $item->id ): ?>
 	<h2>Redigerar aktivitet</h2>
@@ -17,8 +19,10 @@
 
 <script>var presets = <?php echo json_encode($presets); ?></script>
 
+<?php if ( !$this->is_partial() ): ?>
 <div class="row">
 	<div class="col-sm-6">
+<?php endif; ?>
 <?php
 Form::from_object($item, function($f) use($item) {
 	$f->fieldset('Aktivitet', function($f){
@@ -40,9 +44,11 @@ Form::from_object($item, function($f) use($item) {
 		if ( $item->id ){
 			$f->submit('Ta bort', 'remove', ['class' => 'btn-danger pull-right', 'name' => 'remove']);
 		}
-		$f->link('Avbryt', "$root/admin/timetable", false, ['class' => 'btn btn-default pull-left']);
+		$f->link('Avbryt', "$root/admin/timetable", false, ['class' => 'btn btn-default pull-left', 'data-ajax-cancel' => true]);
 	});
 }, ['action' => $item->id ? "$root/admin/timetable/{$item->id}" : "$root/admin/timetable"]);
 ?>
+<?php if ( !$this->is_partial() ): ?>
 	</div>
 </div>
+<?php endif; ?>

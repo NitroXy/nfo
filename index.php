@@ -42,6 +42,10 @@
 				echo $content;
 				exit;
 
+			case 'html_partial':
+				echo $content;
+				exit;
+
 			case 'html':
 			default:
 				break;
