@@ -18,7 +18,7 @@
         <input type="text" name="href" class="form-control" disabled value="<?=$s->name?>"/>
     </div>
 
-    <textarea class="form-control" name="text" id="text" rows="30"><?=$s->text?></textarea>
+    <textarea class="form-control" name="text" id="text" rows="10"><?=$s->text?></textarea>
 
     <a style="margin-top: 15px" class="btn btn-success" href="#" onclick="image_add()">Infoga bild</a>
     <a style="margin-top: 15px;" class="btn btn-warning" href="#" onclick="preview()">Förhandsgranska</a>

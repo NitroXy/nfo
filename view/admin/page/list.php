@@ -1,16 +1,24 @@
-<h3>Välj sida att redigera</h3>
+<ol class="breadcrumb">
+	<li><a href="<?=$root?>/">NFO</a></li>
+	<li><a href="<?=$root?>/admin">Admin</a></li>
+	<li class="active">Sidor</li>
+</ol>
 
 <div class="row">
 	<div class="col-sm-6">
+		<h2 clas="title-buttons">
+			Välj sida att redigera
+			<div class="btn-group pull-right">
+				<a href="<?=$root?>/admin/add" class="btn btn-primary" data-ajax="#work"><span class="glyphicon glyphicon-plus"></span> Ny sida</a>
+			</div>
+		</h2>
 		<div class="list-group">
 			<?php foreach($sites as $site): ?>
-				<a class="list-group-item" href="<?=$root?>/admin/edit/<?=$site->id?>"> <?=$site->name?> - <?=$site->display_name?> </a>
+				<a class="list-group-item" href="<?=$root?>/admin/edit/<?=$site->id?>" data-ajax="#work"> <?=$site->name?> - <?=$site->display_name?></a>
 			<?php endforeach; ?>
 		</div>
+	</div>
 
-		<div class="actions">
-			<a href="<?=$root?>/admin" class="btn btn-default pull-left">Tillbaka</a>
-			<a href="<?=$root?>/admin/add" class="btn btn-primary pull-right"><span class="glyphicon glyphicon-plus"></span> Lägg till sida</a>
-		</div>
+	<div class="col-sm-6" id="work">
 	</div>
 </div>
