@@ -489,7 +489,12 @@ class AdminController extends Controller {
 		$filename = escapeshellarg($filename);
 		$cmd = "convert {$filename} -resize 20 png:-";
 
-		return shell_exec($cmd);
+		$output = shell_exec($cmd);
+		if ( $output === null ){
+			throw new Exception("convert failed");
+		}
+
+		return $output;
 	}
 
 	public function rights() {
