@@ -53,7 +53,7 @@ class TimetableController extends Controller {
 				 * quick-and-dirty but would be very slow for a larger set. need to fix
 				 * this later when under less time contstraints */
 				$result[$day-$min][$hour] = array_filter($items, function($v, $k) use(&$items, $timestamp){
-					if ( $timestamp >= $v['begin'] && $timestamp <= $v['end'] ){
+					if ( $timestamp >= $v['begin'] && $timestamp < $v['end'] ){
 						$items[$k]['first'] = false;
 						return true;
 					} else {
