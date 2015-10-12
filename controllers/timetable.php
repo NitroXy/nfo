@@ -1,6 +1,7 @@
 <?php
 
 define('DAY_OFFSET', 719528);
+define('DAY_ENDS', 3); // at what hour the day "ends"
 
 class TimetableController extends Controller {
 	public function index() {
@@ -9,6 +10,7 @@ class TimetableController extends Controller {
 		return $this->render('frontpage', [
 			'days' => $days,
 			'start' => $min,
+			'day_ends', DAY_ENDS,
 		]);
 	}
 
@@ -27,13 +29,12 @@ class TimetableController extends Controller {
 
 		$items = $db->query('SELECT UNIX_TIMESTAMP(`timestamp`) AS `begin`, UNIX_TIMESTAMP(`timestamp`)+`duration`*3600 AS `end`, `text`, `short_name`, `color` as `background` FROM `scheme_items` ORDER BY begin');
 
-
 		$days = [];
 		for ( $day = $min; $day <= $max; $day++ ){
 			$daystamp = static::timestamp_from_days($day);
 			$dayObj = new stdClass();
-			$dayObj->begin = $daystamp;
-			$dayObj->end = $daystamp + 24 * 3600;
+			$dayObj->begin = $daystamp + DAY_ENDS * 3600;
+			$dayObj->end = $dayObj->begin + 24 * 3600;
 			$dayObj->columns = 1;
 			$dayObj->items = [];
 			$days[] = $dayObj;
