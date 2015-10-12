@@ -68,6 +68,35 @@ footer .madeby {
     background: #aaa;
 }
 
+/* Begin timetable */
+
+.schedule-day {
+	float: left;
+	width: 350px;
+}
+
+.schedule-content {
+	position: relative;
+}
+
+.schedule-item {
+	display: inline-block;
+	padding: 9px 8px;
+	font-size: 14px;
+	font-weight: bold;
+}
+
+.schedule-item-light {
+	color: #fff;
+}
+
+.schedule-item-dark {
+	color: #000;
+}
+
+
+/* old stuff */
+
 .timetable {
 	border: 1px solid #aaa;
 	table-layout: fixed;
@@ -93,20 +122,7 @@ footer .madeby {
 	border-bottom: 0;
 }
 
-.timetable .item {
-	display: inline-block;
-	padding: 9px 8px;
-	font-size: 14px;
-	font-weight: bold;
-}
-
-.timetable .item-light {
-	color: #fff;
-}
-
-.timetable .item-dark {
-	color: #000;
-}
+/* end timetable */
 
 .overlap-1 > div.item {
 	width: 100%;
