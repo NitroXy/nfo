@@ -34,7 +34,10 @@ class SchemeItem extends ValidatingBasicObject {
 		switch($key){
 			case 'icon_url':
 				return url('/preset/:id/icon', $this->preset_id);
-
+			case 'begin':
+				return static::to_timestamp($this->timestamp);
+			case 'end':
+				return static::to_timestamp($this->timestamp) + $this->duration*3600;
 			default:
 				return parent::__get($key);
 		}
@@ -42,5 +45,9 @@ class SchemeItem extends ValidatingBasicObject {
 
 	public function render() {
 		return "<div class=\"scheme_item\"><span class=\"datetime\">{$this->timestamp}</span><a href=\"{$this->href}\"> <span>{$this->text}</span></a></div>";
+	}
+
+	private static function to_timestamp($date) {
+		return strtotime($date);
 	}
 }
