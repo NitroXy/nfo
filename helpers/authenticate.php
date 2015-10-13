@@ -57,6 +57,9 @@ function has_right($right) {
 
 function get_rights() {
 	$u = NXAuth::user();
+	if ( !$u ){
+		return null;
+	}
 
 	$rights = Right::from_username($u->username);
 	if(!isset($rights)) {
