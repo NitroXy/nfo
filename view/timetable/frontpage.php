@@ -1,20 +1,25 @@
-<h2>NitroXy Schema: </h2>
-<div id="schedule" class="schedule-days-<?=count($days)?>">
-
 <?php $hour_height = 30; ?>
-
 <style type="text/css">
-	.schedule-content {
-		height: <?=$hour_height*24 ?>px;
-	}
+.schedule-content {
+	height: <?=$hour_height*24 ?>px;
+}
+.schedule-clock {
+	height: <?=$hour_height?>px;
+	line-height: <?=$hour_height?>px;
+}
 </style>
 
+<h2>NitroXy Schema</h2>
+<div id="schedule" class="schedule-days-<?=count($days)?>">
 <?php foreach ( $days as $day_index => $day ): ?>
 	<div class="schedule-day scedule-day-col-<?=$day->columns?>">
 		<div class="schedule-day-header">
 			<h3>Dag <?=$day_index+1?> <small><?=strftime('%A, %d %b', $day->begin)?></small></h3>
 		</div>
 		<div class="schedule-content">
+			<?php for ( $i = 0; $i < 24; $i++ ): ?>
+				<p class="schedule-clock"><?=sprintf('%02d', ($i+4)%24)?></p>
+			<?php endfor; ?>
 			<?php foreach($day->items as $item): ?>
 				<?php $bg = implode(',', $item->background); ?>
 				<div class="schedule-item schedule-item-<?=$item->luminance>160?'dark':'light'?>" style="width: <?=$item->size?>%; height: <?=$hour_height * $item->hours + 1?>px; top: <?=$hour_height * $item->start - 1?>px; left: <?=$item->offset?>%; background: linear-gradient(rgba(<?=$bg?>, 1), rgba(<?=$bg?>,0.8));">
