@@ -94,7 +94,7 @@
 		<script>var root = '<?=$root?>';</script>
 		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap-theme.min.css">
-		<link rel="stylesheet" type="text/css" href="<?=$root?>/style.css"/>
+		<link rel="stylesheet" type="text/css" href="<?=$root?>/style.css?<?=md5_file($repo_root . '/public/style.css')?>"/>
 	</head>
 	<body>
 		<header class="container">
