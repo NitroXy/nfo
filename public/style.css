@@ -135,6 +135,15 @@ footer .madeby {
 	background: #ccc;
 }
 
+@media (min-width: 768px){
+	.schedule-day .schedule-clock {
+		color: transparent;
+	}
+	.schedule-day:first-child .schedule-clock {
+		color: inherit;
+	}
+}
+
 .schedule-content {
 	position: relative;
 }
