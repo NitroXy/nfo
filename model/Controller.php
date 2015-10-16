@@ -119,7 +119,7 @@ class Controller {
 	}
 
 	public function format(){
-		if ( $this->format != null ) return $format;
+		if ( $this->format != null ) return $this->format;
 		if ( $this->is_partial() ) return 'html_partial';
 		return $this->default_format;
 	}
