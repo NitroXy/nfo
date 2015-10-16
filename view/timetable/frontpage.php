@@ -12,7 +12,7 @@
 <?php foreach ( $days as $day_index => $day ): ?>
 	<div class="schedule-day scedule-day-col-<?=$day->columns?>">
 		<div class="schedule-day-header">
-			<h3>Dag <?=$day_index+1?> <small><?=strftime('%A', $this->timestamp_from_days($day->begin))?></small></h3>
+			<h3>Dag <?=$day_index+1?> <small><?=strftime('%A, %d %b', $day->begin)?></small></h3>
 		</div>
 		<div class="schedule-content">
 			<?php foreach($day->items as $item): ?>
