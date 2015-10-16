@@ -104,6 +104,20 @@ footer .madeby {
 	font-size: 1rem;
 }
 
+.schedule-day-header .glyphicon {
+	margin-top: 8px;
+	margin-right: 8px;
+}
+
+.schedule-day-header a {
+	padding: 10px 0;
+	display: block;
+}
+
+.schedule-day-header h3 {
+	margin: 0;
+}
+
 .schedule-clock {
 	font-size: 16px;
 	margin: 0;
@@ -141,8 +155,22 @@ footer .madeby {
 		padding-left: 55px;
 	}
 
+	#schedule .collapse {
+		display: block !important;
+		height: inherit !important;
+	}
+
 	.schedule-day {
 		padding-left: 0;
+	}
+
+	.schedule-day-header a {
+		color: #333;
+		pointer-events: none;
+	}
+
+	.schedule-day-header .glyphicon {
+		display: none;
 	}
 
 	.schedule-day-header, .schedule-clock {

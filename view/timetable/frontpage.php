@@ -14,9 +14,12 @@
 <?php foreach ( $days as $day_index => $day ): ?>
 	<div class="schedule-day scedule-day-col-<?=$day->columns?>">
 		<div class="schedule-day-header">
-			<h3>Dag <?=$day_index+1?> <small><?=strftime('%A, %d %b', $day->begin)?></small></h3>
+			<a href="#schedule-day-<?=$day_index?>" data-toggle="collapse" data-parent="#schedule" class="">
+				<span class="pull-right glyphicon glyphicon-chevron-down"></span>
+				<h3>Dag <?=$day_index+1?> <small><?=strftime('%A, %d %b', $day->begin)?></small></h3>
+			</a>
 		</div>
-		<div class="schedule-content">
+		<div class="schedule-content collapse" id="schedule-day-<?=$day_index?>" style="height: 0px;">
 			<?php for ( $i = 0; $i < 24; $i++ ): ?>
 				<p class="schedule-clock"><?=sprintf('%02d', ($i+4)%24)?></p>
 			<?php endfor; ?>
