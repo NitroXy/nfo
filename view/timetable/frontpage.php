@@ -1,5 +1,5 @@
 <h2>NitroXy Schema: </h2>
-<div id="scheme">
+<div id="schedule" class="schedule-days-<?=count($days)?>">
 
 <?php $hour_height = 30; ?>
 
@@ -9,30 +9,23 @@
 	}
 </style>
 
-<?php
-for($day_index = 0; $day_index < count($days); ++$day_index) {
-	$day = &$days[$day_index];
-	?>
-	<div class="schedule-day">
+<?php foreach ( $days as $day_index => $day ): ?>
+	<div class="schedule-day scedule-day-col-<?=$day->columns?>">
 		<div class="schedule-day-header">
-			Dag <?=$day_index+1?><br/>
-			<small><?=strftime('%A', $this->timestamp_from_days($day->begin))?></small>
+			<h3>Dag <?=$day_index+1?> <small><?=strftime('%A', $this->timestamp_from_days($day->begin))?></small></h3>
 		</div>
 		<div class="schedule-content">
-			<?php foreach($day->items as $item):
-				$bg = implode(',', $item->background);
-				?>
-				<div class="schedule-item schedule-item-<?=$item->luminance>160?'dark':'light'?>" style="position: absolute; width: <?=$item->size?>%; height: <?=$hour_height * $item->hours?>px; top: <?=$hour_height * $item->start?>px; left: <?=$item->offset?>%; background: linear-gradient(rgba(<?=$bg?>, 1), rgba(<?=$bg?>,0.8));">
+			<?php foreach($day->items as $item): ?>
+				<?php $bg = implode(',', $item->background); ?>
+				<div class="schedule-item schedule-item-<?=$item->luminance>160?'dark':'light'?>" style="width: <?=$item->size?>%; height: <?=$hour_height * $item->hours + 1?>px; top: <?=$hour_height * $item->start - 1?>px; left: <?=$item->offset?>%; background: linear-gradient(rgba(<?=$bg?>, 1), rgba(<?=$bg?>,0.8));">
 					<?=$item->data->text?>
-
 				</div>
 			<?php endforeach ?>
 		</div>
 	</div>
-	<?php
-}
+<?php endforeach; ?>
 
-
+<?php
 /*
   <table class="timetable" cellspacing="0" cellpadding="0" border="0">
 		<colgroup>

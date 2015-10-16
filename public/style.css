@@ -70,9 +70,41 @@ footer .madeby {
 
 /* Begin timetable */
 
+#schedule {
+	font-size: 0;
+}
+
 .schedule-day {
-	float: left;
-	width: 350px;
+	width: 100%;
+	display: inline-block;
+	padding: 0 5px;
+}
+
+@media (min-width: 768px) {
+	.schedule-days-1 .schedule-day {
+		width: 100%;
+	}
+
+	.schedule-days-2 .schedule-day {
+		width: 50%;
+	}
+
+	.schedule-days-3 .schedule-day {
+		width: 33.333%;
+	}
+
+	.schedule-days-4 .schedule-day {
+		width: 25%;
+	}
+
+	.schedule-days-5 .schedule-day {
+		width: 20%;
+	}
+}
+
+.schedule-day-header {
+	border-bottom: 1px solid #000;
+	font-size: 1rem;
 }
 
 .schedule-content {
@@ -81,9 +113,11 @@ footer .madeby {
 
 .schedule-item {
 	display: inline-block;
+	border: 1px solid #000;
 	padding: 9px 8px;
-	font-size: 14px;
+	font-size: 1rem;
 	font-weight: bold;
+	position: absolute;
 }
 
 .schedule-item-light {
