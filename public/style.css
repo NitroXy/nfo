@@ -228,6 +228,10 @@ footer .madeby {
 	position: absolute;
 }
 
+.schedule-item:hover {
+	box-shadow: 1px 1px 5px #000;
+}
+
 .schedule-item-light {
 	color: #fff;
 }
