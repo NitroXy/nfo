@@ -20,6 +20,25 @@ class TimetableController extends Controller {
 	}
 
 	/**
+	 * Extract RGB components (as int) from '#rrggbb'.
+	 */
+	protected static function parse_color($color){
+		$int = hexdec(substr($color, 1));
+		$r = 0xFF & ($int >> 0x10);
+		$g = 0xFF & ($int >> 0x8);
+		$b = 0xFF & $int;
+		return [$r, $g, $b];
+	}
+
+	/**
+	 * Calculate luminance from '#rrggbb'
+	 */
+	protected static function luminance($color){
+		list($r, $g, $b) = static::parse_color($color);
+		return sqrt(0.299 * $r*$r + 0.587 * $g*$g + 0.114 * $b*$b);
+	}
+
+	/**
 	 * Returns an array [$day][$hour] = $items where $day and $hour
 	 * corresponds to the date and items is all scheme items on that slot.
 	 */
@@ -47,16 +66,8 @@ class TimetableController extends Controller {
 		foreach($items as $item) {
 			$metaItem = new stdClass;
 			$metaItem->data = $item;
-			/* calculate a good-enough text color */
-			$int = hexdec(substr($item->get_color(),1));
-			$r = 0xFF & ($int >> 0x10);
-			$g = 0xFF & ($int >> 0x8);
-			$b = 0xFF & $int;
-			$metaItem->background = [];
-			$metaItem->background['r'] = $r;
-			$metaItem->background['g'] = $g;
-			$metaItem->background['b'] = $b;
-			$metaItem->luminance = sqrt(0.299 * $r*$r + 0.587 * $g*$g + 0.114 * $b*$b);
+			$metaItem->background = static::parse_color($item->get_color());
+			$metaItem->luminance = static::luminance($item->get_color());
 			$metaItem->collisions = [];
 			$metaItem->column = -1;
 			$metaItem->max_column = 0; // max column in collision with this item

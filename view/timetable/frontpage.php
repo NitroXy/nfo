@@ -20,10 +20,9 @@ for($day_index = 0; $day_index < count($days); ++$day_index) {
 		</div>
 		<div class="schedule-content">
 			<?php foreach($day->items as $item):
-				$bg = $item->background;
-				$bg_str = "{$bg['r']},{$bg['g']},{$bg['b']}";
+				$bg = implode(',', $item->background);
 				?>
-				<div class="schedule-item schedule-item-<?=$item->luminance>160?'dark':'light'?>" style="position: absolute; width: <?=$item->size?>%; height: <?=$hour_height * $item->hours?>px; top: <?=$hour_height * $item->start?>px; left: <?=$item->offset?>%; background: linear-gradient(rgba(<?=$bg_str?>, 1), rgba(<?=$bg_str?>,0.8));">
+				<div class="schedule-item schedule-item-<?=$item->luminance>160?'dark':'light'?>" style="position: absolute; width: <?=$item->size?>%; height: <?=$hour_height * $item->hours?>px; top: <?=$hour_height * $item->start?>px; left: <?=$item->offset?>%; background: linear-gradient(rgba(<?=$bg?>, 1), rgba(<?=$bg?>,0.8));">
 					<?=$item->data->text?>
 
 				</div>
