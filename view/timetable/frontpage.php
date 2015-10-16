@@ -22,7 +22,7 @@
 			<?php endfor; ?>
 			<?php foreach($day->items as $item): ?>
 				<?php $bg = implode(',', $item->background); ?>
-				<div class="schedule-item schedule-item-<?=$item->luminance>160?'dark':'light'?>" style="width: <?=$item->size?>%; height: <?=$hour_height * $item->hours + 1?>px; top: <?=$hour_height * $item->start - 1?>px; left: <?=$item->offset?>%; background: linear-gradient(rgba(<?=$bg?>, 1), rgba(<?=$bg?>,0.8));">
+				<div class="schedule-item schedule-item-<?=$item->luminance>160?'dark':'light'?>" style="width: <?=$item->size?>%; height: <?=$hour_height * $item->hours + 1?>px; top: <?=$hour_height * $item->start - 1?>px; left: <?=$item->offset?>%; background: <?php if ( $item->data->have_icon() ): ?>url(<?=$item->data->icon_url?>) no-repeat top 5px right 5px, <?php endif; ?>linear-gradient(rgba(<?=$bg?>, 1), rgba(<?=$bg?>,0.8));">
 					<?=$item->data->text?>
 				</div>
 			<?php endforeach ?>
