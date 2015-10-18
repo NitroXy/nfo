@@ -9,6 +9,9 @@
 	//Get the path
 	$path = Path::from_path_info();
 
+	/* Additional parameters */
+	$slim = isset($_GET['slim']) ? (boolean)$_GET['slim'] : false;
+
 	if(is_loggedin()) {
 		$u = NXAuth::user();
 	}
@@ -95,6 +98,9 @@
 		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap-theme.min.css">
 		<link rel="stylesheet" type="text/css" href="<?=$root?>/style.css?<?=md5_file($repo_root . '/public/style.css')?>"/>
+		<?php if ( $slim ): ?>
+			<link rel="stylesheet" type="text/css" href="<?=$root?>/slim.css?<?=md5_file($repo_root . '/public/slim.css')?>"/>
+		<?php endif; ?>
 	</head>
 	<body>
 		<header class="container">
