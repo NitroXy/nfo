@@ -132,10 +132,6 @@ footer .madeby {
 	user-select: none;
 }
 
-.schedule-clock:before {
-	content: 'kl ';
-}
-
 .schedule-clock:after {
 	content: '-';
 	color: transparent;

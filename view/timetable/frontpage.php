@@ -21,7 +21,7 @@
 		</div>
 		<div class="schedule-content collapse" id="schedule-day-<?=$day_index?>" style="height: 0px;">
 			<?php for ( $i = 0; $i < 24; $i++ ): ?>
-				<p class="schedule-clock"><?=sprintf('%02d', ($i+4)%24)?></p>
+				<p class="schedule-clock"><?=sprintf('%02d:00', ($i+4)%24)?></p>
 			<?php endfor; ?>
 			<?php foreach($day->items as $item): ?>
 				<?php $bg = implode(',', $item->background); ?>
