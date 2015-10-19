@@ -184,4 +184,22 @@ class TimetableController extends Controller {
 	protected static function timestamp_from_days($days, $offset=0){
 		return ($days - DAY_OFFSET) * 86400 + $offset;
 	}
+
+	protected static function item_classes($item){
+		$class = [''];
+		$class[] = '-col-' . ($item->column+1);
+		$class[] = '-max-' . ($item->max_column+1);
+
+		if ( $item->column === 0 ){
+			$class[] = '-first';
+		}
+
+		if ( $item->column === $item->max_column ){
+			$class[] = '-last';
+		}
+
+		$class[] = $item->luminance > 160 ? '-dark' : '-light';
+
+		return implode(' ', array_map(function($x){ return "schedule-item$x"; }, $class));
+	}
 }
