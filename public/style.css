@@ -160,6 +160,10 @@ footer .madeby {
 		padding-left: 0;
 	}
 
+	.schedule-day-header {
+		padding-left: 10px;
+	}
+
 	.schedule-day-header a {
 		color: #333;
 		pointer-events: none;
@@ -170,8 +174,9 @@ footer .madeby {
 	}
 
 	.schedule-day-header, .schedule-clock {
-		margin-left: 0;
-		margin-right: -5px;
+		margin-left: 1px;
+		margin-right: -1px;
+		border-right: 1px solid #000;
 	}
 
 	.schedule-day:first-child .schedule-day-header,
@@ -179,13 +184,8 @@ footer .madeby {
 		margin-left: -56px;
 	}
 
-	.schedule-day:last-child .schedule-day-header,
-	.schedule-day:last-child .schedule-clock {
-		margin-right: 0;
-	}
-
 	.schedule-day:first-child .schedule-day-header {
-		padding-left: 55px;
+		padding-left: 65px;
 	}
 }
 
