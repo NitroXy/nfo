@@ -9,4 +9,5 @@ nxauth.php
 /.sass-cache
 /public/images/uploaded/
 /public/style.css
+/public/style.css.map
 /vendor/
