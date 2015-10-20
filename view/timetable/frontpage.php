@@ -16,7 +16,7 @@
 		<div class="schedule-day-header">
 			<a href="#schedule-day-<?=$day_index?>" data-toggle="collapse" data-parent="#schedule" class="">
 				<span class="pull-right glyphicon glyphicon-chevron-down"></span>
-				<h3>Dag <?=$day_index+1?> <small><?=strftime('%A, %d %b', $day->begin)?></small></h3>
+				<h3>Dag <?=$day_index+1?> <small><?=strftime('<span>%A,</span> <span>%d %b</span>', $day->begin)?></small></h3>
 			</a>
 		</div>
 		<div class="schedule-content collapse" id="schedule-day-<?=$day_index?>" style="height: 0px;">

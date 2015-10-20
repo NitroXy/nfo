@@ -118,6 +118,10 @@ footer .madeby {
 	margin: 0;
 }
 
+.schedule-day-header h3 span {
+	display: inline-block
+}
+
 .schedule-clock {
 	font-size: 16px;
 	margin: 0;
