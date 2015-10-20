@@ -6,5 +6,7 @@ Icon?
 config.php
 nxauth.php
 
+/.sass-cache
 /public/images/uploaded/
+/public/style.css
 /vendor/
