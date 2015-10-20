@@ -1,16 +1,24 @@
 NitroXy - INFO
 ===================================================
 
-Vad du behöver göra innan montering
+## Prerequisites
 
-	* Fixa en burk med linux på (helst debian)
-	* Installera valfri webbserver (apache?), samt mysql med lite andra saker
-        * Fixa en API nyckel från nitroxy.com/admin/api
+Vad du behöver göra innan installation
 
-Monteringsguide
+* LAMP-stack
+* [Composer](https://getcomposer.org/)
+* API nyckel från [NitroXy](https://nitroxy.com) (prata med Admin)
 
-	* Kopiera till lämplig mapp (ja, du måste vara åtminstone _lite_ kompetent för att göra detta)
-	* Skapa en ny databas med namn "nfo"
-	* Konfiguera databasinställningarna i "config.php" rätt
-	* Gå in i mappen 'migrations' och kör "php update_migrations.php" för att få en fin databas
-	* Skriv content ....
+## Installationsguide
+
+* `git clone https://github.com/NitroXy/nfo.git`
+* Skapa MySQL databas och användare.
+* `cp config.php{.sample,}`
+* `cp nxauth.php{.sample,}`
+* Konfigurera `config.php`
+* Konfigurera `nxauth.php` (be någon om hjälp, det är lite krånligt och odokumenterat).
+* `git submodules init` och `git submodules update`
+* `composer install` (kräver att du installerat composer redan)
+* `php migrations/update_migrations.php`
+* Gå till sidan och välj "Logga in" nere i footern.  
+Se till att du har rätt behörighet från nitroxy.com (prata med HA eller Admin om du tycker att du borde ha behörighet men saknar).
