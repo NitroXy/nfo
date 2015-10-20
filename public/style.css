@@ -291,35 +291,6 @@ footer .madeby {
 	width: 20%;
 }
 
-/* old stuff */
-
-.timetable {
-	border: 1px solid #aaa;
-	table-layout: fixed;
-	width: 100%;
-}
-
-.timetable th {
-	padding: 8px;
-	text-align: center;
-}
-
-.timetable tr > td,
-.timetable tr > th {
-	border: 0;
-	border-right: 1px solid #aaa;
-	border-left: 1px solid #aaa;
-	border-bottom: 1px solid #aaa;
-}
-
-.timetable td.has-item {
-	border: 0;
-	font-size: 0;
-	border-bottom: 0;
-}
-
-/* end timetable */
-
 .overlap-1 > div.item {
 	width: 100%;
 }
