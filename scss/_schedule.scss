@@ -10,7 +10,7 @@ $border_color: #113;
 
 #schedule-wrapper {
 	padding: 5px 15px;
-	background: #283145 url(noise.png) repeat;
+	background: $secondary url(noise.png) repeat;
 	color: $font_color;
 	border-radius: 4px;
 

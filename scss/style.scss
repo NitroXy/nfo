@@ -1,9 +1,14 @@
 @import 'variables';
 @import 'schedule';
 
+body {
+	background: #eee;
+}
+
 h1 > small {
 	white-space: nowrap;
 	display: none;
+	margin-left: 5px;
 }
 
 h1 .nitroxy {
@@ -45,6 +50,10 @@ nav .bar {
 .navbar-default .navbar-toggle:hover,
 .navbar-default .navbar-toggle:focus {
 	background: inherit;
+}
+
+.navbar-inverse {
+	background-image: linear-gradient(to bottom, lighten($secondary,10%) 0px, $secondary 100%);
 }
 
 img {
