@@ -9,13 +9,20 @@ $border_color: #113;
 }
 
 #schedule-wrapper {
-	padding: 5px;
+	padding: 5px 15px;
 	background: #283145 url(noise.png) repeat;
 	color: $font_color;
 	border-radius: 4px;
 
 	h2 {
-		margin: 10px 0 10px 10px;
+		margin: 10px 0;
+	}
+
+	@media (min-width: $screen-sm-min){
+		padding: 5px;
+		h2 {
+			margin: 10px 0 10px 10px;
+		}
 	}
 }
 
@@ -58,6 +65,10 @@ $border_color: #113;
 		padding-left: 10px;
 	}
 
+	h3 > small {
+		color: #999;
+	}
+
 	@media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
 		h3 > small {
 			display: block;
@@ -71,6 +82,7 @@ $border_color: #113;
 	}
 
 	a {
+		color: $font_color;
 		padding: 10px 0;
 		display: block;
 
@@ -166,7 +178,6 @@ $border_color: #113;
 
 	.schedule-day-header {
 		a {
-			color: $font_color;
 			pointer-events: none;
 		}
 
