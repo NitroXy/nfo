@@ -27,8 +27,12 @@
 						<?php endfor; ?>
 						<?php foreach($day->items as $item): ?>
 							<?php $bg = implode(',', $item->background); ?>
-							<div class="<?=$this->item_classes($item);?>" style="height: <?=$hour_height * $item->hours + 1?>px; top: <?=$hour_height * $item->start - 1?>px; left: <?=$item->offset?>%; background: <?php if ( $item->data->have_icon() ): ?>url(<?=$item->data->icon_url?>) no-repeat top 5px right 5px, <?php endif; ?>linear-gradient(rgba(<?=$bg?>, 1), rgba(<?=$bg?>,0.8));">
-								<?=$item->data->text?>
+							<div class="<?=$this->item_classes($item);?>" style="height: <?=$hour_height * $item->hours + 1?>px; top: <?=$hour_height * $item->start - 1?>px; left: <?=$item->offset?>%; background: rgba(<?=$bg?>, 1)">
+								<?php if ( $item->data->have_icon() ): ?>
+									<img src="<?=$item->data->icon_url?>" class="pull-right"/>
+								<?php endif; ?>
+								<span class="hidden-sm"><?=$item->data->text?></span>
+								<span class="visible-sm-inline"><?=$item->data->short_name?></span>
 							</div>
 						<?php endforeach ?>
 					</div>
