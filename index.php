@@ -102,7 +102,7 @@
 			<link rel="stylesheet" type="text/css" href="<?=$root?>/slim.css?<?=md5_file($repo_root . '/public/slim.css')?>"/>
 		<?php endif; ?>
 	</head>
-	<body>
+	<body class="<?=$path->controller() ?>">
 		<header class="container">
 			<h1>
 				<?=$event->name?> Info
