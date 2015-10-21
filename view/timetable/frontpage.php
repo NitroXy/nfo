@@ -1,4 +1,4 @@
-<?php $hour_height = 30; ?>
+<?php $hour_height = 30; $h = $GLOBALS['slim'] ? 1 : 2; ?>
 <style type="text/css">
 .schedule-content {
 	height: <?=$hour_height*24 ?>px;
@@ -10,7 +10,7 @@
 </style>
 
 <div id="schedule-wrapper">
-	<h2><span class="nitroxy">NitroXy</span> Schema</h2>
+	<h<?=$h?>><span class="nitroxy">NitroXy</span> Schema</h<?=$h?>>
 	<div id="schedule" class="schedule-days-<?=count($days)?>">
 		<?php foreach ( $days as $day_index => $day ): ?>
 			<div class="schedule-day scedule-day-col-<?=$day->columns?>">
