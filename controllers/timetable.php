@@ -1,7 +1,7 @@
 <?php
 
 define('DAY_OFFSET', 719528);
-define('DAY_ENDS', 3); // at what hour the day "ends"
+define('DAY_ENDS', 8); // at what hour the day "ends"
 
 class TimetableController extends Controller {
 	public function index() {

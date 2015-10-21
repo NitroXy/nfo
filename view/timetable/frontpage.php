@@ -1,4 +1,8 @@
-<?php $hour_height = 30; $h = $GLOBALS['slim'] ? 1 : 2; ?>
+<?php
+$hour_height = 30;
+$h = $GLOBALS['slim'] ? 1 : 2;
+$fulhack = 20;
+?>
 <style type="text/css">
 .schedule-content {
 	height: <?=$hour_height*24 ?>px;
@@ -22,8 +26,8 @@
 				</div>
 				<div class="schedule-content collapse" id="schedule-day-<?=$day_index?>" style="height: 0px;">
 					<div class="schedule-inner">
-						<?php for ( $i = 0; $i < 24; $i++ ): ?>
-							<p class="schedule-clock"><span><?=sprintf('%02d:00', ($i+4)%24)?></span></p>
+						<?php for ( $i = 0; $i < $fulhack; $i++ ): ?>
+							<p class="schedule-clock"><span><?=sprintf('%02d:00', ($i+1+DAY_ENDS)%24)?></span></p>
 						<?php endfor; ?>
 						<?php foreach($day->items as $item): ?>
 							<?php $bg = implode(',', $item->background); ?>
