@@ -6,12 +6,15 @@ $border_color: #113;
 
 #schedule {
 	font-size: 0;
+}
+
+#schedule-wrapper {
 	padding: 5px;
 	background: #283145 url(noise.png) repeat;
 	color: $font_color;
 
 	h2 {
-		margin: 10px 0;
+		margin: 10px 0 10px 10px;
 	}
 }
 
