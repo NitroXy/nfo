@@ -5,7 +5,7 @@ $fulhack = 20;
 ?>
 <style type="text/css">
 .schedule-content {
-	height: <?=$hour_height*24 ?>px;
+	height: <?=$hour_height*$fulhack ?>px;
 }
 .schedule-clock {
 	height: <?=$hour_height?>px;
