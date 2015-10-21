@@ -8,6 +8,6 @@ nxauth.php
 
 /.sass-cache
 /public/images/uploaded/
-/public/style.css
-/public/style.css.map
+/public/*.css
+/public/*.css.map
 /vendor/
