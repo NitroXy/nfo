@@ -105,7 +105,7 @@
 	<body class="<?=$path->controller() ?>">
 		<header class="container">
 			<h1>
-				<?=$event->name?> Info
+				<?=str_replace('NitroXy', '<span class="nitroxy">NitroXy</span>', $event->name)?> Info
 				<small>Nå information snabbt och enkelt</small>
 			</h1>
 			<nav id="navigation_menu" class="navbar navbar-inverse">

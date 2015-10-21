@@ -6,6 +6,22 @@ h1 > small {
 	display: none;
 }
 
+h1 .nitroxy {
+	color: transparent;
+	display: inline-block;
+	width: 144px;
+	background: url(nitroxy_h1_svart.png);
+	letter-spacing: 4px;
+}
+
+h2 .nitroxy {
+	color: transparent;
+	display: inline-block;
+	width: 112px;
+	background: url(nitroxy_h2_vit.png);
+	letter-spacing: 2px;
+}
+
 @media (min-width: 400px){
 	h1 > small {
 		display: inline;

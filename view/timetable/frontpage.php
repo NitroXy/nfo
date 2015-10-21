@@ -10,7 +10,7 @@
 </style>
 
 <div id="schedule-wrapper">
-	<h2>NitroXy Schema</h2>
+	<h2><span class="nitroxy">NitroXy</span> Schema</h2>
 	<div id="schedule" class="schedule-days-<?=count($days)?>">
 		<?php foreach ( $days as $day_index => $day ): ?>
 			<div class="schedule-day scedule-day-col-<?=$day->columns?>">
