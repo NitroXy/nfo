@@ -9,8 +9,8 @@
 }
 </style>
 
-<h2>NitroXy Schema</h2>
 <div id="schedule" class="schedule-days-<?=count($days)?>">
+	<h2>NitroXy Schema</h2>
 	<?php foreach ( $days as $day_index => $day ): ?>
 		<div class="schedule-day scedule-day-col-<?=$day->columns?>">
 			<div class="schedule-day-header">

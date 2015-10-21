@@ -1,8 +1,18 @@
-$max_columns: 5 !default;
+$max_columns: 5;
+$font_color: #fff;
+$stripe_bg: rgba(255, 255, 255, 0.1);
+$stripe_border_color: #333;
+$border_color: #113;
 
 #schedule {
 	font-size: 0;
-	padding-left: 5px;
+	padding: 5px;
+	background: #283145 url(noise.png) repeat;
+	color: $font_color;
+
+	h2 {
+		margin: 10px 0;
+	}
 }
 
 // column generation
@@ -37,7 +47,7 @@ $max_columns: 5 !default;
 }
 
 .schedule-day-header {
-	border-bottom: 1px solid #000;
+	border-bottom: 1px solid $border_color;
 	font-size: 1rem;
 
 	@media (min-width: 768px){
@@ -79,7 +89,7 @@ $max_columns: 5 !default;
 	font-size: 16px;
 	margin: 0;
 	margin-left: -55px;
-	border-bottom: 1px solid #ccc;
+	border-bottom: 1px solid $stripe_border_color;
 	cursor: default;
 
 	-webkit-touch-callout: none;
@@ -93,12 +103,12 @@ $max_columns: 5 !default;
 		width: 56px;
 		padding: 0 5px;
 		display: inline-block;
-		border-right: 1px solid #000;
+		border-right: 1px solid $border_color;
 		text-align: center;
 	}
 
 	&:nth-child(2n) {
-		background: #f0f0f0;
+		background: $stripe_bg;
 	}
 }
 
@@ -118,7 +128,7 @@ $max_columns: 5 !default;
 	&:before {
 		z-index: 2;
 		content: ' ';
-		border: 1px solid #000;
+		border: 1px solid $border_color;
 		position: absolute;
 		top: 0;
 		right: 0;
@@ -152,7 +162,7 @@ $max_columns: 5 !default;
 
 	.schedule-day-header {
 		a {
-			color: #333;
+			color: $font_color;
 			pointer-events: none;
 		}
 
@@ -163,7 +173,7 @@ $max_columns: 5 !default;
 
 	.schedule-day-header,
 	.schedule-clock {
-		border-right: 1px solid #000;
+		border-right: 1px solid $border_color;
 		margin-right: -1px;
 	}
 
