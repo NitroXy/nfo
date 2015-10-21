@@ -29,7 +29,7 @@
 							<?php $bg = implode(',', $item->background); ?>
 							<div class="<?=$this->item_classes($item);?>" style="height: <?=$hour_height * $item->hours + 1?>px; top: <?=$hour_height * $item->start - 1?>px; left: <?=$item->offset?>%; background: rgba(<?=$bg?>, 1)">
 								<?php if ( $item->data->have_icon() ): ?>
-									<img src="<?=$item->data->icon_url?>" class="pull-right"/>
+									<img src="<?=$item->data->icon_url?>" class="logo"/>
 								<?php endif; ?>
 								<span class="hidden-sm"><?=$item->data->text?></span>
 								<span class="visible-sm-inline"><?=$item->data->short_name?></span>

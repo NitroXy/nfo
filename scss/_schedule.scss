@@ -156,6 +156,11 @@ $border_color: #113;
 		box-shadow: 1px 1px 5px #000;
 		z-index: 5;
 	}
+
+	> img.logo {
+		float: right;
+		margin-left: 5px;
+	}
 }
 
 .schedule-item-first:before {
