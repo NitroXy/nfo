@@ -23,7 +23,6 @@
 
 		<div class="btn-group pull-right">
 			<button name="remove" type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Ta bort</button>
-			<button name="save" type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-save"></span> Spara</button>
 		</div>
 	</h2>
 
@@ -43,8 +42,14 @@
 				$f->select(FormSelect::from_selection($f, 'preset_id', 'name', SchemePreset::all(), 'Grupp', ['null' => true, 'hint' => 'Vilken schema-grupp den här aktiviteten tillhör. Om en grupp är vald används färg, ikon osv från gruppen.', 'class' => 'preset-selector']));
 				$f->text_field('color', 'Färg', ['type' => 'color', 'class' => 'hidden-preset']);
 			});
-			$f->link('Avbryt', url('/admin/timetable'), false, ['class' => 'btn btn-default', 'data-ajax-cancel' => true]);
 		}, ['action' => false]);
 		?>
+
+		<div class="actions clearfix">
+			<a href="<?=url('/admin/timetable')?>" class="btn btn-default pull-left" data-ajax-cancel>Avbryt</a>
+			<button name="save" type="submit" class="btn btn-primary pull-right"><span class="glyphicon glyphicon-floppy-save"></span> Spara</button>
+		</div>
+
+
 	<?php if ( !$this->is_partial() ): ?></div></div><?php endif; ?>
 </form>
