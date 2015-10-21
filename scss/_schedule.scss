@@ -6,6 +6,10 @@ $border_color: #113;
 
 #schedule {
 	font-size: 0;
+
+	@media (min-width: $screen-sm-min){
+		padding-left: 55px;
+	}
 }
 
 #schedule-wrapper {
@@ -50,10 +54,6 @@ $border_color: #113;
 
 	@media (min-width: 768px) {
 		padding-left: 0;
-	}
-
-	@at-root .schedule-day:first-child & {
-		padding-left: 55px;
 	}
 }
 
