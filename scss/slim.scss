@@ -8,10 +8,12 @@ body.timetable {
 	#schedule-wrapper {
 		background: none;
 		border-radius: 0;
-	}
 
-	h1 .nitroxy {
-		width: 136px;
-		background: url(nitroxy_h1_vit.png);
+
+		h1 .nitroxy {
+			display: inline-block;
+			width: 136px;
+			background: url(nitroxy_h1_vit.png);
+		}
 	}
 }
