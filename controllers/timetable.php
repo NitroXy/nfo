@@ -39,16 +39,11 @@ class TimetableController extends Controller {
 	}
 
 	/**
-	 * Returns an array [$day][$hour] = $items where $day and $hour
-	 * corresponds to the date and items is all scheme items on that slot.
+	 * Get an array of days, starting from day 1 to day N. Even if no schedule
+	 * items a day will still be generated.
 	 */
-	protected function build_items(){
-		global $db;
+	protected function build_days(){
 		list($min, $max) = $this->get_span();
-
-		//$items = $db->query('SELECT UNIX_TIMESTAMP(`timestamp`) AS `begin`, UNIX_TIMESTAMP(`timestamp`)+`duration`*3600 AS `end`, `text`, `short_name`, `color` as `background` FROM `scheme_items` ORDER BY begin');
-
-		$items = SchemeItem::all();
 
 		$days = [];
 		for ( $day = $min; $day <= $max; $day++ ){
@@ -61,8 +56,17 @@ class TimetableController extends Controller {
 			$days[] = $dayObj;
 		}
 
+		$this->fill_days($days);
+		return $days;
+	}
+
+	/**
+	 * Fills each day (generated from `build_days`) with schedule items.
+	 */
+	protected function fill_days(array $days){
 		$current_day_index = 0;
 
+		$items = SchemeItem::all();
 		foreach($items as $item) {
 			$metaItem = new stdClass;
 			$metaItem->data = $item;
@@ -100,11 +104,19 @@ class TimetableController extends Controller {
 				$days[$local_day_index]->items[] = $metaItem;
 			}
 		}
+	}
 
-		for ($day_index = 0; $day_index < count($days); ++$day_index) {
-			$day = &$days[$day_index];
+	/**
+	 * Returns an array [$day][$hour] = $items where $day and $hour
+	 * corresponds to the date and items is all scheme items on that slot.
+	 */
+	protected function build_items(){
+		$days = $this->build_days();
+
+		foreach ( $days as $day_index => &$day ){
 			$items = &$day->items;
-			$num_items = count($days[$day_index]->items);
+			$num_items = count($items);
+
 			// Calculate collisions:
 			for($i = 0; $i < $num_items; ++$i) {
 				for($j = $i+1; $j < $num_items; ++$j) {
@@ -121,8 +133,7 @@ class TimetableController extends Controller {
 			$max_column = 0;
 
 			// Now allocate a column to each event
-			for($i = 0; $i < $num_items; ++$i) {
-				$item = &$items[$i];
+			foreach ( $items as $i => &$item ) {
 				$column = 0;
 				$occupied = count($item->collisions) > 0;
 				while($occupied) {
@@ -166,7 +177,6 @@ class TimetableController extends Controller {
 				$item->hours = ($item->end - $item->begin) / 3600.0;
 				$item->start = ($item->begin - $day->begin) / 3600.0;
 			}
-
 		}
 
 		return $days;
