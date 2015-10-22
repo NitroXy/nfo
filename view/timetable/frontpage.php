@@ -27,11 +27,16 @@ $fulhack = 20;
 				<div class="schedule-content collapse" id="schedule-day-<?=$day_index?>" style="height: 0px;">
 					<div class="schedule-inner">
 						<?php for ( $i = 0; $i < $fulhack; $i++ ): ?>
-							<p class="schedule-clock"><span><?=sprintf('%02d:00', ($i+1+DAY_ENDS)%24)?></span></p>
+							<p class="schedule-clock" data-hour="<?=$i+1+DAY_ENDS?>" ><span><?=sprintf('%02d:00', ($i+1+DAY_ENDS)%24)?></span></p>
 						<?php endfor; ?>
 						<?php foreach($day->items as $item): ?>
 							<?php $bg = implode(',', $item->background); ?>
-							<div class="<?=$this->item_classes($item);?>" style="height: <?=$hour_height * $item->hours + 1?>px; top: <?=$hour_height * $item->start - 1?>px; left: <?=$item->offset?>%; background: rgba(<?=$bg?>, 1)">
+							<div
+								class="<?=$this->item_classes($item);?>"
+								data-begin="<?=(int)strftime('%H', $item->begin)?>"
+								data-end="<?=(int)strftime('%H', $item->end)?>"
+								style="height: <?=$hour_height * $item->hours + 1?>px; top: <?=$hour_height * $item->start - 1?>px; left: <?=$item->offset?>%; background: rgba(<?=$bg?>, 1)"
+								>
 								<?php if ( $item->data->have_icon() ): ?>
 									<img src="<?=$item->data->icon_url?>" class="logo"/>
 								<?php endif; ?>

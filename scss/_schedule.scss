@@ -126,6 +126,13 @@ $border_color: #113;
 		display: inline-block;
 		border-right: 1px solid $border_color;
 		text-align: center;
+		transition: all 0.2s;
+	}
+
+	&.in > span {
+		color: #333;
+		background: #cc0;
+		opacity: 0.7;
 	}
 
 	&:nth-child(2n) {
@@ -145,6 +152,7 @@ $border_color: #113;
 	font-weight: bold;
 	position: absolute;
 	z-index: 3;
+	transition: box-shadow 0.3s;
 
 	&:before {
 		z-index: 2;

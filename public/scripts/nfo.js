@@ -70,6 +70,35 @@
 			$editor.focus().change();
 			editor.selectionStart = editor.selectionEnd = caret + md.length;
 		});
+
+		var schedule_marks = {
+			reset: function(){
+				$('#schedule .schedule-clock').removeClass('in');
+			},
+			update: function(begin, end){
+				for ( var i = begin; i < end; i++ ){
+					var selector = '#schedule .schedule-clock[data-hour="' + i + '"]';
+					$(selector).addClass('in');
+				}
+			},
+		};
+
+		/* schedule hover */
+		$('#schedule .schedule-item').hover(function(){
+			var $this = $(this);
+			var begin = $this.data('begin');
+			var end = $this.data('end');
+
+			/* unwrap hours, that is put 01 back as the 25th hour (as it appears in the rendering) */
+			if ( end < begin ){
+				end += 24;
+			}
+
+			schedule_marks.reset();
+			schedule_marks.update(begin, end);
+		}, function(){
+			schedule_marks.reset();
+		});
 	}
 
 	function ajaxopen(state){
