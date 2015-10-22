@@ -90,6 +90,9 @@
 			var end = $this.data('end');
 
 			/* unwrap hours, that is put 01 back as the 25th hour (as it appears in the rendering) */
+			if ( begin < DAY_ENDS ){
+				begin += 24;
+			}
 			if ( end < begin ){
 				end += 24;
 			}

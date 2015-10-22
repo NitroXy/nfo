@@ -12,6 +12,9 @@ $fulhack = 20;
 	line-height: <?=$hour_height?>px;
 }
 </style>
+<script>
+var DAY_ENDS = <?=DAY_ENDS?>;
+</script>
 
 <div id="schedule-wrapper">
 	<h<?=$h?>><span class="nitroxy">NitroXy</span> Schema</h<?=$h?>>
