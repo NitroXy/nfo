@@ -3,7 +3,6 @@
 		<?=$page->name?> - <?=$page->display_name?>
 		<div class="btn-group pull-right">
 			<a class="btn btn-danger" href="<?=url('/admin/delete/:id', $page->id)?>"><span class="glyphicon glyphicon-remove"></span> Ta bort</a>
-			<button class="btn btn-primary" type="submit"><span class="glyphicon glyphicon-floppy-save"></span> Spara</button>
 		</div>
 	</h2>
 
@@ -18,7 +17,10 @@
 
 	<div class="actions clearfix">
 		<a class="btn btn-default pull-left" href="<?=$root?>/admin/edit" data-ajax-cancel>Tillbaka</a>
-		<button type="button" class="btn btn-success pull-right" data-toggle="collapse" data-target=".image-gallery"><span class="glyphicon glyphicon-picture"></span> Infoga bild</a>
+		<div class="btn-group pull-right">
+			<button type="button" class="btn btn-success" data-toggle="collapse" data-target=".image-gallery"><span class="glyphicon glyphicon-picture"></span> Infoga bild</button>
+			<button class="btn btn-primary" type="submit"><span class="glyphicon glyphicon-floppy-save"></span> Spara</button>
+		</div>
 	</div>
 
 	<ul class="image-gallery collapse">
