@@ -18,6 +18,8 @@ class Config {
 $db = Config::fix_database();
 $dir = dirname(__FILE__);
 
+setlocale(LC_ALL, 'sv_SE.UTF8');
+
 //specify rights ... just because I'm lazy and tired
 //     is controlled by the bits in an integer
 //          NAME        : BIT
@@ -32,5 +34,3 @@ $_rights = array( 'Administratör'       => 1,
                   'Bild-moderator'      => 3,
                   'Nyhets-moderator'    => 4,
                   'Schema-moderator'    => 5 );
-
-?>
