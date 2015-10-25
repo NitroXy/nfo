@@ -38,7 +38,7 @@ var DAY_ENDS = <?=DAY_ENDS?>;
 								class="<?=$this->item_classes($item);?>"
 								data-begin="<?=(int)strftime('%H', $item->begin)?>"
 								data-end="<?=(int)strftime('%H', $item->end)?>"
-								style="height: <?=$hour_height * $item->hours + 1?>px; top: <?=$hour_height * $item->start - 1?>px; left: <?=$item->offset?>%; background: rgba(<?=$bg?>, 1)"
+								style="height: <?=$hour_height * $item->hours + 1?>px; top: <?=$hour_height * $item->start - 1?>px; left: <?=number_to_string($item->offset)?>%; background: rgba(<?=$bg?>, 1)"
 								>
 								<?php if ( $item->data->have_icon() ): ?>
 									<img src="<?=$item->data->icon_url?>" class="logo"/>
