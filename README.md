@@ -5,8 +5,8 @@ NitroXy - INFO
 
 Vad du behöver göra innan installation
 
-* LAMP-stack  
-`apt-get install apache2 libapache2-mod-php5 php5-cli mysql-client mysql-server php5-mysql php5-json php5-curl`
+* LAMP-stack och imagemagick
+`apt-get install apache2 libapache2-mod-php5 php5-cli mysql-client mysql-server php5-mysql php5-json php5-curl imagemagick
 * [Composer](https://getcomposer.org/)
 * [Compass](http://compass-style.org/)
 * API nyckel från [NitroXy](https://nitroxy.com) (prata med Admin)
