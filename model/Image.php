@@ -77,7 +77,7 @@ class Image {
 
 		exec($cmd, $output, $rc);
 		if ( $rc != 0 ){
-			flash('error', impode($output, "\n"));
+			flash('error', implode($output, "\n"));
 		}
 
 		return $rc === 0;
